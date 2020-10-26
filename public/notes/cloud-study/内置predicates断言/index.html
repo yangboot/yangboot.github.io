@@ -1,0 +1,1020 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academia 4.3.1">
+  <meta name="generator" content="Hugo 0.70.0" />
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="My favorite">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="内置Predicates断言 原文地址：https://blog.csdn.net/weixin_43839681/article/details/106160813
+1 After 路由断言 After 路由断言只有一个ZonedDateTime生成的datetime参数，只有在这个事件之后的请求才能匹配上。
+ Example 1. application.yml
+ spring: cloud: gateway: routes: - id: after_route uri: https://example.org  predicates: - After=2017-01-20T17:42:47.789-07:00[America/Denver] 12345678 https://example.org这个地址在美国Denver时间2017-01-20 17:42：00之后才能
+// 生成时间的代码 // demo 2020-05-06T19:16:43.338&#43;08:00[Asia/Shanghai] System.out.println(ZonedDateTime.now().toString()); 123 2 Before 路由断言 Before 同样是一个时间断言，只不过是在配置的时间之前有效，过时之后失效。
+ Example 2. application.yml
+ spring: cloud: gateway: routes: - id: before_route uri: https://example.org  predicates: - Before=2017-01-20T17:42:47.789-07:00[America/Denver] 12345678 上面的链接地址在America/Denver时间2017-01-20 17:42::00之前有效
+3 Between 路由断言 Between 路由断言，时间类断言，在声明的时间内有效。并且第二个时间必须大于第一个时间。
+ Example 3. application.yml">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://academia-hugo.netlify.com/notes/cloud-study/%E5%86%85%E7%BD%AEpredicates%E6%96%AD%E8%A8%80/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#fc6f5c">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academia.min.adccb3b334fd9406ba3e6667ec8e7903.css">
+
+  
+
+  
+  
+  
+
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://academia-hugo.netlify.com/notes/cloud-study/%E5%86%85%E7%BD%AEpredicates%E6%96%AD%E8%A8%80/">
+
+  
+  
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GUAN-BLOG">
+  <meta property="og:url" content="https://academia-hugo.netlify.com/notes/cloud-study/%E5%86%85%E7%BD%AEpredicates%E6%96%AD%E8%A8%80/">
+  <meta property="og:title" content="内置Predicates断言 | GUAN-BLOG">
+  <meta property="og:description" content="内置Predicates断言 原文地址：https://blog.csdn.net/weixin_43839681/article/details/106160813
+1 After 路由断言 After 路由断言只有一个ZonedDateTime生成的datetime参数，只有在这个事件之后的请求才能匹配上。
+ Example 1. application.yml
+ spring: cloud: gateway: routes: - id: after_route uri: https://example.org  predicates: - After=2017-01-20T17:42:47.789-07:00[America/Denver] 12345678 https://example.org这个地址在美国Denver时间2017-01-20 17:42：00之后才能
+// 生成时间的代码 // demo 2020-05-06T19:16:43.338&#43;08:00[Asia/Shanghai] System.out.println(ZonedDateTime.now().toString()); 123 2 Before 路由断言 Before 同样是一个时间断言，只不过是在配置的时间之前有效，过时之后失效。
+ Example 2. application.yml
+ spring: cloud: gateway: routes: - id: before_route uri: https://example.org  predicates: - Before=2017-01-20T17:42:47.789-07:00[America/Denver] 12345678 上面的链接地址在America/Denver时间2017-01-20 17:42::00之前有效
+3 Between 路由断言 Between 路由断言，时间类断言，在声明的时间内有效。并且第二个时间必须大于第一个时间。
+ Example 3. application.yml"><meta property="og:image" content="https://academia-hugo.netlify.com/img/icon-192.png">
+  <meta property="twitter:image" content="https://academia-hugo.netlify.com/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2020-07-28T00:00:00&#43;01:00">
+  
+  <meta property="article:modified_time" content="2020-07-28T00:00:00&#43;01:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>内置Predicates断言 | GUAN-BLOG</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">GUAN-BLOG</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"><span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#gallery"><span>gallery</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/notes/"><span>Notes</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/">SpringCloud微服务学习</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/%E7%88%B6%E5%B7%A5%E7%A8%8B/">父工程</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E6%9E%84%E5%BB%BA/">支付模块构建</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/idea%E7%83%AD%E9%83%A8%E7%BD%B2/">idea热部署</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/eureka/">eureka</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/eureka-server%E9%9B%86%E7%BE%A4/">eureka-server集群</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/%E5%85%A5%E9%A9%BBeureka-server/">服务入驻eureka-server</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/%E6%9C%8D%E5%8A%A1%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8/">服务的高可用</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0discovery/">服务发现Discovery</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/zookeeper/">服务注册zookerper</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/consul/">consul</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/consul%E5%AE%89%E8%A3%85/">consul安装</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8Cconsul/">服务注册consul</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E7%9A%84%E5%BC%82%E5%90%8C%E7%82%B9/">三个注册注册中心的异同点</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/ribbon/">Ribbon</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/ribbon%E8%B4%9F%E8%BD%BD%E8%A7%84%E5%88%99/">Ribbon负载规则</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/openfeign/">openfeign</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/openfeign%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/">openfeign服务调用</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/openfeign%E8%B6%85%E6%97%B6%E6%8E%A7%E5%88%B6/">openfeign超时控制</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/openfeign%E6%97%A5%E5%BF%97%E5%A2%9E%E5%BC%BA/">openfeign日志增强</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/hystrix/">Hystrix</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/%E5%8E%8B%E6%B5%8B%E5%8D%A1%E9%A1%BF%E9%97%AE%E9%A2%98/">压测卡顿问题</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/hystrix%E6%9C%8D%E5%8A%A1%E9%99%8D%E7%BA%A7/">Hystrix服务降级</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/hystrix%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD/">Hystrix服务熔断</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/hystrix%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/">Hystrix服务监控</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/gateway/">Gateway</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/gateway%E6%90%AD%E5%BB%BA/">Gateway搭建</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/gateway%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1/">Gateway配置动态路由</a>
+      </li>
+      
+      <li class="active">
+        <a href="/notes/cloud-study/%E5%86%85%E7%BD%AEpredicates%E6%96%AD%E8%A8%80/">内置Predicates断言</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/cookie%E8%B7%AF%E7%94%B1%E6%96%AD%E8%A8%80%E6%A1%88%E4%BE%8B/">Cookie路由断言案例</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/gateway%E7%9A%84filter/">Gateway的filter</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/config/">config</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/config%E6%80%BB%E6%8E%A7%E4%B8%AD%E5%BF%83/">config总控中心</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/config%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE/">config客户端配置</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/config%E6%89%8B%E5%8A%A8%E5%88%B7%E6%96%B0/">config手动刷新</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/bus/">bus</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/rabbitmq%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">RabbitMQ安装配置</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/bus%E5%8A%A8%E6%80%81%E5%88%B7%E6%96%B0%E5%85%A8%E5%B1%80%E5%B9%BF%E6%92%AD/">bus动态刷新全局广播</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/bus%E5%8A%A8%E6%80%81%E5%AE%9A%E7%82%B9%E5%88%B7%E6%96%B0%E5%B9%BF%E6%92%AD/">bus动态定点刷新广播</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#内置predicates断言">内置Predicates断言</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article" itemscope itemtype="http://schema.org/Article">
+
+        <div class="docs-article-container">
+          <h1 itemprop="name">内置Predicates断言</h1>
+
+          <div class="article-style" itemprop="articleBody">
+            <h3 id="内置predicates断言">内置Predicates断言</h3>
+<p>原文地址：https://blog.csdn.net/weixin_43839681/article/details/106160813</p>
+<h4 id="1-after-路由断言">1 After 路由断言</h4>
+<p><code>After</code> 路由断言只有一个ZonedDateTime生成的datetime参数，只有在这个事件之后的请求才能匹配上。</p>
+<blockquote>
+<p>Example 1. application.yml</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">spring:
+  cloud<span style="color:#f92672">:</span>
+    gateway<span style="color:#f92672">:</span>
+      routes<span style="color:#f92672">:</span>
+      <span style="color:#f92672">-</span> id<span style="color:#f92672">:</span> after_route
+        uri<span style="color:#f92672">:</span> https<span style="color:#f92672">:</span><span style="color:#75715e">//example.org
+</span><span style="color:#75715e"></span>        predicates<span style="color:#f92672">:</span>
+        <span style="color:#f92672">-</span> After<span style="color:#f92672">=</span>2017<span style="color:#f92672">-</span>01<span style="color:#f92672">-</span>20T17<span style="color:#f92672">:</span>42<span style="color:#f92672">:</span>47<span style="color:#f92672">.</span><span style="color:#a6e22e">789</span><span style="color:#f92672">-</span>07<span style="color:#f92672">:</span>00<span style="color:#f92672">[</span>America<span style="color:#f92672">/</span>Denver<span style="color:#f92672">]</span>
+12345678
+</code></pre></div><p><a href="https://example.org">https://example.org</a>这个地址在美国Denver时间2017-01-20 17:42：00之后才能</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// 生成时间的代码
+</span><span style="color:#75715e">// demo 2020-05-06T19:16:43.338+08:00[Asia/Shanghai]
+</span><span style="color:#75715e"></span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>ZonedDateTime<span style="color:#f92672">.</span><span style="color:#a6e22e">now</span><span style="color:#f92672">().</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">());</span>
+123
+</code></pre></div><h4 id="2-before-路由断言">2 Before 路由断言</h4>
+<p><code>Before</code> 同样是一个时间断言，只不过是在配置的时间之前有效，过时之后失效。</p>
+<blockquote>
+<p>Example 2. application.yml</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">spring:
+  cloud<span style="color:#f92672">:</span>
+    gateway<span style="color:#f92672">:</span>
+      routes<span style="color:#f92672">:</span>
+      <span style="color:#f92672">-</span> id<span style="color:#f92672">:</span> before_route
+        uri<span style="color:#f92672">:</span> https<span style="color:#f92672">:</span><span style="color:#75715e">//example.org
+</span><span style="color:#75715e"></span>        predicates<span style="color:#f92672">:</span>
+        <span style="color:#f92672">-</span> Before<span style="color:#f92672">=</span>2017<span style="color:#f92672">-</span>01<span style="color:#f92672">-</span>20T17<span style="color:#f92672">:</span>42<span style="color:#f92672">:</span>47<span style="color:#f92672">.</span><span style="color:#a6e22e">789</span><span style="color:#f92672">-</span>07<span style="color:#f92672">:</span>00<span style="color:#f92672">[</span>America<span style="color:#f92672">/</span>Denver<span style="color:#f92672">]</span>
+12345678
+</code></pre></div><p>上面的链接地址在America/Denver时间2017-01-20 17:42::00之前有效</p>
+<h4 id="3--between--路由断言">3  Between  路由断言</h4>
+<p>Between   路由断言，时间类断言，在声明的时间内有效。并且第二个时间必须大于第一个时间。</p>
+<blockquote>
+<p>Example 3. application.yml</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">spring:
+  cloud<span style="color:#f92672">:</span>
+    gateway<span style="color:#f92672">:</span>
+      routes<span style="color:#f92672">:</span>
+      <span style="color:#f92672">-</span> id<span style="color:#f92672">:</span> between_route
+        uri<span style="color:#f92672">:</span> https<span style="color:#f92672">:</span><span style="color:#75715e">//example.org
+</span><span style="color:#75715e"></span>        predicates<span style="color:#f92672">:</span>
+        <span style="color:#f92672">-</span> Between<span style="color:#f92672">=</span>2017<span style="color:#f92672">-</span>01<span style="color:#f92672">-</span>20T17<span style="color:#f92672">:</span>42<span style="color:#f92672">:</span>47<span style="color:#f92672">.</span><span style="color:#a6e22e">789</span><span style="color:#f92672">-</span>07<span style="color:#f92672">:</span>00<span style="color:#f92672">[</span>America<span style="color:#f92672">/</span>Denver<span style="color:#f92672">],</span> 2017<span style="color:#f92672">-</span>01<span style="color:#f92672">-</span>21T17<span style="color:#f92672">:</span>42<span style="color:#f92672">:</span>47<span style="color:#f92672">.</span><span style="color:#a6e22e">789</span><span style="color:#f92672">-</span>07<span style="color:#f92672">:</span>00<span style="color:#f92672">[</span>America<span style="color:#f92672">/</span>Denver<span style="color:#f92672">]</span>
+12345678
+</code></pre></div><p>上面的链接在America/Denver时间2017-01 20日17时42-21日17时47分之间有效。</p>
+<h4 id="4-cookie-路由断言">4 Cookie 路由断言</h4>
+<p><code>Cookie</code> 断言有两个参数，一个cookie 名称和一个java 正则表达式，这个断言匹配给定的cookie 名和值正则匹配的请求。</p>
+<blockquote>
+<p>Example 4. application.yml</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">spring:
+  cloud<span style="color:#f92672">:</span>
+    gateway<span style="color:#f92672">:</span>
+      routes<span style="color:#f92672">:</span>
+      <span style="color:#f92672">-</span> id<span style="color:#f92672">:</span> cookie_route
+        uri<span style="color:#f92672">:</span> https<span style="color:#f92672">:</span><span style="color:#75715e">//example.org
+</span><span style="color:#75715e"></span>        predicates<span style="color:#f92672">:</span>
+        <span style="color:#f92672">-</span> Cookie<span style="color:#f92672">=</span>chocolate<span style="color:#f92672">,</span> ch<span style="color:#f92672">.</span><span style="color:#a6e22e">p</span>
+12345678
+</code></pre></div><p>上面的匹配那些请求中包含参数名为<code>chocolate</code>并且值匹配<code>ch.p</code>的请求。</p>
+<h4 id="5-header--路由断言">5 Header  路由断言</h4>
+<p><code>Header</code>断言有两个参数，一个参数名，一个正则。只有当有这个参数并且值匹配正则的时候才能执行下去。</p>
+<blockquote>
+<p>Example 5. application.yml</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">spring:
+  cloud<span style="color:#f92672">:</span>
+    gateway<span style="color:#f92672">:</span>
+      routes<span style="color:#f92672">:</span>
+      <span style="color:#f92672">-</span> id<span style="color:#f92672">:</span> header_route
+        uri<span style="color:#f92672">:</span> https<span style="color:#f92672">:</span><span style="color:#75715e">//example.org
+</span><span style="color:#75715e"></span>        predicates<span style="color:#f92672">:</span>
+        <span style="color:#f92672">-</span> Header<span style="color:#f92672">=</span>X<span style="color:#f92672">-</span>Request<span style="color:#f92672">-</span>Id<span style="color:#f92672">,</span> <span style="color:#960050;background-color:#1e0010">\</span>d<span style="color:#f92672">+</span>
+12345678
+</code></pre></div><p>这个路由规则匹配<code>Header</code>中包含<code>X-Request-Id</code>并且值为纯数字的请求。</p>
+<h4 id="6-host-路由断言">6 Host 路由断言</h4>
+<p>Host 路由断言接受一个正则域名列表，正则是用英文句号分割的<code>Ant-Style</code>(ant 风格？)正则表达式。</p>
+<blockquote>
+<p>Example 6. application.yml</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">spring:
+  cloud<span style="color:#f92672">:</span>
+    gateway<span style="color:#f92672">:</span>
+      routes<span style="color:#f92672">:</span>
+      <span style="color:#f92672">-</span> id<span style="color:#f92672">:</span> host_route
+        uri<span style="color:#f92672">:</span> https<span style="color:#f92672">:</span><span style="color:#75715e">//example.org
+</span><span style="color:#75715e"></span>        predicates<span style="color:#f92672">:</span>
+        <span style="color:#f92672">-</span> Host<span style="color:#f92672">=**.</span><span style="color:#a6e22e">somehost</span><span style="color:#f92672">.</span><span style="color:#a6e22e">org</span><span style="color:#f92672">,**.</span><span style="color:#a6e22e">anotherhost</span><span style="color:#f92672">.</span><span style="color:#a6e22e">org</span>
+12345678
+</code></pre></div><p>这个路由匹配<code>somehost.org</code> <code>anotherhost.org</code>这两个域名下的所有请求。</p>
+<h4 id="7-method-路由断言">7 Method 路由断言</h4>
+<p><code>Method</code>路由断言匹配一个或多个<code>Http</code>请求方式（<code>GET</code> <code>POST</code> <code>PUT</code> <code>DELETE</code> <code>HEAD</code>）.</p>
+<blockquote>
+<p>Example 7. application.yml</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">spring:
+  cloud<span style="color:#f92672">:</span>
+    gateway<span style="color:#f92672">:</span>
+      routes<span style="color:#f92672">:</span>
+      <span style="color:#f92672">-</span> id<span style="color:#f92672">:</span> method_route
+        uri<span style="color:#f92672">:</span> https<span style="color:#f92672">:</span><span style="color:#75715e">//example.org
+</span><span style="color:#75715e"></span>        predicates<span style="color:#f92672">:</span>
+        <span style="color:#f92672">-</span> Method<span style="color:#f92672">=</span>GET<span style="color:#f92672">,</span>POST
+12345678
+</code></pre></div><p>这个路由匹配所有的<code>GET</code> <code>POST</code>请求。</p>
+<h4 id="8-path-路径路由断言">8 Path 路径路由断言</h4>
+<p><code>Path</code>路由断言接受两个参数：Spring <code>PathMatcher</code> 正则列表和一个名为 <code>matchOptionalTrailingSeparator</code> 的可选标志。</p>
+<blockquote>
+<p>Example 8. application.yml</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">spring:
+  cloud<span style="color:#f92672">:</span>
+    gateway<span style="color:#f92672">:</span>
+      routes<span style="color:#f92672">:</span>
+      <span style="color:#f92672">-</span> id<span style="color:#f92672">:</span> path_route
+        uri<span style="color:#f92672">:</span> https<span style="color:#f92672">:</span><span style="color:#75715e">//example.org
+</span><span style="color:#75715e"></span>        predicates<span style="color:#f92672">:</span>
+        <span style="color:#f92672">-</span> Path<span style="color:#f92672">=/</span>red<span style="color:#f92672">/{</span>segment<span style="color:#f92672">},/</span>blue<span style="color:#f92672">/{</span>segment<span style="color:#f92672">}</span>
+12345678
+</code></pre></div><p>如果请求路径为(例如: / red / 1或 / red / blue 或 / blue / green) ，则此路由匹配。
+这个断言提取了URL中模板变量（像前面例子中声明的<code>segment</code>）组为key/value键值对放置在<code>ServerWebExchange.getAttributes()</code>中，并用已经声明的<code>ServerWebExchangeUtils.URI_TEMPLATE_VARIABLES_ATTRIBUTE</code>来声明。这些内容可被<code>GatewayFilter</code> factories的一个名为<code>get</code>的方法很简单的去访问。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> String<span style="color:#f92672">&gt;</span> uriVariables <span style="color:#f92672">=</span> ServerWebExchangeUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">getPathPredicateVariables</span><span style="color:#f92672">(</span>exchange<span style="color:#f92672">);</span>
+
+String segment <span style="color:#f92672">=</span> uriVariables<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;segment&#34;</span><span style="color:#f92672">);</span>
+123
+</code></pre></div><h4 id="9-query-查询路由断言">9 Query 查询路由断言</h4>
+<p><code>Query</code>路由断言有两个参数: 一个必传参数 and 和一个可选的正则表达式。</p>
+<blockquote>
+<p>Example 9. application.yml</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">spring:
+  cloud<span style="color:#f92672">:</span>
+    gateway<span style="color:#f92672">:</span>
+      routes<span style="color:#f92672">:</span>
+      <span style="color:#f92672">-</span> id<span style="color:#f92672">:</span> query_route
+        uri<span style="color:#f92672">:</span> https<span style="color:#f92672">:</span><span style="color:#75715e">//example.org
+</span><span style="color:#75715e"></span>        predicates<span style="color:#f92672">:</span>
+        <span style="color:#f92672">-</span> Query<span style="color:#f92672">=</span>green
+12345678
+</code></pre></div><p>如果一个请求中包含green的参数，则匹配成功。</p>
+<blockquote>
+<p>application.yml</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">spring:
+  cloud<span style="color:#f92672">:</span>
+    gateway<span style="color:#f92672">:</span>
+      routes<span style="color:#f92672">:</span>
+      <span style="color:#f92672">-</span> id<span style="color:#f92672">:</span> query_route
+        uri<span style="color:#f92672">:</span> https<span style="color:#f92672">:</span><span style="color:#75715e">//example.org
+</span><span style="color:#75715e"></span>        predicates<span style="color:#f92672">:</span>
+        <span style="color:#f92672">-</span> Query<span style="color:#f92672">=</span>red<span style="color:#f92672">,</span> gree<span style="color:#f92672">.</span>
+12345678
+</code></pre></div><p>如果一个请求中包含参数red并且值匹配·gree.·这个正则，那么路由匹配。比如：green和greet。</p>
+<h4 id="10-remoteaddr-远程地址路由断言">10 RemoteAddr 远程地址路由断言</h4>
+<p><code>RemoteAddr</code>路由断言接受一个来源地址的list，由IPv4或者IPv6组成，比如：<code>192.168.0.1/16</code>（其中<code>192.168.0.1</code>是IP地址，<code>16</code>是子网掩码）</p>
+<blockquote>
+<p>Example 10. application.yml</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">spring:
+  cloud<span style="color:#f92672">:</span>
+    gateway<span style="color:#f92672">:</span>
+      routes<span style="color:#f92672">:</span>
+      <span style="color:#f92672">-</span> id<span style="color:#f92672">:</span> remoteaddr_route
+        uri<span style="color:#f92672">:</span> https<span style="color:#f92672">:</span><span style="color:#75715e">//example.org
+</span><span style="color:#75715e"></span>        predicates<span style="color:#f92672">:</span>
+        <span style="color:#f92672">-</span> RemoteAddr<span style="color:#f92672">=</span>192<span style="color:#f92672">.</span><span style="color:#a6e22e">168</span><span style="color:#f92672">.</span><span style="color:#a6e22e">1</span><span style="color:#f92672">.</span><span style="color:#a6e22e">1</span><span style="color:#f92672">/</span>24
+12345678
+</code></pre></div><p>如果请求的远程地址是192.168.1.10，则此路由匹配。</p>
+<h4 id="11-weight-权重路由断言">11. Weight 权重路由断言</h4>
+<p>权重路由断言接受两个参数：<code>group</code>分组和<code>Weight</code>权重。权重是按组计算的。</p>
+<blockquote>
+<p>Example 11. application.yml</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">spring:
+  cloud<span style="color:#f92672">:</span>
+    gateway<span style="color:#f92672">:</span>
+      routes<span style="color:#f92672">:</span>
+      <span style="color:#f92672">-</span> id<span style="color:#f92672">:</span> weight_high
+        uri<span style="color:#f92672">:</span> https<span style="color:#f92672">:</span><span style="color:#75715e">//weighthigh.org
+</span><span style="color:#75715e"></span>        predicates<span style="color:#f92672">:</span>
+        <span style="color:#f92672">-</span> Weight<span style="color:#f92672">=</span>group1<span style="color:#f92672">,</span> 8
+      <span style="color:#f92672">-</span> id<span style="color:#f92672">:</span> weight_low
+        uri<span style="color:#f92672">:</span> https<span style="color:#f92672">:</span><span style="color:#75715e">//weightlow.org
+</span><span style="color:#75715e"></span>        predicates<span style="color:#f92672">:</span>
+        <span style="color:#f92672">-</span> Weight<span style="color:#f92672">=</span>group1<span style="color:#f92672">,</span> 2
+123456789101112
+</code></pre></div><p>这条路线将80% 的流量转发到 weighthigh. org，20% 的流量转发到 weighlow. org。</p>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/notes/cloud-study/rabbitmq%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" rel="next">RabbitMQ安装配置</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/notes/cloud-study/%E5%8E%8B%E6%B5%8B%E5%8D%A1%E9%A1%BF%E9%97%AE%E9%A2%98/" rel="prev">压测卡顿问题</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          Last updated on Jul 28, 2020
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  <script src="/js/clipboard.js"></script>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        
+        <p class="powered-by">
+          <a href="/privacy/"></a>
+        </p>
+        
+        <p>
+          
+          Powered by
+          <a href="https://themefisher.com" target="_blank" rel="noopener">themefisher</a> for
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+        </p>
+      </div>
+      <div class="col-md-6">
+        <ul class="list-inline network-icon text-right">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://twitter.com/Twitter" target="_blank" rel="noopener" title="DM Me"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="skype:echo123?call"  title="Skype Me"><i class="fab fa-skype" aria-hidden="true"></i></a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://keybase.io/" target="_blank" rel="noopener" title="Chat on Keybase"><i class="fab fa-keybase" aria-hidden="true"></i></a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://discourse.gohugo.io" target="_blank" rel="noopener" title="Discuss on Forum"><i class="fas fa-comments" aria-hidden="true"></i></a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script async defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.25/gmaps.min.js" integrity="sha256-7vjlAeb8OaTrCXZkCNun9djzuB2owUsaO72kXaFDBJs=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academia.min.7276a6a3624de715a5c7f54c7c07696d.js"></script>
+
+    
+
+
+
+
+
+
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

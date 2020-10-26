@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PaaS平台即服务 on GUAN-BLOG</title>
+    <link>https://academia-hugo.netlify.com/notes/paas-study/</link>
+    <description>Recent content in PaaS平台即服务 on GUAN-BLOG</description>
+    <generator>Source Themes academia (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 02 Jul 2020 00:00:00 +0000</lastBuildDate>
+    
+	    <atom:link href="https://academia-hugo.netlify.com/notes/paas-study/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>GitLab基本设置</title>
+      <link>https://academia-hugo.netlify.com/notes/paas-study/gitlab%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/paas-study/gitlab%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/</guid>
+      <description>&lt;p&gt;&lt;code&gt;GitLab&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;新建用户&#34;&gt;新建用户&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/gitlab/3.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;新建项目&#34;&gt;新建项目&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/gitlab/4.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ssh拉取和推送项目&#34;&gt;SSH拉取和推送项目&lt;/h2&gt;
+&lt;p&gt;进入Gti的安装目录下的的&lt;code&gt;usr\bin&lt;/code&gt;下，默认在&lt;code&gt;C:\Program Files\Git\usr\bin&lt;/code&gt;
+进入cmd，输入以下命令（1785868089@qq.com可以改成你的邮箱）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;ssh-keygen -t rsa -C &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1785868089@qq.com&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/gitlab/5.jpg&#34; alt=&#34;&#34;&gt;
+设置SSH密钥
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/gitlab/7.jpg&#34; alt=&#34;&#34;&gt;
+复制&lt;code&gt;id_rsa.pub&lt;/code&gt;文件下的内容
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/gitlab/6.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/gitlab/8.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;配置TortoiseGit&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/gitlab/9.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;采用SSH克隆&lt;/p&gt;
+&lt;p&gt;不需要密码拉取成功！！！！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/gitlab/10.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>GitLab安装</title>
+      <link>https://academia-hugo.netlify.com/notes/paas-study/gitlab%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/paas-study/gitlab%E5%AE%89%E8%A3%85/</guid>
+      <description>&lt;h1 id=&#34;gitlab中文版安装&#34;&gt;GitLab中文版安装&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;GitLab&lt;/code&gt;  ,&lt;code&gt;docker-compose&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://hub.docker.com/r/twang2218/gitlab-ce-zh&#34;&gt;dockerHub 中文版镜像地址&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;拉取镜像&#34;&gt;拉取镜像&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker pull twang2218/gitlab-ce-zh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;编写docker-composeyml&#34;&gt;编写docker-compose.yml&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;version: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;3&amp;#39;&lt;/span&gt;
+services:
+    gitlab:
+      image: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;docker.io/twang2218/gitlab-ce-zh:latest&amp;#39;&lt;/span&gt;
+      restart: unless-stopped
+      hostname: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;203.176.95.155:8081&amp;#39;&lt;/span&gt;
+      environment:
+        TZ: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;mrpen/Nanning&amp;#39;&lt;/span&gt;
+        GITLAB_OMNIBUS_CONFIG: |
+          external_url &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;http://203.176.95.155:8088&amp;#39;&lt;/span&gt;
+          gitlab_rails&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;gitlab_shell_ssh_port&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2222&lt;/span&gt;
+          gitlab_rails&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;port&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;8888&lt;/span&gt;
+          gitlab_rails&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;listen_port&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;8088&lt;/span&gt; 
+      ports:
+        - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;8088:8088&amp;#39;&lt;/span&gt;
+        - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;8443:443&amp;#39;&lt;/span&gt;
+        - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;2222:22&amp;#39;&lt;/span&gt;
+      volumes:
+        - ./config:/etc/gitlab
+        - ./config:/var/opt/gitlab
+        - ./log:/var/log/gitlab
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;输入http://你的主机IP:8088/访问&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/gitlab/1.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;修改密码后登陆，账号是root&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/gitlab/2.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>GitLab仓库管理系统</title>
+      <link>https://academia-hugo.netlify.com/notes/paas-study/gitlab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/paas-study/gitlab/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/paas/2.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;gitlab-简介&#34;&gt;GitLab 简介&lt;/h2&gt;
+&lt;p&gt;GitLab 是一个用于仓库管理系统的开源项目，使用Git作为代码管理工具，并在此基础上搭建起来的web服务。安装方法是参考GitLab在GitHub上的Wiki页面。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

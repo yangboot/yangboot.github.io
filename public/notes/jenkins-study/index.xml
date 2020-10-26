@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jenkins持续集成 on GUAN-BLOG</title>
+    <link>https://academia-hugo.netlify.com/notes/jenkins-study/</link>
+    <description>Recent content in jenkins持续集成 on GUAN-BLOG</description>
+    <generator>Source Themes academia (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 06 Jul 2020 00:00:00 +0000</lastBuildDate>
+    
+	    <atom:link href="https://academia-hugo.netlify.com/notes/jenkins-study/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>sonarQube代码审查</title>
+      <link>https://academia-hugo.netlify.com/notes/jenkins-study/sonarqube/</link>
+      <pubDate>Thu, 09 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/jenkins-study/sonarqube/</guid>
+      <description>&lt;p&gt;官网 &lt;a href=&#34;https://www.sonarqube.org/&#34;&gt;https://www.sonarqube.org/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.sonarqube.org/&#34;&gt;&lt;img src=&#34;https://www.sonarqube.org/assets/logo-31ad3115b1b4b120f3d1efd63e6b13ac9f1f89437f0cf6881cc4d8b5603a52b4.svg&#34; alt=&#34;SonarQube&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;nd Security&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;SonarQube empowers all developers to write cleaner and safer code.
+Join an Open Community of more than 200k dev teams.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-6.7.7.zip&#34;&gt;Download&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.sonarqube.org/index/hero-image.png&#34; alt=&#34;SonarQube detects coding issues during code review, and lets you track overall health of your codebase&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>jenkins集成邮件</title>
+      <link>https://academia-hugo.netlify.com/notes/jenkins-study/jenkins%E8%A7%A6%E5%8F%91%E5%99%A8/</link>
+      <pubDate>Thu, 09 Jul 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/jenkins-study/jenkins%E8%A7%A6%E5%8F%91%E5%99%A8/</guid>
+      <description>&lt;h2 id=&#34;触发远程构建&#34;&gt;触发远程构建&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/14.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;输入JENKINS_URL&lt;code&gt;/view/all/job/cn-yzg-jfinaloa/build?token=&lt;/code&gt;TOKEN_NAME&lt;/p&gt;
+&lt;p&gt;&lt;code&gt; 或者 /buildWithParameters?token=&lt;/code&gt;TOKEN_NAME&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/15.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;其他工程构建后触发&#34;&gt;其他工程构建后触发&lt;/h2&gt;
+&lt;p&gt;当frist-pro构建时触发&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/16.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;定时触发&#34;&gt;定时触发&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;每30分钟构建一次
+H/30* * * *
+
+每2小时构建
+H H/2* * *
+
+每天8、12、22 一天构建3次
+0.8，12，22* * *
+
+每天中午12点定时构建一次
+H 12* * *
+
+每天下午18点定时构建一次
+H 18* * *
+
+在每小时的前半小时内的10分钟
+H(0-29)/10* * * *
+
+每两小时一次，每个工作日上午9点到下午5点
+H H(9-16)/2* *1-5
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;轮询-scm触发不建议&#34;&gt;轮询 SCM触发（不建议）&lt;/h2&gt;
+&lt;p&gt;代码仓库发生变更时触发定时构建&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pipeline风格集成项目</title>
+      <link>https://academia-hugo.netlify.com/notes/jenkins-study/pipeline%E9%A3%8E%E6%A0%BC%E9%9B%86%E6%88%90%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Wed, 08 Jul 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/jenkins-study/pipeline%E9%A3%8E%E6%A0%BC%E9%9B%86%E6%88%90%E9%A1%B9%E7%9B%AE/</guid>
+      <description>&lt;h2 id=&#34;1配置pipeline插件&#34;&gt;1.配置pipeline插件&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/19.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2编写jenkinsfile&#34;&gt;2.编写&lt;strong&gt;Jenkinsfile&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;在项目的根目录下编写Jenkinsfile&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;pipeline &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    agent any
+
+    stages &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;pull code&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+            steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+                 checkout&lt;span style=&#34;color:#f92672&#34;&gt;([&lt;/span&gt;$class: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;GitSCM&amp;#39;&lt;/span&gt;, branches: &lt;span style=&#34;color:#f92672&#34;&gt;[[&lt;/span&gt;name: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;*/master&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]]&lt;/span&gt;, doGenerateSubmoduleConfigurations: false, extensions: &lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt;, submoduleCfg: &lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt;, userRemoteConfigs: &lt;span style=&#34;color:#f92672&#34;&gt;[[&lt;/span&gt;credentialsId: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;95f5cb07-e0fd-4186-9504-4d7e1d211d3b&amp;#39;&lt;/span&gt;, url: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;https://gitee.com/MrPen/jfinaloa.git&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]]])&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+        stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;package war&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+            steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+                  sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mvn clean package&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+         stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;publish&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+            steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+                 deploy adapters: &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;tomcat8&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;credentialsId: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;afc2e433-a99c-4070-b9d9-7125f4139bec&amp;#39;&lt;/span&gt;, path: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;, url: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;http://203.176.95.155:8081/&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)]&lt;/span&gt;, contextPath: null, war: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;target/*.war&amp;#39;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3新建流水线项目&#34;&gt;3.新建流水线项目&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/17.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/18.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;4立即构建&#34;&gt;4.立即构建&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/13.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>jenkins用户权限</title>
+      <link>https://academia-hugo.netlify.com/notes/jenkins-study/jenkins%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90/</link>
+      <pubDate>Tue, 07 Jul 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/jenkins-study/jenkins%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90/</guid>
+      <description>&lt;h3 id=&#34;安装插件&#34;&gt;安装插件&lt;/h3&gt;
+&lt;p&gt;Role-based Authorization Strategy&lt;/p&gt;
+&lt;h3 id=&#34;开启策略&#34;&gt;开启策略&lt;/h3&gt;
+&lt;p&gt;系统管理&amp;ndash;&amp;raquo;全局安全配置&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/a5.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;配置权限&#34;&gt;配置权限&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/a6.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/7.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Global roles&lt;/strong&gt;  ：系统权限&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Item roles&lt;/strong&gt;     ：项目权限&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>jenkins配置jdk,maven</title>
+      <link>https://academia-hugo.netlify.com/notes/jenkins-study/jenkins%E9%85%8D%E7%BD%AEjdkmaven/</link>
+      <pubDate>Tue, 07 Jul 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/jenkins-study/jenkins%E9%85%8D%E7%BD%AEjdkmaven/</guid>
+      <description>&lt;h3 id=&#34;安装git&#34;&gt;安装git&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;yum install git -y
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;安装maven&#34;&gt;安装maven&lt;/h3&gt;
+&lt;p&gt;下载maven &lt;a href=&#34;https://maven.apache.org/download.cgi&#34;&gt;https://maven.apache.org/download.cgi&lt;/a&gt;
+将tar包移动到服务器
+解压&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;tar -xzf apache-maven-3.6.3-bin.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;配置环境变量&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;vim /etc/profile
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;追加以下内容&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
+export MAVEN_HOME=/opt/maven
+export PATH=${JAVA_HOME}/bin:${MAVEN_HOME}/bin
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;重载环境变量&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;source /etc/profile
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;测试&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mvn -v
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;出现以下内容安装成功&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
+Maven home: /opt/maven
+Java version: 1.8.0_252, vendor: Oracle Corporation, runtime: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.252.b09-2.el7_8.x86_64/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: &amp;quot;linux&amp;quot;, version: &amp;quot;3.10.0-327.el7.x86_64&amp;quot;, arch: &amp;quot;amd64&amp;quot;, family: &amp;quot;unix&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;配置settingsxml&#34;&gt;配置settings.xml&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;mkdir /root/repo
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;vim /opt/maven/conf/settings.xml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;配置本地仓库&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; &amp;lt;localRepository&amp;gt;/root/repo&amp;lt;/localRepository&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;配置阿里云镜像&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;      &amp;lt;mirror&amp;gt;
+         &amp;lt;id&amp;gt;nexus-aliyun&amp;lt;/id&amp;gt;
+         &amp;lt;mirrorOf&amp;gt;*&amp;lt;/mirrorOf&amp;gt;
+         &amp;lt;name&amp;gt;Nexus aliyun&amp;lt;/name&amp;gt;
+         &amp;lt;url&amp;gt;http://maven.aliyun.com/nexus/content/groups/public&amp;lt;/url&amp;gt;
+      &amp;lt;/mirror&amp;gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;jenkins配置jdk和maven&#34;&gt;jenkins配置jdk和maven&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/8.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;系统设置&amp;ndash;&amp;raquo;系统配置&amp;ndash;&amp;raquo;全局属性环境变量&lt;/p&gt;
+&lt;p&gt;分别配置&lt;code&gt;JAVA_HOME&lt;/code&gt;，&lt;code&gt;M2_HOME&lt;/code&gt;，&lt;code&gt;PATH+EXTRA&lt;/code&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>jenkins安装</title>
+      <link>https://academia-hugo.netlify.com/notes/jenkins-study/jenkins%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/jenkins-study/jenkins%E5%AE%89%E8%A3%85/</guid>
+      <description>&lt;h1 id=&#34;jenkins安装&#34;&gt;jenkins安装&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;jenkins&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;官方网址：https://pkg.jenkins.io/redhat-stable/&lt;/p&gt;
+&lt;p&gt;上官网下载rpm包&lt;/p&gt;
+&lt;h3 id=&#34;安装&#34;&gt;安装&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;rpm -ivh jenkins-2.235.1-1.1.noarch.rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;修改配置&#34;&gt;修改配置&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;vim /etc/sysconfig/jenkins
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;修改端口号为8888&lt;/p&gt;
+&lt;p&gt;JENKINS_PORT=&amp;quot;8888&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;修改用户名&amp;quot;root&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;JENKINS_USER=&amp;quot;root&amp;rdquo;&lt;/p&gt;
+&lt;h3 id=&#34;启动jenkins&#34;&gt;启动jenkins&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;systemctl start jenkins
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;开放8888端口&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;firewall-cmd --zone&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;public --add-port&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;8888/tcp --permanent
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;firewall-cmd --reload 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;输入http://你的主机IP:8888/访问&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/2.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;查看密码&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cat /var/lib/jenkins/secrets/initialAdminPassword-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;跳过插件安装&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/3.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/4.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;使用清华源加速插件安装&#34;&gt;使用清华源加速插件安装&lt;/h3&gt;
+&lt;p&gt;修改 Update Site&lt;/p&gt;
+&lt;p&gt;Manage Jenkins  -&amp;raquo;Manager plugin-&amp;raquo;Advanced&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/6.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;修改为&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;http://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;替换default.json的下载路径&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt; cd /var/lib/jenkins/updates
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;sed -i &#39;s/http:\/\/updates.jenkins-ci.org\/download/https:\/\/mirrors.tuna.tsinghua.edu.cn\/jenkins/g&#39; default.json &amp;amp;&amp;amp; sed -i &#39;s/http:\/\/www.google.com/https:\/\/www.baidu.com/g&#39; default.json
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;浏览器输入 http://你的主机名:8888/restart  重启&lt;/p&gt;
+&lt;h2 id=&#34;docker&#34;&gt;docker&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;docker run -u root --rm  -d  -p 8888:8080  -p 50000:50000 -v jenkins-data:/var/jenkins_home    jenkins/jenkins
+
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;卸载&#34;&gt;卸载&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;find / -iname jenkins | xargs -n 1000 rm -rf
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>jenkins触发器</title>
+      <link>https://academia-hugo.netlify.com/notes/jenkins-study/jenkins%E9%9B%86%E6%88%90%E9%82%AE%E4%BB%B6/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/jenkins-study/jenkins%E9%9B%86%E6%88%90%E9%82%AE%E4%BB%B6/</guid>
+      <description>&lt;h2 id=&#34;前提条件&#34;&gt;前提条件&lt;/h2&gt;
+&lt;p&gt;开启邮箱服务器的SMTP功能&lt;/p&gt;
+&lt;h2 id=&#34;安装插件&#34;&gt;安装插件&lt;/h2&gt;
+&lt;p&gt;Email Extension Template&lt;/p&gt;
+&lt;h2 id=&#34;配置&#34;&gt;配置&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/20.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/21.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/22.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/23.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;测试成功&#34;&gt;测试成功&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/24.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;添加邮件模板&#34;&gt;添加邮件模板&lt;/h2&gt;
+&lt;p&gt;项目根目录下添加邮件模板&lt;code&gt;email.html&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;html&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;head&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;meta&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;charset&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;UTF-8&amp;#34;&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;title&lt;/span&gt;&amp;gt;${ENV, var=&amp;#34;JOB_NAME&amp;#34;}-第${BUILD_NUMBER}次构建日志&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;title&lt;/span&gt;&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;head&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;body&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;leftmargin&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;8&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;marginwidth&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;topmargin&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;8&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;marginheight&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;offset&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;table&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;width&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;95%&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;cellpadding&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;cellspacing&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;style&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;font-size: 11pt; font-family: Tahoma, Arial, Helvetica, sans-serif&amp;#34;&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt;
+   &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt;(本邮件是程序自动下发的，请勿回复！)&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt;
+   &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;h2&lt;/span&gt;&amp;gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;font&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;color&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;#0000FF&amp;#34;&lt;/span&gt;&amp;gt;构建结果 - ${BUILD_STATUS}&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;font&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;h2&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt;
+   &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;br&lt;/span&gt; /&amp;gt; &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;b&lt;/span&gt;&amp;gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;font&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;color&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;#0B610B&amp;#34;&lt;/span&gt;&amp;gt;构建信息&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;font&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;b&lt;/span&gt;&amp;gt; &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;hr&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;size&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;width&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;100%&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;align&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;center&amp;#34;&lt;/span&gt; /&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt; 
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt; 
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt; 
+     &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;ul&lt;/span&gt;&amp;gt; 
+          &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;li&lt;/span&gt;&amp;gt;项目名称&amp;amp;nbsp;：&amp;amp;nbsp;${PROJECT_NAME}&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;li&lt;/span&gt;&amp;gt;
+          &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;li&lt;/span&gt;&amp;gt;构建编号&amp;amp;nbsp;：&amp;amp;nbsp;第${BUILD_NUMBER}次构建&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;li&lt;/span&gt;&amp;gt;
+          &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;li&lt;/span&gt;&amp;gt;触发原因：&amp;amp;nbsp;${CAUSE}&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;li&lt;/span&gt;&amp;gt;
+          &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;li&lt;/span&gt;&amp;gt;构建日志：&amp;amp;nbsp;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;${BUILD_URL}console&amp;#34;&lt;/span&gt;&amp;gt;${BUILD_URL}console&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;li&lt;/span&gt;&amp;gt;
+          &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;li&lt;/span&gt;&amp;gt;构建&amp;amp;nbsp;&amp;amp;nbsp;Url&amp;amp;nbsp;：&amp;amp;nbsp;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;${BUILD_URL}&amp;#34;&lt;/span&gt;&amp;gt;${BUILD_URL}&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;li&lt;/span&gt;&amp;gt;
+          &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;li&lt;/span&gt;&amp;gt;工作目录&amp;amp;nbsp;：&amp;amp;nbsp;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;${PROJECT_URL}ws&amp;#34;&lt;/span&gt;&amp;gt;${PROJECT_URL}ws&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;li&lt;/span&gt;&amp;gt;
+          &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;li&lt;/span&gt;&amp;gt;项目&amp;amp;nbsp;&amp;amp;nbsp;Url&amp;amp;nbsp;：&amp;amp;nbsp;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;${PROJECT_URL}&amp;#34;&lt;/span&gt;&amp;gt;${PROJECT_URL}&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;li&lt;/span&gt;&amp;gt;
+     &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;ul&lt;/span&gt;&amp;gt; 
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt; 
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt;
+     &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt;
+          &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;b&lt;/span&gt;&amp;gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;font&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;color&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;#0B610B&amp;#34;&lt;/span&gt;&amp;gt;Changes Since Last Successful Build:&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;font&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;b&lt;/span&gt;&amp;gt;
+          &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;hr&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;size&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;width&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;100%&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;align&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;center&amp;#34;&lt;/span&gt; /&amp;gt;
+     &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt; 
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt; 
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt; 
+     &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt;
+         &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;ul&lt;/span&gt;&amp;gt; 
+              &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;li&lt;/span&gt;&amp;gt;历史变更记录 : &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;${PROJECT_URL}changes&amp;#34;&lt;/span&gt;&amp;gt;${PROJECT_URL}changes&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;li&lt;/span&gt;&amp;gt;
+         &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;ul&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt; 
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt;
+     &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt;
+          &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;b&lt;/span&gt;&amp;gt;Failed Test Results&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;b&lt;/span&gt;&amp;gt; &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;hr&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;size&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;width&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;100%&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;align&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;center&amp;#34;&lt;/span&gt; /&amp;gt;
+     &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt; 
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt;
+     &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt;
+          &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;pre&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;style&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;font-size: 11pt; font-family: Tahoma, Arial, Helvetica, sans-serif&amp;#34;&lt;/span&gt;&amp;gt;$FAILED_TESTS&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;pre&lt;/span&gt;&amp;gt; &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;br&lt;/span&gt; /&amp;gt;
+     &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt;
+     &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;b&lt;/span&gt;&amp;gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;font&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;color&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;#0B610B&amp;#34;&lt;/span&gt;&amp;gt;构建日志 (最后 100行):&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;font&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;b&lt;/span&gt;&amp;gt; &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;hr&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;size&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;width&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;100%&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;align&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;center&amp;#34;&lt;/span&gt; /&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- &amp;lt;tr&amp;gt; &amp;lt;td&amp;gt;Test Logs (if test has ran): &amp;lt;a href=&amp;#34;${PROJECT_URL}ws/TestResult/archive_logs/Log-Build-${BUILD_NUMBER}.zip&amp;#34;&amp;gt;${PROJECT_URL}/ws/TestResult/archive_logs/Log-Build-${BUILD_NUMBER}.zip&amp;lt;/a&amp;gt; &amp;lt;br /&amp;gt; &amp;lt;br /&amp;gt; &amp;lt;/td&amp;gt; &amp;lt;/tr&amp;gt; --&amp;gt;&lt;/span&gt; 
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt;
+     &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;textarea&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;cols&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;80&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;rows&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;30&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;readonly&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;readonly&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;style&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;font-family: Courier New&amp;#34;&lt;/span&gt;&amp;gt;${BUILD_LOG, maxLines=100}&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;textarea&lt;/span&gt;&amp;gt; 
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;td&lt;/span&gt;&amp;gt; 
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;tr&lt;/span&gt;&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;table&lt;/span&gt;&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;body&lt;/span&gt;&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;html&lt;/span&gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;修改jenkinsfile&#34;&gt;修改jenkinsfile&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;post&lt;/span&gt; {
+             &lt;span style=&#34;color:#a6e22e&#34;&gt;always&lt;/span&gt; {
+               &lt;span style=&#34;color:#a6e22e&#34;&gt;emailext&lt;/span&gt;(
+               		&lt;span style=&#34;color:#a6e22e&#34;&gt;subject&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;构建通知: ${PROJECT_NAME} - Build  # ${BUILD_NUMBER} - ${BUILD_STATUS)!&amp;#39;&lt;/span&gt;,
+                    &lt;span style=&#34;color:#a6e22e&#34;&gt;body&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;${FILE,path=&amp;#34;email.html&amp;#34;}&amp;#39;&lt;/span&gt;,
+                    &lt;span style=&#34;color:#a6e22e&#34;&gt;to&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;1785868089@qq.com&amp;#39;&lt;/span&gt;
+               )  
+            }
+            
+        }
+    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;立即构建&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/25.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>jenkins集成sonarQube</title>
+      <link>https://academia-hugo.netlify.com/notes/jenkins-study/jenkins%E9%9B%86%E6%88%90sonarqube/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/jenkins-study/jenkins%E9%9B%86%E6%88%90sonarqube/</guid>
+      <description>&lt;h2 id=&#34;安装插件&#34;&gt;安装插件&lt;/h2&gt;
+&lt;p&gt;安装&lt;code&gt;SonarQube Scanner&lt;/code&gt;插件&lt;/p&gt;
+&lt;h2 id=&#34;添加凭证&#34;&gt;添加凭证&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/sonar/3.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;安装sonarqube-scanner&#34;&gt;安装SonarQube Scanner&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/sonar/5.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;配置sonarqube-servers&#34;&gt;配置SonarQube servers&lt;/h2&gt;
+&lt;p&gt;系统配置&amp;ndash;&amp;raquo;系统配置&amp;ndash;&amp;raquo;SonarQube servers
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/sonar/4.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;自由风格项目配置&#34;&gt;自由风格项目配置&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/sonar/6.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/sonar/7.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;流水线项目配置&#34;&gt;流水线项目配置&lt;/h2&gt;
+&lt;p&gt;在项目根目录下创建sonar-project.properties文件
+sonar-project.properties&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sonar.projectKey&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;com-yzg-jfinaloa-pipeline
+sonar.projectName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;com-yzg-jfinaloa-pipeline
+sonar.projectVersion&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1.0  
+sonar.sources&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;src/main/java/com/pointlion/
+sonar.exclusions&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;**/test/**,**/target/**
+sonar.java.sources&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1.8
+sonar.java.target&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1.8
+sonar.sourceEncoding&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;UTF-8
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;jenkinsfile加入以下配置&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code checking&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+            steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+              script &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+                 //引入sonarqubeScanner工具
+                 scannerHome&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tool &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;SonarQube&amp;#39;&lt;/span&gt;
+                 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+              
+              withSonarQubeEnv&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;SonarQube&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+                 //引入SonarQube的服务器环境
+                sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;scannerHome&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/bin/sonar-scanner&amp;#34;&lt;/span&gt;
+                &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/sonar/8.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>sonarQube安装</title>
+      <link>https://academia-hugo.netlify.com/notes/jenkins-study/sonarqube%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/jenkins-study/sonarqube%E5%AE%89%E8%A3%85/</guid>
+      <description>&lt;h2 id=&#34;前提条件&#34;&gt;前提条件&lt;/h2&gt;
+&lt;p&gt;安装MYSQL数据库
+新建sonnar数据库&lt;/p&gt;
+&lt;h2 id=&#34;下载安装&#34;&gt;下载安装&lt;/h2&gt;
+&lt;p&gt;下载链接： &lt;a href=&#34;https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-6.7.7.zip&#34;&gt;https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-6.7.7.zip&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;解压sonnar并配置权限&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install unzip
+
+unzip sonarqube-6.7.7.zip
+
+mv /root/sonarqube-6.7.7./* /opt/sonar 
+
+useradd  sonar 
+
+chown -R sonar. /opt/sonar
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;配置&#34;&gt;配置&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;vim /opt/sonar/conf/sonar.properties
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;# 配置数据库
+sonar.jdbc.url=jdbc:mysql://localhost:3306/sonar?useUnicode=true&amp;amp;characterEncoding=utf8&amp;amp;rewriteBatchedStatements=true&amp;amp;useConfigs=maxPerformance
+sonar.jdbc.username=root
+sonar.jdbc.password=root
+sonar.sorceEncoding=UTF-8
+sonar.login=admin
+sonar.password=admin
+# 配置端口
+sonar.web.port=9000
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;启动&#34;&gt;启动&lt;/h2&gt;
+&lt;p&gt;不能用root账号启动&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;su sonar /opt/sonar/bin/linux-x86-64/sonar.sh start
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;查看日志&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;tail -f /opt/sonar/logs/sonar.log
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/sonar/2.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/sonar/1.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;安装中文插件&#34;&gt;安装中文插件&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FSonarQubeCommunity%2Fsonar-l10n-zh%2Freleases%2Ftag%2Fsonar-l10n-zh-plugin-1.16&#34;&gt;下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载好的jar包放到sonar安装目录下&lt;code&gt;extensions/plugins&lt;/code&gt;重启即可&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>自由风格集成tomcat项目</title>
+      <link>https://academia-hugo.netlify.com/notes/jenkins-study/%E8%87%AA%E7%94%B1%E9%A3%8E%E6%A0%BC%E9%9B%86%E6%88%90tomcat%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/jenkins-study/%E8%87%AA%E7%94%B1%E9%A3%8E%E6%A0%BC%E9%9B%86%E6%88%90tomcat%E9%A1%B9%E7%9B%AE/</guid>
+      <description>&lt;h2 id=&#34;配置tomcat远程访问权限&#34;&gt;配置tomcat远程访问权限&lt;/h2&gt;
+&lt;p&gt;修改tomcat安装目录下的tomcat-users.xml&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;vim /opt/apache-tomcat-8.5.57/conf/tomcat-users.xml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;  &amp;lt;role rolename=&amp;quot;admin-gui&amp;quot;/&amp;gt;
+  &amp;lt;role rolename=&amp;quot;admin-script&amp;quot;/&amp;gt;
+  &amp;lt;role rolename=&amp;quot;manager-gui&amp;quot;/&amp;gt;
+  &amp;lt;role rolename=&amp;quot;manager-script&amp;quot;/&amp;gt;
+  &amp;lt;role rolename=&amp;quot;manager-jmx&amp;quot;/&amp;gt;
+  &amp;lt;role rolename=&amp;quot;manager-status&amp;quot;/&amp;gt;
+  &amp;lt;user username=&amp;quot;admin&amp;quot; password=&amp;quot;admin&amp;quot; roles=&amp;quot;manager-gui,manager-script,manager-jmx,manager-status,admin-script,admin-gui&amp;quot;/&amp;gt;
+&amp;lt;/tomcat-users&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;重启&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./shutdown.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;./startup.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;修改&lt;code&gt;webapps/manager/META-INF/context.xml&lt;/code&gt;配置文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;vim /opt/apache-tomcat-8.5.57/webapps/manager/META-INF/context.xml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;给&lt;code&gt;value&lt;/code&gt;标签加上注释&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- &amp;lt;Valve className=&amp;quot;org.apache.catalina.valves.RemoteAddrValve&amp;quot;
+         allow=&amp;quot;127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1&amp;quot; /&amp;gt;--&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;点击 manager webapp
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/10.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;安装deploy-to-container插件&#34;&gt;安装Deploy to container插件&lt;/h2&gt;
+&lt;h2 id=&#34;创建自由风格项目&#34;&gt;创建自由风格项目&lt;/h2&gt;
+&lt;p&gt;配置Git地址
+构建&amp;mdash;&amp;ndash;&amp;raquo;&amp;gt; 执行shell &amp;mdash;&amp;ndash;&amp;raquo;&amp;gt; 输入&lt;code&gt;mvn clean package&lt;/code&gt;
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/11.jpg&#34; alt=&#34;&#34;&gt;
+构建后操作&amp;mdash;&amp;ndash;&amp;raquo;&amp;gt;  Deploy war to container
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/12.jpg&#34; alt=&#34;&#34;&gt;
+立即构建&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/jenkins/13.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

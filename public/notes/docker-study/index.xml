@@ -1,0 +1,946 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>doxker on GUAN-BLOG</title>
+    <link>https://academia-hugo.netlify.com/notes/docker-study/</link>
+    <description>Recent content in doxker on GUAN-BLOG</description>
+    <generator>Source Themes academia (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 09 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	    <atom:link href="https://academia-hugo.netlify.com/notes/docker-study/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>docker安装</title>
+      <link>https://academia-hugo.netlify.com/notes/docker-study/docker%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Tue, 16 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/docker-study/docker%E5%AE%89%E8%A3%85/</guid>
+      <description>&lt;h3 id=&#34;centos-610---安装-docker&#34;&gt;centos 6.10   安装 docker&lt;/h3&gt;
+&lt;p&gt;官方文档 ：https://docs.docker.com/engine/install/centos/&lt;/p&gt;
+&lt;p&gt;查看centos系统版本,6和7有不同的安装步骤&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cat /etc/redhat-release
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;卸载旧版本&#34;&gt;卸载旧版本&lt;/h3&gt;
+&lt;p&gt;较旧的Docker版本称为docker或docker-engine。如果已安装这些程序，请卸载它们以及相关的依赖项。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;    yum remove docker &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;                  docker-client &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;                  docker-client-latest &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;                  docker-common &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;                  docker-latest &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;                  docker-latest-logrotate &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;                  docker-logrotate &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;                  docker-engine
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;安装&#34;&gt;安装&lt;/h3&gt;
+&lt;p&gt;网上试试很多方法都失败了，下面这个亲测可用&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt; wget https://get.docker.com/rpm/1.7.1/centos-6/RPMS/x86_64/docker-engine-1.7.1-1.el6.x86_64.rpm 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo rpm -ivh docker-engine-1.7.1-1.el6.x86_64.rpm 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;### 安装配置cgroup&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;yum install -y libcgroup
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo vim /etc/fstab
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;增加一行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;none      /sys/fs/cgroup          cgroup  defaults        &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;重启&#34;&gt;重启&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;reboot
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;启动服务&#34;&gt;启动服务&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;service docker start
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;测试&#34;&gt;测试&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt; docker -v
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/linux/17.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;centos-linux-release-721511---安装-docker&#34;&gt;CentOS Linux release 7.2.1511   安装 docker&lt;/h3&gt;
+&lt;p&gt;/docker要求内核版本必须高于3.10，因此先查看自己的内核版本
+查看内核&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;uname -r
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;yum -y install docker-io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;yum list installed |grep docker
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;启动docker服务&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;systemctl start docker.service 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;systemctl status docker.service 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;开机自启动&#34;&gt;开机自启动：&lt;/h3&gt;
+&lt;p&gt;检查服务是否开机启动&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;systemctl is-enabled docker.service 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将服务配置成开机启动&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;systemctl enable docker.service 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;启动服务&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;systemctl start docker.service 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;systemctl 相关其他命令：
+禁止开机启动&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;systemctl disable docker.service 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;停止&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;systemctl stop docker.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;重启&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;systemctl restart docker.service 重启
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>docker命令</title>
+      <link>https://academia-hugo.netlify.com/notes/docker-study/dock%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/docker-study/dock%E5%91%BD%E4%BB%A4/</guid>
+      <description>&lt;p&gt;docker hub地址： &lt;a href=&#34;https://hub.docker.com/&#34;&gt;https://hub.docker.com/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;镜像命令&#34;&gt;镜像命令&lt;/h3&gt;
+&lt;h4 id=&#34;运行hello-world&#34;&gt;运行hello-world&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker run hello-world
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;查询镜像&#34;&gt;查询镜像&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker     images                                     查看主机上可运行的镜像
+
+docker     images   -a             			          列出本地所有镜像
+
+docker     images   -q              			      只显示镜像ID
+
+docker     images   --digests           	          显示镜像摘要信息
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;搜索镜像&#34;&gt;搜索镜像&lt;/h4&gt;
+&lt;p&gt;（系统去docker hub搜索，但是是从阿里云拉）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker search  XXX
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;列出点赞数不少于20的tomcat镜像&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker search  -s  &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;  tomcat
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/5.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;下载拉取镜像&#34;&gt;下载（拉取）镜像&lt;/h4&gt;
+&lt;p&gt;docker pull  XXX&lt;/p&gt;
+&lt;p&gt;下载tomcat&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker pull  tomcat      后面接版本号，不写就是最新版本
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;删除镜像&#34;&gt;删除镜像&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker rmi image id   &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;有容器的时候删不掉&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;删除全部镜像&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker rmi &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;docker images -q&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;容器命令&#34;&gt;容器命令&lt;/h3&gt;
+&lt;p&gt;运行容器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker run -it  XXX
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;后台运行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker run  -d -it  XXX
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;运行hellow-world&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker run -it fd74c3615f76
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;查看&#34;&gt;查看&lt;/h4&gt;
+&lt;p&gt;l列出所有正在运行的容器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker ps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;查看两条运行记录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker ps -n &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;启动容器&#34;&gt;启动容器&lt;/h4&gt;
+&lt;p&gt;启动容器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker start  XXX（容器ID或者容器名）
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;进入交互模式&#34;&gt;进入交互模式&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker exec -it XXX /bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;安全退出交互式界面&#34;&gt;安全退出交互式界面：&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;Ctrl+P+Q
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;重启容器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker restart  XXX（容器ID或者容器名）
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;关闭容器&#34;&gt;关闭容器&lt;/h4&gt;
+&lt;p&gt;温柔停止&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker stop XXX（容器ID或者容器名）
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;强制停止&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker stop XXX（容器ID或者容器名）
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker kill  XXX（容器ID或者容器名）
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;删除容器&#34;&gt;删除容器&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker rm  -f XXX（容器ID或者容器名）
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;停止所有容器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker stop &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;docker ps -aq&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;删除所有容器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker rm &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;docker ps -aq&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;从容器创建一个新的镜像&#34;&gt;从容器创建一个新的镜像&lt;/h3&gt;
+&lt;p&gt;将容器a404c6c174a2 保存为新的镜像,并添加提交人信息和说明信息。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker commit -a &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;runoob.com&amp;#34;&lt;/span&gt; -m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;my apache&amp;#34;&lt;/span&gt; a404c6c174a2  mytoncat:v1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;**-a :**提交的镜像作者；&lt;/li&gt;
+&lt;li&gt;**-c :**使用Dockerfile指令来创建镜像；&lt;/li&gt;
+&lt;li&gt;**-m :**提交时的说明文字；&lt;/li&gt;
+&lt;li&gt;**-p :**在commit时，将容器暂停。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;查看容器占用&#34;&gt;查看容器占用&lt;/h3&gt;
+&lt;p&gt;ps -ef|grep 容器Id&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@wentao-2 order]# ps -ef|grep 3a61cb3fd4f6
+root      7358 12956  0 09:14 ?        00:00:00 containerd-shim -namespace moby -workdir /var/lib/containerd/io.containerd.runtime.v1.linux/moby/3a61cb3fd4f64f6fed464ca6c7185c5138c9256ac8ceb049b9527272573e994d -address /run/containerd/containerd.sock -containerd-binary /usr/bin/containerd -runtime-root /var/run/docker/runtime-runc
+root      7893  5652  0 09:19 pts/0    00:00:00 grep --color=auto 3a61cb3fd4f6
+123
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;top -p 7358(pid)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@wentao-2 order]# top -p 7358
+top - 09:22:14 up 103 days, 18:13,  2 users,  load average: 0.04, 0.09, 0.12
+Tasks:   1 total,   0 running,   1 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.8 us,  0.3 sy,  0.0 ni, 98.9 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem :  8010424 total,   170620 free,  7303264 used,   536540 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.   369860 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                                                                    
+ 7358 root      20   0   10724   3744   2656 S   0.0  0.0   0:00.05 containerd-shim      
+123456789
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;参数说明：
+PID：进程的ID
+USER：进程所有者
+PR：进程的优先级别，越小越优先被执行
+NInice：值
+VIRT：进程占用的虚拟内存
+RES：进程占用的物理内存
+SHR：进程使用的共享内存
+S：进程的状态。S表示休眠，R表示正在运行，Z表示僵死状态，N表示该进程优先值为负数
+%CPU：进程占用CPU的使用率
+%MEM：进程使用的物理内存和总内存的百分比
+TIME+：该进程启动后占用的总的CPU时间，即占用CPU使用时间的累加值。
+COMMAND：进程启动命令名称&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>docker 三剑客 Compose</title>
+      <link>https://academia-hugo.netlify.com/notes/docker-study/dockercompose/</link>
+      <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/docker-study/dockercompose/</guid>
+      <description>&lt;h2 id=&#34;compose-简介&#34;&gt;Compose 简介&lt;/h2&gt;
+&lt;p&gt;Compose 是用于定义和运行多容器 Docker 应用程序的工具。通过 Compose，您可以使用 YML 文件来配置应用程序需要的所有服务。然后，使用一个命令，就可以从 YML 文件配置中创建并启动所有服务。&lt;/p&gt;
+&lt;p&gt;Compose 使用的三个步骤：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用 Dockerfile 定义应用程序的环境。&lt;/li&gt;
+&lt;li&gt;使用 docker-compose.yml 定义构成应用程序的服务，这样它们可以在隔离环境中一起运行。&lt;/li&gt;
+&lt;li&gt;最后，执行 docker-compose up 命令来启动并运行整个应用程序。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>docker 私有库</title>
+      <link>https://academia-hugo.netlify.com/notes/docker-study/docker%E7%A7%81%E6%9C%89%E5%BA%93/</link>
+      <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/docker-study/docker%E7%A7%81%E6%9C%89%E5%BA%93/</guid>
+      <description>&lt;h1 id=&#34;docker-私有仓库&#34;&gt;Docker 私有仓库&lt;/h1&gt;
+&lt;p&gt;有时候使用 Docker Hub 这样的公共仓库可能不方便，用户可以创建一个本地仓库供私人使用。&lt;/p&gt;
+&lt;p&gt;本节介绍如何使用本地仓库。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.docker.com/registry/&#34;&gt;&lt;code&gt;docker-registry&lt;/code&gt;&lt;/a&gt; 是官方提供的工具，可以用于构建私有的镜像仓库。本文内容基于 &lt;a href=&#34;https://github.com/docker/distribution&#34;&gt;&lt;code&gt;docker-registry&lt;/code&gt;&lt;/a&gt; v2.x 版本。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>docker Compose使用</title>
+      <link>https://academia-hugo.netlify.com/notes/docker-study/dockercompose%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/docker-study/dockercompose%E4%BD%BF%E7%94%A8/</guid>
+      <description>&lt;h2 id=&#34;术语&#34;&gt;术语&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;服务 (&lt;code&gt;service&lt;/code&gt;)：一个应用容器，实际上可以运行多个相同镜像的实例。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;项目 (&lt;code&gt;project&lt;/code&gt;)：由一组关联的应用容器组成的一个完整业务单元。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一个项目可以由多个服务（容器）关联而成，Compose 面向项目进行管理。&lt;/p&gt;
+&lt;h2 id=&#34;docker-compose启动tomcat&#34;&gt;docker Compose启动tomcat&lt;/h2&gt;
+&lt;p&gt;在 &lt;code&gt;/usr/local/docker/tomcat&lt;/code&gt;下创建一个&lt;code&gt;docker-compose.yml&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;version: &#39;3&#39;
+services:
+  tomcat:
+    restart: always
+    image: tomcat
+    container_name: tomcat
+    ports:
+     - 18080:8080
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;运行-compose-项目&#34;&gt;运行 compose 项目&lt;/h2&gt;
+&lt;p&gt;在&lt;code&gt;docker-compose.yml&lt;/code&gt;所在的目录下执行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker-compose up
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;后台运行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker-compose up -d
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/44.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>docker Compose安装</title>
+      <link>https://academia-hugo.netlify.com/notes/docker-study/dockercompose%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/docker-study/dockercompose%E5%AE%89%E8%A3%85/</guid>
+      <description>&lt;h1 id=&#34;compose-安装&#34;&gt;Compose 安装&lt;/h1&gt;
+&lt;p&gt;在 Linux 上的也安装十分简单，从 &lt;a href=&#34;https://github.com/docker/compose/releases&#34;&gt;官方 GitHub Release&lt;/a&gt; 处直接下载编译好的二进制文件即可。&lt;/p&gt;
+&lt;p&gt;运行以下命令以下载 Docker Compose 的当前稳定版本：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo curl -L &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://github.com/docker/compose/releases/download/1.24.1/docker-compose-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;uname -s&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;uname -m&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; -o /usr/local/bin/docker-compose
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;要安装其他版本的 Compose，请替换 1.24.1。&lt;/p&gt;
+&lt;h2 id=&#34;高速安装&#34;&gt;高速安装&lt;/h2&gt;
+&lt;p&gt;Docker Compose 存放在Git Hub，不太稳定。
+你可以也通过执行下面的命令，高速安装Docker Compose。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;curl -L https://get.daocloud.io/docker/compose/releases/download/1.26.0/docker-compose-&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;uname -s&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;-&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;uname -m&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt; &amp;gt; /usr/local/bin/docker-compose
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;授权&#34;&gt;授权&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;chmod +x /usr/local/bin/docker-compose
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;验证&#34;&gt;验证&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker-compose --version
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/43.jpg&#34; alt=&#34;&#34;&gt;
+安装成功！！！&lt;/p&gt;
+&lt;h2 id=&#34;卸载&#34;&gt;卸载&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo rm /usr/local/bin/docker-compose
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>dockerCompose实战</title>
+      <link>https://academia-hugo.netlify.com/notes/docker-study/dockercompose%E5%AE%9E%E6%88%98/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/docker-study/dockercompose%E5%AE%9E%E6%88%98/</guid>
+      <description>&lt;h2 id=&#34;docker-compose-部署ruoyi项目&#34;&gt;docker Compose 部署RuoYi项目&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;RuoYi&lt;/code&gt; ， &lt;code&gt;MYSQL&lt;/code&gt; ， &lt;code&gt;docker Compose&lt;/code&gt;，  &lt;code&gt;dockerfile&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://gitee.com/MrPen/docker-ruoyi-demo&#34;&gt;项目gitee地址&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;根据 &lt;a href=&#34;http://doc.ruoyi.vip/ruoyi/document/hjbs.html#%E5%BF%85%E8%A6%81%E9%85%8D%E7%BD%AE&#34;&gt;ruoyi官方&lt;/a&gt;.文档将RuoYi项目打包成jar&lt;/p&gt;
+&lt;h3 id=&#34;打jar包&#34;&gt;打jar包&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;bin/package.bat&lt;/code&gt; 在项目的目录下执行
+然后会在项目下生成 &lt;code&gt;target&lt;/code&gt;文件夹包含 &lt;code&gt;war&lt;/code&gt; 或&lt;code&gt;jar&lt;/code&gt; （多模块生成在ruoyi-admin）&lt;/p&gt;
+&lt;p&gt;1、jar部署方式
+使用命令行执行：&lt;code&gt;java –jar ruoyi.jar&lt;/code&gt; 或者执行脚本：&lt;code&gt;bin/run.bat&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;2、war部署方式
+pom.xml packaging修改为&lt;code&gt;war&lt;/code&gt; 放入tomcat服务器webapps&lt;/p&gt;
+&lt;h3 id=&#34;修改配置文件&#34;&gt;修改配置文件&lt;/h3&gt;
+&lt;p&gt;application-druid.yml&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;spring&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;datasource&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt;: com.alibaba.druid.pool.DruidDataSource
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;driverClassName&lt;/span&gt;: com.mysql.cj.jdbc.Driver
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;druid&lt;/span&gt;:
+            &lt;span style=&#34;color:#75715e&#34;&gt;# 主库数据源 mysqldbserver必须与 container_name一致&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;master&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;url&lt;/span&gt;: jdbc:mysql://mysqldbserver:&lt;span style=&#34;color:#ae81ff&#34;&gt;3306&lt;/span&gt;/ry?useUnicode=&lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&amp;amp;characterEncoding=utf8&amp;amp;zeroDateTimeBehavior=convertToNull&amp;amp;useSSL=true&amp;amp;serverTimezone=GMT%2B8&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;username&lt;/span&gt;: root
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;password&lt;/span&gt;: root
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;编写app-dockerfile&#34;&gt;编写app-dockerfile&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-dockerfile&#34; data-lang=&#34;dockerfile&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; java:8&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;MAINTAINER&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; mrpen&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;ADD&lt;/span&gt;  ./ruoyi/ruoyi-admin.jar  app.jar&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;EXPOSE&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; 8081&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;ENTRYPOINT&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;java&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-jar&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;app.jar&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;FROM: 基础镜像,通过jdk8镜像开始&lt;/li&gt;
+&lt;li&gt;MAINTAINER: 维护者&lt;/li&gt;
+&lt;li&gt;ADD: 复制jar包到镜像内,名字为app.jar&lt;/li&gt;
+&lt;li&gt;EXPOSE: 声明端口&lt;/li&gt;
+&lt;li&gt;ENTRYPOINT: docker启动时,运行的命令.这里就是容器运行就启动jar服务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;编写mysql-dockerfile&#34;&gt;编写mysql-dockerfile&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-dockerfile&#34; data-lang=&#34;dockerfile&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; mysql:5.7&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;MAINTAINER&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; mrpen&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;编写docker-composeyml&#34;&gt;编写docker-compose.yml&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yml&#34; data-lang=&#34;yml&#34;&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;version &lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;3&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;services&lt;/span&gt;:
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;mysqldbserver&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;container_name&lt;/span&gt;: mysqldbserver
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;image&lt;/span&gt;: mysql:&lt;span style=&#34;color:#ae81ff&#34;&gt;5.7&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;build&lt;/span&gt;:
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;context&lt;/span&gt;: .
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;dockerfile&lt;/span&gt;: mysql-dockerfile
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;ports&lt;/span&gt;:
+      - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3306:3306&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;volumes&lt;/span&gt;:
+      - ./mysql/conf:/etc/mysql/conf.d
+      - ./mysql/logs:/logs
+      - ./mysql/data:/var/lib/mysql
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;command&lt;/span&gt;: [
+          &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;mysqld&amp;#39;&lt;/span&gt;,
+          &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;--innodb-buffer-pool-size=80M&amp;#39;&lt;/span&gt;,
+          &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;--character-set-server=utf8&amp;#39;&lt;/span&gt;,
+          &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;--collation-server=utf8_general_ci&amp;#39;&lt;/span&gt;,
+          &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;--default-time-zone=+8:00&amp;#39;&lt;/span&gt;,
+          &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;--lower-case-table-names=1&amp;#39;&lt;/span&gt;
+        ]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;environment&lt;/span&gt;:
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;MYSQL_DATABASE&lt;/span&gt;: ry
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;MYSQL_ROOT_PASSWORD&lt;/span&gt;: root
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;ryappserver&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;container_name&lt;/span&gt;: ryappserver
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;build&lt;/span&gt;:
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;context&lt;/span&gt;: .
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;dockerfile&lt;/span&gt;: app-dockerfile
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;ports&lt;/span&gt;:
+      - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;8081:8081&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;volumes&lt;/span&gt;:
+      - ./uploadPath:/home/ruoyi/uploadPath
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;depends_on&lt;/span&gt;:
+      - mysqldbserver
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;links&lt;/span&gt;:
+      - mysqldbserver
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;启动&#34;&gt;启动&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker-compose ps -d
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个时候还是访问不了的，因为我们的数据库还没导入&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/61.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;将&lt;code&gt;ry.sql&lt;/code&gt;导入后&lt;/p&gt;
+&lt;p&gt;重新启动&lt;code&gt;ryappserver&lt;/code&gt;服务&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker-compose restart ryappserver
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;查看ryappserver的容器id&#34;&gt;查看&lt;code&gt;ryappserver&lt;/code&gt;的容器ID&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker ps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/62.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;查看容器日志&#34;&gt;查看容器日志&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker logs -f 2559d6cdadf7
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/63.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;运行成功&#34;&gt;运行成功&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/64.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Harbor（上传、搜索、下载镜像）</title>
+      <link>https://academia-hugo.netlify.com/notes/docker-study/harbor%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/docker-study/harbor%E6%93%8D%E4%BD%9C/</guid>
+      <description>&lt;h2 id=&#34;前提条件&#34;&gt;前提条件&lt;/h2&gt;
+&lt;p&gt;开启两台机器
+机器A: (docker私有库)
+机器B: (外部访问)&lt;/p&gt;
+&lt;h2 id=&#34;注意事项&#34;&gt;注意事项&lt;/h2&gt;
+&lt;p&gt;如果你不想使用 &lt;code&gt;127.0.0.1:5000&lt;/code&gt; 作为仓库地址，比如想让本网段的其他主机也能把镜像推送到私有仓库。你就得把例如 &lt;code&gt;192.168.199.100:5000&lt;/code&gt; 这样的内网地址作为私有仓库地址，这时你会发现无法成功推送镜像。&lt;/p&gt;
+&lt;p&gt;这是因为 Docker 默认不允许非 &lt;code&gt;HTTPS&lt;/code&gt; 方式推送镜像。我们可以通过 Docker 的配置选项来取消这个限制，或者查看下一节配置能够通过 &lt;code&gt;HTTPS&lt;/code&gt; 访问的私有仓库。&lt;/p&gt;
+&lt;h3 id=&#34;机器b&#34;&gt;机器B&lt;/h3&gt;
+&lt;p&gt;添加http信任&lt;/p&gt;
+&lt;p&gt;编辑 &lt;code&gt;/etc/docker/daemon.json&lt;/code&gt; 文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;vim /etc/docker/daemon.json
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;内容如下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;registry-mirrors&amp;#34;&lt;/span&gt;: [
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://registry.docker-cn.com&amp;#34;&lt;/span&gt;
+  ],
+   &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;insecure-registries&amp;#34;&lt;/span&gt;: [
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;机器A的IP:18080&amp;#34;&lt;/span&gt;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;重启docker&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;systemctl daemon-reload
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;systemctl restart docker.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;登录&#34;&gt;登录&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;docker login [机器A的ip]:[docker私有库端口号]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/54.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;镜像推送&#34;&gt;镜像推送&lt;/h2&gt;
+&lt;h3 id=&#34;机器a&#34;&gt;机器A&lt;/h3&gt;
+&lt;p&gt;新建一个私有项目
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/51.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/52.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;机器b-1&#34;&gt;机器B&lt;/h3&gt;
+&lt;p&gt;在项目中标记镜像&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; docker tag tomcat:latest &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;机器A的ip&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;:18080/repo-test/mytomcat
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;推送镜像到当前项目&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker push &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;机器A的ip&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;:18080/repo-test/mytomcat
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/57.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/58.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;镜像拉取&#34;&gt;镜像拉取&lt;/h2&gt;
+&lt;p&gt;为了避免混淆先把本地的镜像全部删了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker rmi &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;docker images -a&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;先确认本地没有镜像&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/59.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker pull &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;机器A的ip&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;:18080/repo-test/mytomcat
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/60.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>安装docker-registry</title>
+      <link>https://academia-hugo.netlify.com/notes/docker-study/docker%E7%A7%81%E6%9C%89%E5%BA%93%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/docker-study/docker%E7%A7%81%E6%9C%89%E5%BA%93%E5%AE%89%E8%A3%85/</guid>
+      <description>&lt;h2 id=&#34;安装运行-docker-registry&#34;&gt;安装运行 docker-registry&lt;/h2&gt;
+&lt;p&gt;参考：https://www.funtl.com/zh/docs-docker/Docker-%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93.html#%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8C-docker-registry&lt;/p&gt;
+&lt;h3 id=&#34;httpswwwfuntlcomzhdocs-dockerdocker-私有仓库html容器运行容器运行&#34;&gt;&lt;a href=&#34;https://www.funtl.com/zh/docs-docker/Docker-%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93.html#%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C&#34;&gt;#&lt;/a&gt;容器运行&lt;/h3&gt;
+&lt;p&gt;你可以通过获取官方 &lt;code&gt;registry&lt;/code&gt; 镜像来运行。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; docker run -d -p 5000:5000 --restart&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;always --name registry registry
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这将使用官方的 &lt;code&gt;registry&lt;/code&gt; 镜像来启动私有仓库。默认情况下，仓库会被创建在容器的 &lt;code&gt;/var/lib/registry&lt;/code&gt; 目录下。你可以通过 &lt;code&gt;-v&lt;/code&gt; 参数来将镜像文件存放在本地的指定路径。例如下面的例子将上传的镜像放到本地的 &lt;code&gt;/opt/data/registry&lt;/code&gt; 目录。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; docker run -d &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;    -p 5000:5000 &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;    -v /opt/data/registry:/var/lib/registry &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;    registry
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;输入 http://你的IP:5000/v2/_catalog
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/45.jpg&#34; alt=&#34;&#34;&gt;
+表示私有仓库搭建成功并且内容为空。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>搭建Harbor</title>
+      <link>https://academia-hugo.netlify.com/notes/docker-study/%E6%90%AD%E5%BB%BAharbor/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/docker-study/%E6%90%AD%E5%BB%BAharbor/</guid>
+      <description>&lt;h2 id=&#34;下载&#34;&gt;下载&lt;/h2&gt;
+&lt;p&gt;下载链接：https://storage.googleapis.com/harbor-releases/harbor-offline-installer-v1.6.1.tgz&lt;/p&gt;
+&lt;p&gt;将文件移动到/opt目录下&lt;/p&gt;
+&lt;p&gt;解压会在当前目录生成harbor目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;tar xvf harbor-offline-installer-v1.6.1.tgz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;修改harborcfg&#34;&gt;修改harbor.cfg&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;vim  harbor/harbor.cfg
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;hostname设置访问地址，可以使用ip、域名，不可以设置为127.0.0.1或localhost，此处我设置为本地ip&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;hostname = 172.16.50.37
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Harbor启动后，管理员UI登录的密码，默认是Harbor12345&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;harbor_admin_password = Harbor12345
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;认证方式，这里支持多种认证方式，如LADP、本次存储、数据库认证。默认是db_auth，mysql数据库认证&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;auth_mode = db_auth
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;是否开启自注册&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;self_registration = on
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Token有效时间，默认30分钟&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;token_expiration = 30
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;启动-harbor&#34;&gt;启动 Harbor&lt;/h2&gt;
+&lt;p&gt;在harbor目录下执行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;./install.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/47.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;查看compose状态&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker-compose ps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/48.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;修改端口&#34;&gt;修改端口&lt;/h2&gt;
+&lt;p&gt;在公网上，一般情况下都不暴露默认端口，避免被攻击！
+以下修改harbor的默认80端口为其他端口！&lt;/p&gt;
+&lt;p&gt;修改docker-compose.yml
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/53.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;修改common/templates/registry/config.yml文件
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/54.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;重新启动并生成配置文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker-compose stop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;./install.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;访问&#34;&gt;访问&lt;/h2&gt;
+&lt;p&gt;输入http://你的IP:18080/harbor/sign-in
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/49.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;输入用户名admin，默认密码（或已修改密码）
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/50.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;原文链接：https://blog.csdn.net/funtaster/java/article/details/83268974&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>本地镜像上传阿里云</title>
+      <link>https://academia-hugo.netlify.com/notes/docker-study/%E6%9C%AC%E5%9C%B0%E9%95%9C%E5%83%8F%E4%B8%8A%E4%BC%A0%E9%98%BF%E9%87%8C%E4%BA%91/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/docker-study/%E6%9C%AC%E5%9C%B0%E9%95%9C%E5%83%8F%E4%B8%8A%E4%BC%A0%E9%98%BF%E9%87%8C%E4%BA%91/</guid>
+      <description>&lt;h3 id=&#34;创建镜像仓库&#34;&gt;创建镜像仓库&lt;/h3&gt;
+&lt;p&gt;地址：https://cr.console.aliyun.com/&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/39.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/40.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;推送镜像&#34;&gt;推送镜像&lt;/h3&gt;
+&lt;p&gt;点击管理
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/41.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt; sudo docker login --username&lt;span style=&#34;color:#f92672&#34;&gt;=[&lt;/span&gt;阿里云账号&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; registry.cn-hangzhou.aliyuncs.com
+ sudo docker tag &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;ImageId&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; registry.cn-hangzhou.aliyuncs.com/mrpen/study:&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;镜像版本号&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+ sudo docker push registry.cn-hangzhou.aliyuncs.com/mrpen/study:&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;镜像版本号&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/42.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>dockerfile</title>
+      <link>https://academia-hugo.netlify.com/notes/docker-study/dockerfile/</link>
+      <pubDate>Wed, 24 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/docker-study/dockerfile/</guid>
+      <description>&lt;h1 id=&#34;docker-dockerfile&#34;&gt;Docker Dockerfile&lt;/h1&gt;
+&lt;p&gt;摘自：https://www.runoob.com/docker/docker-dockerfile.html&lt;/p&gt;
+&lt;h3 id=&#34;什么是-dockerfile&#34;&gt;什么是 Dockerfile？&lt;/h3&gt;
+&lt;p&gt;Dockerfile 是一个用来构建镜像的文本文件，文本内容包含了一条条构建镜像所需的指令和说明。&lt;/p&gt;
+&lt;h3 id=&#34;使用-dockerfile-定制镜像&#34;&gt;使用 Dockerfile 定制镜像&lt;/h3&gt;
+&lt;p&gt;这里仅讲解如何运行 Dockerfile 文件来定制一个镜像，具体 Dockerfile 文件内指令详解，将在下一节中介绍，这里你只要知道构建的流程即可。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1、下面以定制一个 nginx 镜像（构建好的镜像内会有一个 /usr/share/nginx/html/index.html 文件）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在一个空目录下，新建一个名为 Dockerfile 文件，并在文件内添加以下内容：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;FROM nginx
+RUN echo &#39;这是一个本地构建的nginx镜像&#39; &amp;gt; /usr/share/nginx/html/index.html
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://www.runoob.com/wp-content/uploads/2019/11/dockerfile1.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2、FROM 和 RUN 指令的作用&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;FROM&lt;/strong&gt;：定制的镜像都是基于 FROM 的镜像，这里的 nginx 就是定制需要的基础镜像。后续的操作都是基于 nginx。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;RUN&lt;/strong&gt;：用于执行后面跟着的命令行命令。有以下俩种格式：&lt;/p&gt;
+&lt;p&gt;shell 格式：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;RUN &amp;lt;命令行命令&amp;gt;
+# &amp;lt;命令行命令&amp;gt; 等同于，在终端操作的 shell 命令。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;exec 格式：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;RUN [&amp;quot;可执行文件&amp;quot;, &amp;quot;参数1&amp;quot;, &amp;quot;参数2&amp;quot;]
+# 例如：
+# RUN [&amp;quot;./test.php&amp;quot;, &amp;quot;dev&amp;quot;, &amp;quot;offline&amp;quot;] 等价于 RUN ./test.php dev offline
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：Dockerfile 的指令每执行一次都会在 docker 上新建一层。所以过多无意义的层，会造成镜像膨胀过大。例如：&lt;/p&gt;
+&lt;p&gt;FROM centos
+RUN &lt;strong&gt;yum install&lt;/strong&gt; &lt;strong&gt;wget&lt;/strong&gt;
+RUN &lt;strong&gt;wget&lt;/strong&gt; -O redis.tar.gz &amp;ldquo;&lt;a href=&#34;http://download.redis.io/releases/redis-5.0.3.tar.gz%22&#34;&gt;http://download.redis.io/releases/redis-5.0.3.tar.gz&amp;quot;&lt;/a&gt;
+RUN &lt;strong&gt;tar&lt;/strong&gt; -xvf redis.tar.gz
+以上执行会创建 3 层镜像。可简化为以下格式：
+FROM centos
+RUN &lt;strong&gt;yum install&lt;/strong&gt; &lt;strong&gt;wget&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;&amp;amp;&amp;amp;&lt;/strong&gt; &lt;strong&gt;wget&lt;/strong&gt; -O redis.tar.gz &amp;ldquo;&lt;a href=&#34;http://download.redis.io/releases/redis-5.0.3.tar.gz%22&#34;&gt;http://download.redis.io/releases/redis-5.0.3.tar.gz&amp;quot;&lt;/a&gt;&lt;br&gt;
+&lt;strong&gt;&amp;amp;&amp;amp;&lt;/strong&gt; &lt;strong&gt;tar&lt;/strong&gt; -xvf redis.tar.gz&lt;/p&gt;
+&lt;p&gt;如上，以 &lt;strong&gt;&amp;amp;&amp;amp;&lt;/strong&gt; 符号连接命令，这样执行后，只会创建 1 层镜像。&lt;/p&gt;
+&lt;h3 id=&#34;开始构建镜像&#34;&gt;开始构建镜像&lt;/h3&gt;
+&lt;p&gt;在 Dockerfile 文件的存放目录下，执行构建动作。&lt;/p&gt;
+&lt;p&gt;以下示例，通过目录下的 Dockerfile 构建一个 nginx:test（镜像名称:镜像标签）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注&lt;/strong&gt;：最后的 &lt;strong&gt;.&lt;/strong&gt; 代表本次执行的上下文路径，下一节会介绍。&lt;/p&gt;
+&lt;p&gt;$ docker build -t nginx:test .&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.runoob.com/wp-content/uploads/2019/11/dockerfile2.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;以上显示，说明已经构建成功。&lt;/p&gt;
+&lt;h3 id=&#34;上下文路径&#34;&gt;上下文路径&lt;/h3&gt;
+&lt;p&gt;上一节中，有提到指令最后一个 &lt;strong&gt;.&lt;/strong&gt; 是上下文路径，那么什么是上下文路径呢？&lt;/p&gt;
+&lt;p&gt;$ docker build -t nginx:test .&lt;/p&gt;
+&lt;p&gt;上下文路径，是指 docker 在构建镜像，有时候想要使用到本机的文件（比如复制），docker build 命令得知这个路径后，会将路径下的所有内容打包。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解析&lt;/strong&gt;：由于 docker 的运行模式是 C/S。我们本机是 C，docker 引擎是 S。实际的构建过程是在 docker 引擎下完成的，所以这个时候无法用到我们本机的文件。这就需要把我们本机的指定目录下的文件一起打包提供给 docker 引擎使用。&lt;/p&gt;
+&lt;p&gt;如果未说明最后一个参数，那么默认上下文路径就是 Dockerfile 所在的位置。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：上下文路径下不要放无用的文件，因为会一起打包发送给 docker 引擎，如果文件过多会造成过程缓慢。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;指令详解&#34;&gt;指令详解&lt;/h2&gt;
+&lt;h3 id=&#34;copy&#34;&gt;COPY&lt;/h3&gt;
+&lt;p&gt;复制指令，从上下文目录中复制文件或者目录到容器里指定路径。&lt;/p&gt;
+&lt;p&gt;格式：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;COPY [--chown=&amp;lt;user&amp;gt;:&amp;lt;group&amp;gt;] &amp;lt;源路径1&amp;gt;...  &amp;lt;目标路径&amp;gt;
+COPY [--chown=&amp;lt;user&amp;gt;:&amp;lt;group&amp;gt;] [&amp;quot;&amp;lt;源路径1&amp;gt;&amp;quot;,...  &amp;quot;&amp;lt;目标路径&amp;gt;&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;[&amp;ndash;chown=:]&lt;/strong&gt;：可选参数，用户改变复制到容器内文件的拥有者和属组。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&amp;lt;源路径&amp;gt;&lt;/strong&gt;：源文件或者源目录，这里可以是通配符表达式，其通配符规则要满足 Go 的 filepath.Match 规则。例如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;COPY hom* /mydir/
+COPY hom?.txt /mydir/
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;&amp;lt;目标路径&amp;gt;&lt;/strong&gt;：容器内的指定路径，该路径不用事先建好，路径不存在的话，会自动创建。&lt;/p&gt;
+&lt;h3 id=&#34;add&#34;&gt;ADD&lt;/h3&gt;
+&lt;p&gt;ADD 指令和 COPY 的使用格式一致（同样需求下，官方推荐使用 COPY）。功能也类似，不同之处如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ADD 的优点：在执行 &amp;lt;源文件&amp;gt; 为 tar 压缩文件的话，压缩格式为 gzip, bzip2 以及 xz 的情况下，会自动复制并解压到 &amp;lt;目标路径&amp;gt;。&lt;/li&gt;
+&lt;li&gt;ADD 的缺点：在不解压的前提下，无法复制 tar 压缩文件。会令镜像构建缓存失效，从而可能会令镜像构建变得比较缓慢。具体是否使用，可以根据是否需要自动解压来决定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;cmd&#34;&gt;CMD&lt;/h3&gt;
+&lt;p&gt;类似于 RUN 指令，用于运行程序，但二者运行的时间点不同:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CMD 在docker run 时运行。&lt;/li&gt;
+&lt;li&gt;RUN 是在 docker build。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：为启动的容器指定默认要运行的程序，程序运行结束，容器也就结束。CMD 指令指定的程序可被 docker run 命令行参数中指定要运行的程序所覆盖。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：如果 Dockerfile 中如果存在多个 CMD 指令，仅最后一个生效。&lt;/p&gt;
+&lt;p&gt;格式：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;CMD &amp;lt;shell 命令&amp;gt; 
+CMD [&amp;quot;&amp;lt;可执行文件或命令&amp;gt;&amp;quot;,&amp;quot;&amp;lt;param1&amp;gt;&amp;quot;,&amp;quot;&amp;lt;param2&amp;gt;&amp;quot;,...] 
+CMD [&amp;quot;&amp;lt;param1&amp;gt;&amp;quot;,&amp;quot;&amp;lt;param2&amp;gt;&amp;quot;,...]  # 该写法是为 ENTRYPOINT 指令指定的程序提供默认参数
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;推荐使用第二种格式，执行过程比较明确。第一种格式实际上在运行的过程中也会自动转换成第二种格式运行，并且默认可执行文件是 sh。&lt;/p&gt;
+&lt;h3 id=&#34;entrypoint&#34;&gt;ENTRYPOINT&lt;/h3&gt;
+&lt;p&gt;类似于 CMD 指令，但其不会被 docker run 的命令行参数指定的指令所覆盖，而且这些命令行参数会被当作参数送给 ENTRYPOINT 指令指定的程序。&lt;/p&gt;
+&lt;p&gt;但是, 如果运行 docker run 时使用了 &amp;ndash;entrypoint 选项，此选项的参数可当作要运行的程序覆盖 ENTRYPOINT 指令指定的程序。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;优点&lt;/strong&gt;：在执行 docker run 的时候可以指定 ENTRYPOINT 运行所需的参数。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：如果 Dockerfile 中如果存在多个 ENTRYPOINT 指令，仅最后一个生效。&lt;/p&gt;
+&lt;p&gt;格式：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ENTRYPOINT [&amp;quot;&amp;lt;executeable&amp;gt;&amp;quot;,&amp;quot;&amp;lt;param1&amp;gt;&amp;quot;,&amp;quot;&amp;lt;param2&amp;gt;&amp;quot;,...]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可以搭配 CMD 命令使用：一般是变参才会使用 CMD ，这里的 CMD 等于是在给 ENTRYPOINT 传参，以下示例会提到。&lt;/p&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;p&gt;假设已通过 Dockerfile 构建了 nginx:test 镜像：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;FROM nginx
+
+ENTRYPOINT [&amp;quot;nginx&amp;quot;, &amp;quot;-c&amp;quot;] # 定参
+CMD [&amp;quot;/etc/nginx/nginx.conf&amp;quot;] # 变参 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;1、不传参运行&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ docker run  nginx:test
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;容器内会默认运行以下命令，启动主进程。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nginx -c /etc/nginx/nginx.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2、传参运行&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ docker run  nginx:test -c /etc/nginx/new.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;容器内会默认运行以下命令，启动主进程(/etc/nginx/new.conf:假设容器内已有此文件)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nginx -c /etc/nginx/new.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;env&#34;&gt;ENV&lt;/h3&gt;
+&lt;p&gt;设置环境变量，定义了环境变量，那么在后续的指令中，就可以使用这个环境变量。&lt;/p&gt;
+&lt;p&gt;格式：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ENV &amp;lt;key&amp;gt; &amp;lt;value&amp;gt;
+ENV &amp;lt;key1&amp;gt;=&amp;lt;value1&amp;gt; &amp;lt;key2&amp;gt;=&amp;lt;value2&amp;gt;...
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;以下示例设置 NODE_VERSION = 7.2.0 ， 在后续的指令中可以通过 $NODE_VERSION 引用：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ENV NODE_VERSION 7.2.0
+
+RUN curl -SLO &amp;quot;https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz&amp;quot; \
+  &amp;amp;&amp;amp; curl -SLO &amp;quot;https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;arg&#34;&gt;ARG&lt;/h3&gt;
+&lt;p&gt;构建参数，与 ENV 作用一至。不过作用域不一样。ARG 设置的环境变量仅对 Dockerfile 内有效，也就是说只有 docker build 的过程中有效，构建好的镜像内不存在此环境变量。&lt;/p&gt;
+&lt;p&gt;构建命令 docker build 中可以用 &amp;ndash;build-arg &amp;lt;参数名&amp;gt;=&amp;lt;值&amp;gt; 来覆盖。&lt;/p&gt;
+&lt;p&gt;格式：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ARG &amp;lt;参数名&amp;gt;[=&amp;lt;默认值&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;volume&#34;&gt;VOLUME&lt;/h3&gt;
+&lt;p&gt;定义匿名数据卷。在启动容器时忘记挂载数据卷，会自动挂载到匿名卷。&lt;/p&gt;
+&lt;p&gt;作用：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;避免重要的数据，因容器重启而丢失，这是非常致命的。&lt;/li&gt;
+&lt;li&gt;避免容器不断变大。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;格式：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;VOLUME [&amp;quot;&amp;lt;路径1&amp;gt;&amp;quot;, &amp;quot;&amp;lt;路径2&amp;gt;&amp;quot;...]
+VOLUME &amp;lt;路径&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在启动容器 docker run 的时候，我们可以通过 -v 参数修改挂载点。&lt;/p&gt;
+&lt;h3 id=&#34;expose&#34;&gt;EXPOSE&lt;/h3&gt;
+&lt;p&gt;仅仅只是声明端口。&lt;/p&gt;
+&lt;p&gt;作用：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;帮助镜像使用者理解这个镜像服务的守护端口，以方便配置映射。&lt;/li&gt;
+&lt;li&gt;在运行时使用随机端口映射时，也就是 docker run -P 时，会自动随机映射 EXPOSE 的端口。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;格式：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;EXPOSE &amp;lt;端口1&amp;gt; [&amp;lt;端口2&amp;gt;...]
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;workdir&#34;&gt;WORKDIR&lt;/h3&gt;
+&lt;p&gt;指定工作目录。用 WORKDIR 指定的工作目录，会在构建镜像的每一层中都存在。（WORKDIR 指定的工作目录，必须是提前创建好的）。&lt;/p&gt;
+&lt;p&gt;docker build 构建镜像过程中的，每一个 RUN 命令都是新建的一层。只有通过 WORKDIR 创建的目录才会一直存在。&lt;/p&gt;
+&lt;p&gt;格式：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;WORKDIR &amp;lt;工作目录路径&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;user&#34;&gt;USER&lt;/h3&gt;
+&lt;p&gt;用于指定执行后续命令的用户和用户组，这边只是切换后续命令执行的用户（用户和用户组必须提前已经存在）。&lt;/p&gt;
+&lt;p&gt;格式：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;USER &amp;lt;用户名&amp;gt;[:&amp;lt;用户组&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;healthcheck&#34;&gt;HEALTHCHECK&lt;/h3&gt;
+&lt;p&gt;用于指定某个程序或者指令来监控 docker 容器服务的运行状态。&lt;/p&gt;
+&lt;p&gt;格式：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;HEALTHCHECK [选项] CMD &amp;lt;命令&amp;gt;：设置检查容器健康状况的命令
+HEALTHCHECK NONE：如果基础镜像有健康检查指令，使用这行可以屏蔽掉其健康检查指令
+
+HEALTHCHECK [选项] CMD &amp;lt;命令&amp;gt; : 这边 CMD 后面跟随的命令使用，可以参考 CMD 的用法。
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;onbuild&#34;&gt;ONBUILD&lt;/h3&gt;
+&lt;p&gt;用于延迟构建命令的执行。简单的说，就是 Dockerfile 里用 ONBUILD 指定的命令，在本次构建镜像的过程中不会执行（假设镜像为 test-build）。当有新的 Dockerfile 使用了之前构建的镜像 FROM test-build ，这是执行新镜像的 Dockerfile 构建时候，会执行 test-build 的 Dockerfile 里的 ONBUILD 指定的命令。&lt;/p&gt;
+&lt;p&gt;格式：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ONBUILD &amp;lt;其它指令&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;docker执行dockerfile的流程&#34;&gt;docker执行dockerFile的流程&lt;/h3&gt;
+&lt;p&gt;1.docker从基础镜像运行一个容器
+2.执行一条指令并对容器作出修改
+3.执行类似docker commit的操作提交一个新的镜像层
+4.docker再给予刚提交的镜像运行一个新容器
+5.执行dockerfile中的下一条指令直到所有指令都执行完成&lt;/p&gt;
+&lt;h3 id=&#34;对应应用软件的三个阶段&#34;&gt;对应应用软件的三个阶段&lt;/h3&gt;
+&lt;p&gt;dockerfile是软件的原材料
+docker镜像是软件的交付品
+docker容器是软件的运行态&lt;/p&gt;
+&lt;h3 id=&#34;三者转化&#34;&gt;三者转化&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;dockerfile&lt;/strong&gt;  &amp;ndash;&amp;raquo; build- -&amp;raquo; &lt;strong&gt;docker镜像&lt;/strong&gt; - -&amp;raquo; run- -&amp;raquo; &lt;strong&gt;docker容器&lt;/strong&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>dockerfile案例</title>
+      <link>https://academia-hugo.netlify.com/notes/docker-study/%E6%A1%88%E4%BE%8B%E4%B8%80/</link>
+      <pubDate>Wed, 24 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/docker-study/%E6%A1%88%E4%BE%8B%E4%B8%80/</guid>
+      <description>&lt;h3 id=&#34;在centos内构建centos容器并在容器内安装jdk和tomcat&#34;&gt;在centos内构建centos容器，并在容器内安装jdk和tomcat&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;将apache-tomcat-9.0.36.tar.gz&lt;/code&gt;和&lt;code&gt;jdk-8u112-linux-x64.tar.gz&lt;/code&gt;复制到&lt;code&gt;/mydocker&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/33.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;编写dockerFile
+vim dockerFile&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;FROM centos
+MAINTAINER  YZG@qq.com
+&lt;span style=&#34;color:#75715e&#34;&gt;#把宿主机当前上下文的c.txt拷贝到容器/user/local/路径下&lt;/span&gt;
+COPY c.txt /user/local/cincontainer.txt
+&lt;span style=&#34;color:#75715e&#34;&gt;#把Java与tomcat添加到容器中&lt;/span&gt;
+ADD jdk-8u112-linux-x64.tar.gz  /user/local/
+ADD apache-tomcat-9.0.36.tar.gz /user/local/
+&lt;span style=&#34;color:#75715e&#34;&gt;#安装VIM编辑器&lt;/span&gt;
+RUN yum -y install vim
+&lt;span style=&#34;color:#75715e&#34;&gt;#设置工作访问时候的WORKDIR路径，登录的落脚点&lt;/span&gt;
+ENV MYPATH /user/local/
+WORKDIR $MYPATH
+&lt;span style=&#34;color:#75715e&#34;&gt;#配置java与tomcat环境变量&lt;/span&gt;
+ENV JAVA_HOME /user/local/jdk1.8.0_112
+ENV CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+ENV CATALINA_HOME /user/local/apache-tomcat-9.0.36
+ENV CATALINA_BASE /user/local/apache-tomcat-9.0.36
+ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib:$CATALINA_HOME/bin
+&lt;span style=&#34;color:#75715e&#34;&gt;#容器运行时监听的端口&lt;/span&gt;
+EXPOSE &lt;span style=&#34;color:#ae81ff&#34;&gt;8080&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#启动时运行Tomcat&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#ENTRYPOINT [&amp;#34;/user/local/apache-tomcat-9.0.36/bin/startup.sh&amp;#34;]&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#CMD[&amp;#34;/user/local/apache-tomcat-9.0.36/bin/catalina.sh&amp;#34;,&amp;#34;run&amp;#34;]&lt;/span&gt;
+CMD /user/local/apache-tomcat-9.0.36/bin/startup.sh &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; tail -F /user/local/apache-tomcat-9.0.36/bin/logs/catalina.out
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/34.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;构建容器&#34;&gt;构建容器&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker build -f dockerFile . -t mycentos
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/1.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;运行容器&#34;&gt;运行容器&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker run -d -p 18080:8080 --name mycentos 
+-v /mytomcat/test:/user/local/apache-tomcat-9.0.36/webapps/test 
+-v /mytomcat/logs:/user/local/apache-tomcat-9.0.36/logs 
+--privileged&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;true  mycentos
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;运行成功！！！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/35.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;部署简单的web项目&#34;&gt;部署简单的web项目&lt;/h3&gt;
+&lt;p&gt;2.1.在宿主机的&lt;code&gt;/mytomcat/test&lt;/code&gt;文件下新建&lt;code&gt;WEB-INF&lt;/code&gt;文件夹
+2.在&lt;code&gt;WEB-INF&lt;/code&gt;文件夹下新建&lt;code&gt;web.xml&lt;/code&gt;
+3.在&lt;code&gt;/mytomcat/test&lt;/code&gt;下新建&lt;code&gt;index.jsp&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;4.编写web.xml&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!DOCTYPE web-app PUBLIC &amp;#34;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&amp;#34; &amp;#34;http://java.sun.com/dtd/web-app_2_3.dtd&amp;#34;&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;web-app&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;display-name&amp;gt;&lt;/span&gt;myapp&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/display-name&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;description&amp;gt;&lt;/span&gt;This a description of my web app made by Eclipse&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/description&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;welcome-file-list&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;welcome-file&amp;gt;&lt;/span&gt;index.jsp&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/welcome-file&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/welcome-file-list&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/web-app&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;5.编写index.jsp&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!DOCTYPE HTML PUBLIC &amp;#34;-//W3C//DTD HTML 4.01 Transitional//EN&amp;#34;&amp;gt;&lt;/span&gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;html&lt;/span&gt;&amp;gt;
+  &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;body&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;h1&lt;/span&gt;&amp;gt;
+dockerFile successful!!!!!! &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;h1&lt;/span&gt;&amp;gt;
+  &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;body&lt;/span&gt;&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;html&lt;/span&gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;6.重启容器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker restart  8ab8846816c0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;7.运行成功
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/36.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;在宿主机上查看docker容器下tomcat日志&#34;&gt;在宿主机上查看docker容器下tomcat日志&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cat /mytomcat/logs/catalina.out
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/37.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>安装MySQL</title>
+      <link>https://academia-hugo.netlify.com/notes/docker-study/%E5%AE%89%E8%A3%85mysql/</link>
+      <pubDate>Wed, 24 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/docker-study/%E5%AE%89%E8%A3%85mysql/</guid>
+      <description>&lt;h3 id=&#34;拉取镜像&#34;&gt;拉取镜像&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker pull mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;运行&#34;&gt;运行&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;docker run  -p 3306:3306 --name mysql 
+-v /mysql/conf:/etc/mysql/conf.d 
+-v /mysql/logs:/logs -v /mysql/data:/var/lib/mysql 
+-e MYSQL_ROOT_PASSWORD=你的密码 -d   mysql:5.7
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;开启运程登录权限&#34;&gt;开启运程登录权限&lt;/h3&gt;
+&lt;p&gt;登录数据库&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;mysql -uroot -p
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;分配权限&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;GRANT ALL ON *.* TO &#39;root&#39;@&#39;%&#39; IDENTIFIED BY &amp;quot;密码&amp;quot; ;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;刷新权限&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;FLUSH PRIVILEGES ;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/38.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>docker数据卷</title>
+      <link>https://academia-hugo.netlify.com/notes/docker-study/docker%E6%95%B0%E6%8D%AE%E5%8D%B7/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/docker-study/docker%E6%95%B0%E6%8D%AE%E5%8D%B7/</guid>
+      <description>&lt;h3 id=&#34;docker数据卷数据持久化&#34;&gt;docker数据卷（数据持久化）&lt;/h3&gt;
+&lt;p&gt;1.命令       docke run  -it  -v   /宿主机绝对目录 : /容貌内目录   镜像名
+2.查看数据是否挂载成功
+3.容器与数据之间数据共享
+4.容器停止后。主机修改后数据是否同步&lt;/p&gt;
+&lt;h3 id=&#34;数据之间数据共享&#34;&gt;数据之间数据共享&lt;/h3&gt;
+&lt;p&gt;查看容器镜像
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/11.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;查看宿主机根目录
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/10.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker run -d -it -v /tomcatvolume:/usr/local/tomcat/logs tomcat:7
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此时对比宿主机和容器&lt;/p&gt;
+&lt;p&gt;宿主机&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/12.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;容器&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/13.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;查看数据是否挂载成功&#34;&gt;查看数据是否挂载成功&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker inspect 90b560cb23f5
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/17.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;容器停止后主机修改后数据是否同步&#34;&gt;容器停止后。主机修改后数据是否同步&lt;/h3&gt;
+&lt;h4 id=&#34;step1&#34;&gt;step1&lt;/h4&gt;
+&lt;p&gt;这时我们可以在宿主机上新建一个test.txt 文件&lt;/p&gt;
+&lt;p&gt;宿主机
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/14.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;容器&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/15.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;step2&#34;&gt;step2&lt;/h4&gt;
+&lt;p&gt;重启容器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker restart 90b560cb23f5
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;查看容器/tomcat/logs下的文件发现文件依然存在&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/15.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;docker-file实现&#34;&gt;docker file实现&lt;/h3&gt;
+&lt;p&gt;编写dockerFile&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;vim dockerfile
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;输入以下内容&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;FROM tomcat
+VOLUME &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/dataVolumContainer1&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/dataVolumContainer2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+CMD echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;success!!!!!&amp;#34;&lt;/span&gt;
+CMD /bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;构建容器（官方文档：https://docs.docker.com/get-started/part2/）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker build --tag dockerfile . 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/18.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/19.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;运行镜像&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker run -it cb368229b4ab
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/20.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/21.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;数据卷容器&#34;&gt;数据卷容器&lt;/h3&gt;
+&lt;p&gt;命名的数据挂载数据卷，其他容器通过挂载这个（父容器）实现数据共享，挂载数据卷的容器，称之为数据卷容器。
+实验步骤：
+1.创建一个父容器d01
+2.d02/d03j继承d01
+3.删除d01后查看d02和d03能否访问&lt;/p&gt;
+&lt;h4 id=&#34;创建父类&#34;&gt;创建父类&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker run -it -d  --name d01 cb368229b4ab
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/22.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;d02d03j继承d01&#34;&gt;d02/d03j继承d01&lt;/h4&gt;
+&lt;p&gt;d02继承d01容器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker run -it -d --name  d02  --volumes-from d01 cb368229b4ab
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/23.jpg&#34; alt=&#34;&#34;&gt;
+d03继承d01
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/24.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;d01父容器新增文件&#34;&gt;d01(父容器)新增文件&lt;/h4&gt;
+&lt;p&gt;d01:
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/25.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;d02:
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/26.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;d03: 
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/27.jpg&#34; alt=&#34;&#34;&gt;
+结论：父容器可以跟子容器数据共享&lt;/p&gt;
+&lt;h4 id=&#34;d02新增文件&#34;&gt;d02新增文件&lt;/h4&gt;
+&lt;p&gt;d01
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/29.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;d02
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/28.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;d03:
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/30.jpg&#34; alt=&#34;&#34;&gt;
+结论：子容器可以跟父容器数据共享&lt;/p&gt;
+&lt;h4 id=&#34;删除d01容器&#34;&gt;删除d01容器&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/31.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;d02:
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/32.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;d03:
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/32.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;结论：父容器删除后子容器依然存在&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>配置Tomcat</title>
+      <link>https://academia-hugo.netlify.com/notes/docker-study/docker%E9%85%8D%E7%BD%AEtomcat/</link>
+      <pubDate>Mon, 15 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/docker-study/docker%E9%85%8D%E7%BD%AEtomcat/</guid>
+      <description>&lt;h3 id=&#34;拉取tomcat镜像&#34;&gt;拉取Tomcat镜像&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker pull tomcat
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;运行tomcat&#34;&gt;运行tomcat&lt;/h3&gt;
+&lt;p&gt;将宿主机的8081端口指向到容器的8080端口&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker run -d --name tomcat -p 8081:8080 tomcat
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;发现Tomcat已经启动了但是访问不了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/7.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;进入交互模式发现webapps是空的，资源都在webapps.dist下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker exec -it 926d769607f4 /bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/8.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;将webapps.dist下的所有文件复制到webapps&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cp -R webapps.dist/*  webapps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;再次访问成功！！！！！
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/9.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>配置阿里云镜像加速地址</title>
+      <link>https://academia-hugo.netlify.com/notes/docker-study/%E9%85%8D%E7%BD%AE%E9%98%BF%E9%87%8C%E4%BA%91%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/</link>
+      <pubDate>Sat, 23 May 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/docker-study/%E9%85%8D%E7%BD%AE%E9%98%BF%E9%87%8C%E4%BA%91%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/</guid>
+      <description>&lt;h3 id=&#34;注册阿里云账号&#34;&gt;注册阿里云账号&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors&#34;&gt;https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;复制加速地址&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/1.JPG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;编辑配置文件&#34;&gt;编辑配置文件&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;vim /etc/docker/daemon.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;添加如下内容&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;/&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;registry-mirrors&amp;#34;&lt;/span&gt;: [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://****.mirror.aliyuncs.com&amp;#34;&lt;/span&gt;]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;重启docker服务&#34;&gt;重启docker服务&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;systemctl daemon-reload
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;systemctl restart docker
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;检查&#34;&gt;检查&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker info
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/docker/2.jpg&#34; alt=&#34;&#34;&gt;
+配置成功！！！！&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

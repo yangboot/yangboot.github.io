@@ -1,0 +1,874 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academia 4.3.1">
+  <meta name="generator" content="Hugo 0.70.0" />
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="My favorite">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="config package com.cloud.comsumer.order.config; import feign.Logger; import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; /** * OpenFeignClient配置 * * @author yzg * @create 2020/7/28 11:02 **/ @Configuration public class FeignConfig { /** * feignClient配置日志级别 * * @return */ @Bean public Logger.Level feignLoggerLevel() { // 请求和响应的头信息,请求和响应的正文及元数据  return Logger.Level.FULL; } } yml logging:level:com.cloud.comsumer.order.service.PaymentFeignService: debugtest 启动cloud-eureka-server7001
+启动cloud-eureka-server7002
+启动cloud.provider.payment8001
+启动cloud-openfeign-comsumer-order8011
+访问http://localhost:8011/consumer/payment/get/1
+日志输出
+2020-07-28 11:07:26.273 INFO 14276 --- [nio-8011-exec-1] o.apache.tomcat.util.http.parser.Cookie : A cookie header was received [1586915103; CNZZDATA1277660940=1307569842-1585038106-%7C1586919560; rememberMe=nCK4RXlTmL26pgnrtHvtoebs5N83CQ942qOySZo8nv8h21PIE064HmqCrClwl6ECxwmd1L77k80eqb0YxaS9j3oiwY5VKvQwe5rP3RKYodwpQJVfKcB2icYCYDQQoYqX8SgzLWZv4pyQiI3gy8sHJ7XZJ1hKEmfqYUJV21Yb8BDeW2Gdx3mZQjOUCrIzo6RdxeZNUKToxP&#43;mcA/RR4RW&#43;16TjDImWfkVFmCMiTecHP8gkQhHOq8ut28eaebWM5cSmaqCl0p116NsOcsCOqyBWOixdLPFg1P3V1qCRtIPnCCdNdDhslldApu58arhQfP/26msRD/pEB9wsWG9ICmvRg8AAabJGZVvLgEV5cVdn5xg6DrYgZLySwrCk24iQuQ6K8kFOP42VbwV&#43;sV8DCgubhcaoQZYpUYM7uoaR8XSEGXQaic&#43;u5ih7h6M46aCw4srtAFEPUuh&#43;&#43;6bQ&#43;xUiia8D198wOCIKMPx7owTTFzTAwpIeUrtNVvUJDuRaNtNvqbqEpaOPu6O8VBrAenJ9aVe7QEGCW2iDgrb7igeBYaXM0UKJar0QpWwuMSH1lxOFRl2aNN76wKwX4RCGun4C2E/vkZxg4/VQJ4vE&#43;qhw91yvZrnGMF0uQfeS/VQBiGR2G&#43;aJE/8Mda7lBdOjHWkFLDN1IaJhAMhK9TEwdZEk/2fgmKXcU4Lma0yzjyueBVT2cdq2Oki0IKgkadbcRTSPIdbHlVs&#43;2MG9MTfJ8A2YS/UJJtPbjHxS0JarAoRMkwPHdNqz/Zr&#43;AmV14W/OJm4k61orniYuDxAttVHsxvNGNom/ajpbHjD9WvCQpiJAi/xpkXoWkgBVhOuXvEsiJjzz680C34zffr17RX&#43;&#43;tO59cOBFCAdFeGXTyVnSMe&#43;/frwXjL4/4&#43;wyP2WAGMwQCcXOXKINKV4BMHKCt99B7q0eAt0u05u4uFNnXX01IRPfxuilKvAFe4/XQ0DAjooQZi/141N9R9eIu6PKortynnc8uSVr1TU6rLcksOd8IkxiJYikr9b2cnetvvJCLmsBZ5qhzpuidegb/pomnYjWEm0YbawAT0mt&#43;/FqE3AOHQXpr5kC&#43;TA/LtnFc9MnwNJsbzfTidSCBox678Y7gEh6HNNyKPSDoJ1IjAPaPKotdmnNGSlIeVyOPd5jeCBxerOZW5NmwNzu527NZxEDc5TRJd1NqfyAVCYp3oFQVkn07vu8tE8XO4nB1KFRMTpDJJGZtEwYaN2o3gUSMsX6jYb/vSEF&#43;SDekPSY29vbqRstVh5BDQmAItxoTobIArbI4CaRCT23Y8&#43;plneEgknthqP0xDYkXRmesRDs5YMGX7rIKbVAwf7vh3r3rnHJhY35l5XsIvBCznkLPXxfSyaGd4BFV6UMIcZhpJOruTWQ/Y0ftuXo3xniyIrZa4aX1kx1CRIJrwD1DyjSJVdE58Sn3mNfXiWqVdo0J3nJaQ1jBEEwTY2camXmcPZbtlZNkNbhXoXkdFuNpUoTnnfMhaF8r3x&#43;mk&#43;uhk4T86MNkexAid5KLbg5cy9jLqc8Sj7yc97BnzZSFMNNmGn4ya10a4Wm&#43;ba4w/LPxYhpetAmK2je&#43;OptpMzZnT0v&#43;GfxZMTYYJX0AsBSEadZOzJf3p1g9k&#43;15pG7Bj8O0I/FEAhARkWrzohNKqqFI53Tb/iNdLpradnQfEYLZ2wlyLgJq5Z76ZZMwUT/Dotz2DAreayE8uxmsY8whtAdiopVftnpi1qR4DDeu7NinkWul97RgzGhNXZ8miDLpRtDz2XOyvx&#43;49l1vlVZH44uYfd3mNxAcGY2KBRuxiGMBcF5HawBL0SdXqk&#43;zSFhnYO4YcHGvPpQdaTfW6qtOvXAZUzV38n4zGJRROAZFjuzzbCUZY5Q9Vz3spA3VfMgEwIWJ5HTT9GKajVSorbYF1lNrKHeBqHfEUnxKO4fbwPewH0&#43;cLXMCXEAagUTggjxAu3kjSLa6AuUO6N6trxKZ2LV5GcsYzbRLXiXLwjVj1gxZxiKpPus3Yo81dfo9h6w7yuviPWZuMEGaIhgSBzWDenE&#43;wjLbKx3CEbNPtHW4i6JOCAMYuWGa44WCCyh33Xmvw13HfVPnrSpeH95JNvMCM0KVF3jsDzGKC9vgrxh2N36Twbb0TqMJ9sKuirQMli89xKwukKnyKP6msJHOMaoZUHWxVJ/vXURY/ZP0iK1raGtOLZ3dt2620pfbLo9yDRJY/vjYcAAl1hezdbV/08w5tdPGoM9RUNVEYPTjmZodhU3Fdm8Ta2c1BsGxuL4ONR/e4yRwztcMZpe740pq7UsfHZtcdgiiAmTWSy8zOIcRzkGyyWGcc19ZYxiZc19bv3Qgd8HsliICfCwlQOHwgpI3obKiBAyzpz21Rtg0XhQxbaaghurW&#43;ne8ELLyihJ/UfpIIyQtR1Q4rbyQ48zzBunicpp9Qjj/eiBhGQXeRwnlwtmySI2/DZM/YxLdHxzQkjJxUYb2lqJBgPV/3xP&#43;Q8wXr3AOoFBe4otnmcpHFa6DahMooLGAXcQkMsek7JrXL&#43;RMUDVMn6raYPdyUcM9PtwaQn4wn0Mg==] that contained an invalid cookie.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://academia-hugo.netlify.com/notes/cloud-study/openfeign%E6%97%A5%E5%BF%97%E5%A2%9E%E5%BC%BA/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#fc6f5c">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academia.min.adccb3b334fd9406ba3e6667ec8e7903.css">
+
+  
+
+  
+  
+  
+
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://academia-hugo.netlify.com/notes/cloud-study/openfeign%E6%97%A5%E5%BF%97%E5%A2%9E%E5%BC%BA/">
+
+  
+  
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GUAN-BLOG">
+  <meta property="og:url" content="https://academia-hugo.netlify.com/notes/cloud-study/openfeign%E6%97%A5%E5%BF%97%E5%A2%9E%E5%BC%BA/">
+  <meta property="og:title" content="openfeign日志增强 | GUAN-BLOG">
+  <meta property="og:description" content="config package com.cloud.comsumer.order.config; import feign.Logger; import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; /** * OpenFeignClient配置 * * @author yzg * @create 2020/7/28 11:02 **/ @Configuration public class FeignConfig { /** * feignClient配置日志级别 * * @return */ @Bean public Logger.Level feignLoggerLevel() { // 请求和响应的头信息,请求和响应的正文及元数据  return Logger.Level.FULL; } } yml logging:level:com.cloud.comsumer.order.service.PaymentFeignService: debugtest 启动cloud-eureka-server7001
+启动cloud-eureka-server7002
+启动cloud.provider.payment8001
+启动cloud-openfeign-comsumer-order8011
+访问http://localhost:8011/consumer/payment/get/1
+日志输出
+2020-07-28 11:07:26.273 INFO 14276 --- [nio-8011-exec-1] o.apache.tomcat.util.http.parser.Cookie : A cookie header was received [1586915103; CNZZDATA1277660940=1307569842-1585038106-%7C1586919560; rememberMe=nCK4RXlTmL26pgnrtHvtoebs5N83CQ942qOySZo8nv8h21PIE064HmqCrClwl6ECxwmd1L77k80eqb0YxaS9j3oiwY5VKvQwe5rP3RKYodwpQJVfKcB2icYCYDQQoYqX8SgzLWZv4pyQiI3gy8sHJ7XZJ1hKEmfqYUJV21Yb8BDeW2Gdx3mZQjOUCrIzo6RdxeZNUKToxP&#43;mcA/RR4RW&#43;16TjDImWfkVFmCMiTecHP8gkQhHOq8ut28eaebWM5cSmaqCl0p116NsOcsCOqyBWOixdLPFg1P3V1qCRtIPnCCdNdDhslldApu58arhQfP/26msRD/pEB9wsWG9ICmvRg8AAabJGZVvLgEV5cVdn5xg6DrYgZLySwrCk24iQuQ6K8kFOP42VbwV&#43;sV8DCgubhcaoQZYpUYM7uoaR8XSEGXQaic&#43;u5ih7h6M46aCw4srtAFEPUuh&#43;&#43;6bQ&#43;xUiia8D198wOCIKMPx7owTTFzTAwpIeUrtNVvUJDuRaNtNvqbqEpaOPu6O8VBrAenJ9aVe7QEGCW2iDgrb7igeBYaXM0UKJar0QpWwuMSH1lxOFRl2aNN76wKwX4RCGun4C2E/vkZxg4/VQJ4vE&#43;qhw91yvZrnGMF0uQfeS/VQBiGR2G&#43;aJE/8Mda7lBdOjHWkFLDN1IaJhAMhK9TEwdZEk/2fgmKXcU4Lma0yzjyueBVT2cdq2Oki0IKgkadbcRTSPIdbHlVs&#43;2MG9MTfJ8A2YS/UJJtPbjHxS0JarAoRMkwPHdNqz/Zr&#43;AmV14W/OJm4k61orniYuDxAttVHsxvNGNom/ajpbHjD9WvCQpiJAi/xpkXoWkgBVhOuXvEsiJjzz680C34zffr17RX&#43;&#43;tO59cOBFCAdFeGXTyVnSMe&#43;/frwXjL4/4&#43;wyP2WAGMwQCcXOXKINKV4BMHKCt99B7q0eAt0u05u4uFNnXX01IRPfxuilKvAFe4/XQ0DAjooQZi/141N9R9eIu6PKortynnc8uSVr1TU6rLcksOd8IkxiJYikr9b2cnetvvJCLmsBZ5qhzpuidegb/pomnYjWEm0YbawAT0mt&#43;/FqE3AOHQXpr5kC&#43;TA/LtnFc9MnwNJsbzfTidSCBox678Y7gEh6HNNyKPSDoJ1IjAPaPKotdmnNGSlIeVyOPd5jeCBxerOZW5NmwNzu527NZxEDc5TRJd1NqfyAVCYp3oFQVkn07vu8tE8XO4nB1KFRMTpDJJGZtEwYaN2o3gUSMsX6jYb/vSEF&#43;SDekPSY29vbqRstVh5BDQmAItxoTobIArbI4CaRCT23Y8&#43;plneEgknthqP0xDYkXRmesRDs5YMGX7rIKbVAwf7vh3r3rnHJhY35l5XsIvBCznkLPXxfSyaGd4BFV6UMIcZhpJOruTWQ/Y0ftuXo3xniyIrZa4aX1kx1CRIJrwD1DyjSJVdE58Sn3mNfXiWqVdo0J3nJaQ1jBEEwTY2camXmcPZbtlZNkNbhXoXkdFuNpUoTnnfMhaF8r3x&#43;mk&#43;uhk4T86MNkexAid5KLbg5cy9jLqc8Sj7yc97BnzZSFMNNmGn4ya10a4Wm&#43;ba4w/LPxYhpetAmK2je&#43;OptpMzZnT0v&#43;GfxZMTYYJX0AsBSEadZOzJf3p1g9k&#43;15pG7Bj8O0I/FEAhARkWrzohNKqqFI53Tb/iNdLpradnQfEYLZ2wlyLgJq5Z76ZZMwUT/Dotz2DAreayE8uxmsY8whtAdiopVftnpi1qR4DDeu7NinkWul97RgzGhNXZ8miDLpRtDz2XOyvx&#43;49l1vlVZH44uYfd3mNxAcGY2KBRuxiGMBcF5HawBL0SdXqk&#43;zSFhnYO4YcHGvPpQdaTfW6qtOvXAZUzV38n4zGJRROAZFjuzzbCUZY5Q9Vz3spA3VfMgEwIWJ5HTT9GKajVSorbYF1lNrKHeBqHfEUnxKO4fbwPewH0&#43;cLXMCXEAagUTggjxAu3kjSLa6AuUO6N6trxKZ2LV5GcsYzbRLXiXLwjVj1gxZxiKpPus3Yo81dfo9h6w7yuviPWZuMEGaIhgSBzWDenE&#43;wjLbKx3CEbNPtHW4i6JOCAMYuWGa44WCCyh33Xmvw13HfVPnrSpeH95JNvMCM0KVF3jsDzGKC9vgrxh2N36Twbb0TqMJ9sKuirQMli89xKwukKnyKP6msJHOMaoZUHWxVJ/vXURY/ZP0iK1raGtOLZ3dt2620pfbLo9yDRJY/vjYcAAl1hezdbV/08w5tdPGoM9RUNVEYPTjmZodhU3Fdm8Ta2c1BsGxuL4ONR/e4yRwztcMZpe740pq7UsfHZtcdgiiAmTWSy8zOIcRzkGyyWGcc19ZYxiZc19bv3Qgd8HsliICfCwlQOHwgpI3obKiBAyzpz21Rtg0XhQxbaaghurW&#43;ne8ELLyihJ/UfpIIyQtR1Q4rbyQ48zzBunicpp9Qjj/eiBhGQXeRwnlwtmySI2/DZM/YxLdHxzQkjJxUYb2lqJBgPV/3xP&#43;Q8wXr3AOoFBe4otnmcpHFa6DahMooLGAXcQkMsek7JrXL&#43;RMUDVMn6raYPdyUcM9PtwaQn4wn0Mg==] that contained an invalid cookie."><meta property="og:image" content="https://academia-hugo.netlify.com/img/icon-192.png">
+  <meta property="twitter:image" content="https://academia-hugo.netlify.com/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2020-07-28T00:00:00&#43;01:00">
+  
+  <meta property="article:modified_time" content="2020-07-28T00:00:00&#43;01:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>openfeign日志增强 | GUAN-BLOG</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">GUAN-BLOG</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"><span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#gallery"><span>gallery</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/notes/"><span>Notes</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/">SpringCloud微服务学习</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/%E7%88%B6%E5%B7%A5%E7%A8%8B/">父工程</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E6%9E%84%E5%BB%BA/">支付模块构建</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/idea%E7%83%AD%E9%83%A8%E7%BD%B2/">idea热部署</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/eureka/">eureka</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/eureka-server%E9%9B%86%E7%BE%A4/">eureka-server集群</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/%E5%85%A5%E9%A9%BBeureka-server/">服务入驻eureka-server</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/%E6%9C%8D%E5%8A%A1%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8/">服务的高可用</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0discovery/">服务发现Discovery</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/zookeeper/">服务注册zookerper</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/consul/">consul</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/consul%E5%AE%89%E8%A3%85/">consul安装</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8Cconsul/">服务注册consul</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E7%9A%84%E5%BC%82%E5%90%8C%E7%82%B9/">三个注册注册中心的异同点</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/ribbon/">Ribbon</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/ribbon%E8%B4%9F%E8%BD%BD%E8%A7%84%E5%88%99/">Ribbon负载规则</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/openfeign/">openfeign</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/openfeign%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/">openfeign服务调用</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/openfeign%E8%B6%85%E6%97%B6%E6%8E%A7%E5%88%B6/">openfeign超时控制</a>
+      </li>
+      
+      <li class="active">
+        <a href="/notes/cloud-study/openfeign%E6%97%A5%E5%BF%97%E5%A2%9E%E5%BC%BA/">openfeign日志增强</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/hystrix/">Hystrix</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/%E5%8E%8B%E6%B5%8B%E5%8D%A1%E9%A1%BF%E9%97%AE%E9%A2%98/">压测卡顿问题</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/hystrix%E6%9C%8D%E5%8A%A1%E9%99%8D%E7%BA%A7/">Hystrix服务降级</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/hystrix%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD/">Hystrix服务熔断</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/hystrix%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/">Hystrix服务监控</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/gateway/">Gateway</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/gateway%E6%90%AD%E5%BB%BA/">Gateway搭建</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/gateway%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1/">Gateway配置动态路由</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/%E5%86%85%E7%BD%AEpredicates%E6%96%AD%E8%A8%80/">内置Predicates断言</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/cookie%E8%B7%AF%E7%94%B1%E6%96%AD%E8%A8%80%E6%A1%88%E4%BE%8B/">Cookie路由断言案例</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/gateway%E7%9A%84filter/">Gateway的filter</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/config/">config</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/config%E6%80%BB%E6%8E%A7%E4%B8%AD%E5%BF%83/">config总控中心</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/config%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE/">config客户端配置</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/config%E6%89%8B%E5%8A%A8%E5%88%B7%E6%96%B0/">config手动刷新</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/cloud-study/bus/">bus</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/cloud-study/rabbitmq%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">RabbitMQ安装配置</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/bus%E5%8A%A8%E6%80%81%E5%88%B7%E6%96%B0%E5%85%A8%E5%B1%80%E5%B9%BF%E6%92%AD/">bus动态刷新全局广播</a>
+      </li>
+      
+      <li >
+        <a href="/notes/cloud-study/bus%E5%8A%A8%E6%80%81%E5%AE%9A%E7%82%B9%E5%88%B7%E6%96%B0%E5%B9%BF%E6%92%AD/">bus动态定点刷新广播</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#config">config</a></li>
+    <li><a href="#yml">yml</a></li>
+    <li><a href="#test">test</a></li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article" itemscope itemtype="http://schema.org/Article">
+
+        <div class="docs-article-container">
+          <h1 itemprop="name">openfeign日志增强</h1>
+
+          <div class="article-style" itemprop="articleBody">
+            <h2 id="config">config</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> com.cloud.comsumer.order.config<span style="color:#f92672">;</span>
+
+<span style="color:#f92672">import</span> feign.Logger<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.springframework.context.annotation.Bean<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.springframework.context.annotation.Configuration<span style="color:#f92672">;</span>
+
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * OpenFeignClient配置
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * @author yzg
+</span><span style="color:#75715e"> * @create 2020/7/28 11:02
+</span><span style="color:#75715e"> **/</span>
+<span style="color:#a6e22e">@Configuration</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FeignConfig</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * feignClient配置日志级别
+</span><span style="color:#75715e">     *
+</span><span style="color:#75715e">     * @return
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#a6e22e">@Bean</span>
+    <span style="color:#66d9ef">public</span> Logger<span style="color:#f92672">.</span><span style="color:#a6e22e">Level</span> <span style="color:#a6e22e">feignLoggerLevel</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// 请求和响应的头信息,请求和响应的正文及元数据
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> Logger<span style="color:#f92672">.</span><span style="color:#a6e22e">Level</span><span style="color:#f92672">.</span><span style="color:#a6e22e">FULL</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><h2 id="yml">yml</h2>
+<pre><code>logging:
+  level:
+    com.cloud.comsumer.order.service.PaymentFeignService: debug
+</code></pre><h2 id="test">test</h2>
+<p>启动cloud-eureka-server7001<br>
+启动cloud-eureka-server7002<br>
+启动cloud.provider.payment8001<br>
+启动cloud-openfeign-comsumer-order8011</p>
+<p>访问http://localhost:8011/consumer/payment/get/1</p>
+<p>日志输出</p>
+<pre><code>2020-07-28 11:07:26.273  INFO 14276 --- [nio-8011-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1586915103; CNZZDATA1277660940=1307569842-1585038106-%7C1586919560; rememberMe=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] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-07-28 11:07:26.288  INFO 14276 --- [nio-8011-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-28 11:07:26.288  INFO 14276 --- [nio-8011-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-07-28 11:07:26.299  INFO 14276 --- [nio-8011-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2020-07-28 11:07:26.592  INFO 14276 --- [nio-8011-exec-1] c.netflix.config.ChainedDynamicProperty  : Flipping property: CLOUD-PAYMENT-SERVICE.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-07-28 11:07:26.635  INFO 14276 --- [nio-8011-exec-1] c.n.u.concurrent.ShutdownEnabledTimer    : Shutdown hook installed for: NFLoadBalancer-PingTimer-CLOUD-PAYMENT-SERVICE
+2020-07-28 11:07:26.635  INFO 14276 --- [nio-8011-exec-1] c.netflix.loadbalancer.BaseLoadBalancer  : Client: CLOUD-PAYMENT-SERVICE instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=CLOUD-PAYMENT-SERVICE,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2020-07-28 11:07:26.650  INFO 14276 --- [nio-8011-exec-1] c.n.l.DynamicServerListLoadBalancer      : Using serverListUpdater PollingServerListUpdater
+2020-07-28 11:07:26.674  INFO 14276 --- [nio-8011-exec-1] c.netflix.config.ChainedDynamicProperty  : Flipping property: CLOUD-PAYMENT-SERVICE.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-07-28 11:07:26.676  INFO 14276 --- [nio-8011-exec-1] c.n.l.DynamicServerListLoadBalancer      : DynamicServerListLoadBalancer for client CLOUD-PAYMENT-SERVICE initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=CLOUD-PAYMENT-SERVICE,current list of Servers=[USER-20200308JZ:8002, USER-20200308JZ:8001],Load balancer stats=Zone stats: {defaultzone=[Zone:defaultzone;	Instance count:2;	Active connections count: 0;	Circuit breaker tripped count: 0;	Active connections per server: 0.0;]
+},Server stats: [[Server:USER-20200308JZ:8002;	Zone:defaultZone;	Total Requests:0;	Successive connection failure:0;	Total blackout seconds:0;	Last connection made:Thu Jan 01 08:00:00 CST 1970;	First connection made: Thu Jan 01 08:00:00 CST 1970;	Active Connections:0;	total failure count in last (1000) msecs:0;	average resp time:0.0;	90 percentile resp time:0.0;	95 percentile resp time:0.0;	min resp time:0.0;	max resp time:0.0;	stddev resp time:0.0]
+, [Server:USER-20200308JZ:8001;	Zone:defaultZone;	Total Requests:0;	Successive connection failure:0;	Total blackout seconds:0;	Last connection made:Thu Jan 01 08:00:00 CST 1970;	First connection made: Thu Jan 01 08:00:00 CST 1970;	Active Connections:0;	total failure count in last (1000) msecs:0;	average resp time:0.0;	90 percentile resp time:0.0;	95 percentile resp time:0.0;	min resp time:0.0;	max resp time:0.0;	stddev resp time:0.0]
+]}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@27f28632
+2020-07-28 11:07:27.656  INFO 14276 --- [erListUpdater-0] c.netflix.config.ChainedDynamicProperty  : Flipping property: CLOUD-PAYMENT-SERVICE.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+</code></pre>
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/notes/cloud-study/hystrix%E6%9C%8D%E5%8A%A1%E9%99%8D%E7%BA%A7/" rel="next">Hystrix服务降级</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/notes/cloud-study/openfeign%E8%B6%85%E6%97%B6%E6%8E%A7%E5%88%B6/" rel="prev">openfeign超时控制</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          Last updated on Jul 28, 2020
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  <script src="/js/clipboard.js"></script>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        
+        <p class="powered-by">
+          <a href="/privacy/"></a>
+        </p>
+        
+        <p>
+          
+          Powered by
+          <a href="https://themefisher.com" target="_blank" rel="noopener">themefisher</a> for
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+        </p>
+      </div>
+      <div class="col-md-6">
+        <ul class="list-inline network-icon text-right">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://twitter.com/Twitter" target="_blank" rel="noopener" title="DM Me"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="skype:echo123?call"  title="Skype Me"><i class="fab fa-skype" aria-hidden="true"></i></a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://keybase.io/" target="_blank" rel="noopener" title="Chat on Keybase"><i class="fab fa-keybase" aria-hidden="true"></i></a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://discourse.gohugo.io" target="_blank" rel="noopener" title="Discuss on Forum"><i class="fas fa-comments" aria-hidden="true"></i></a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script async defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.25/gmaps.min.js" integrity="sha256-7vjlAeb8OaTrCXZkCNun9djzuB2owUsaO72kXaFDBJs=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academia.min.7276a6a3624de715a5c7f54c7c07696d.js"></script>
+
+    
+
+
+
+
+
+
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

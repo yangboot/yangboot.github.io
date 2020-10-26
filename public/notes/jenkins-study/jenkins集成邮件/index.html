@@ -1,0 +1,760 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academia 4.3.1">
+  <meta name="generator" content="Hugo 0.70.0" />
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="My favorite">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="前提条件 开启邮箱服务器的SMTP功能
+安装插件 Email Extension Template
+配置 测试成功 添加邮件模板 项目根目录下添加邮件模板email.html
+&lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;meta charset=&#34;UTF-8&#34;&gt; &lt;title&gt;${ENV, var=&#34;JOB_NAME&#34;}-第${BUILD_NUMBER}次构建日志&lt;/title&gt; &lt;/head&gt; &lt;body leftmargin=&#34;8&#34; marginwidth=&#34;0&#34; topmargin=&#34;8&#34; marginheight=&#34;4&#34; offset=&#34;0&#34;&gt; &lt;table width=&#34;95%&#34; cellpadding=&#34;0&#34; cellspacing=&#34;0&#34; style=&#34;font-size: 11pt; font-family: Tahoma, Arial, Helvetica, sans-serif&#34;&gt; &lt;tr&gt; &lt;td&gt;(本邮件是程序自动下发的，请勿回复！)&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt;&lt;h2&gt;&lt;font color=&#34;#0000FF&#34;&gt;构建结果 - ${BUILD_STATUS}&lt;/font&gt;&lt;/h2&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt;&lt;br /&gt; &lt;b&gt;&lt;font color=&#34;#0B610B&#34;&gt;构建信息&lt;/font&gt;&lt;/b&gt; &lt;hr size=&#34;2&#34; width=&#34;100%&#34; align=&#34;center&#34; /&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt; &lt;ul&gt; &lt;li&gt;项目名称&amp;nbsp;：&amp;nbsp;${PROJECT_NAME}&lt;/li&gt; &lt;li&gt;构建编号&amp;nbsp;：&amp;nbsp;第${BUILD_NUMBER}次构建&lt;/li&gt; &lt;li&gt;触发原因：&amp;nbsp;${CAUSE}&lt;/li&gt; &lt;li&gt;构建日志：&amp;nbsp;&lt;a href=&#34;${BUILD_URL}console&#34;&gt;${BUILD_URL}console&lt;/a&gt;&lt;/li&gt; &lt;li&gt;构建&amp;nbsp;&amp;nbsp;Url&amp;nbsp;：&amp;nbsp;&lt;a href=&#34;${BUILD_URL}&#34;&gt;${BUILD_URL}&lt;/a&gt;&lt;/li&gt; &lt;li&gt;工作目录&amp;nbsp;：&amp;nbsp;&lt;a href=&#34;${PROJECT_URL}ws&#34;&gt;${PROJECT_URL}ws&lt;/a&gt;&lt;/li&gt; &lt;li&gt;项目&amp;nbsp;&amp;nbsp;Url&amp;nbsp;：&amp;nbsp;&lt;a href=&#34;${PROJECT_URL}&#34;&gt;${PROJECT_URL}&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt; &lt;b&gt;&lt;font color=&#34;#0B610B&#34;&gt;Changes Since Last Successful Build:&lt;/font&gt;&lt;/b&gt; &lt;hr size=&#34;2&#34; width=&#34;100%&#34; align=&#34;center&#34; /&gt; &lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt; &lt;ul&gt; &lt;li&gt;历史变更记录 : &lt;a href=&#34;${PROJECT_URL}changes&#34;&gt;${PROJECT_URL}changes&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt; &lt;b&gt;Failed Test Results&lt;/b&gt; &lt;hr size=&#34;2&#34; width=&#34;100%&#34; align=&#34;center&#34; /&gt; &lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt; &lt;pre style=&#34;font-size: 11pt; font-family: Tahoma, Arial, Helvetica, sans-serif&#34;&gt;$FAILED_TESTS&lt;/pre&gt; &lt;br /&gt; &lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt;&lt;b&gt;&lt;font color=&#34;#0B610B&#34;&gt;构建日志 (最后 100行):&lt;/font&gt;&lt;/b&gt; &lt;hr size=&#34;2&#34; width=&#34;100%&#34; align=&#34;center&#34; /&gt;&lt;/td&gt; &lt;/tr&gt; &lt;!">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://academia-hugo.netlify.com/notes/jenkins-study/jenkins%E9%9B%86%E6%88%90%E9%82%AE%E4%BB%B6/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#fc6f5c">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academia.min.adccb3b334fd9406ba3e6667ec8e7903.css">
+
+  
+
+  
+  
+  
+
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://academia-hugo.netlify.com/notes/jenkins-study/jenkins%E9%9B%86%E6%88%90%E9%82%AE%E4%BB%B6/">
+
+  
+  
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GUAN-BLOG">
+  <meta property="og:url" content="https://academia-hugo.netlify.com/notes/jenkins-study/jenkins%E9%9B%86%E6%88%90%E9%82%AE%E4%BB%B6/">
+  <meta property="og:title" content="jenkins触发器 | GUAN-BLOG">
+  <meta property="og:description" content="前提条件 开启邮箱服务器的SMTP功能
+安装插件 Email Extension Template
+配置 测试成功 添加邮件模板 项目根目录下添加邮件模板email.html
+&lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;meta charset=&#34;UTF-8&#34;&gt; &lt;title&gt;${ENV, var=&#34;JOB_NAME&#34;}-第${BUILD_NUMBER}次构建日志&lt;/title&gt; &lt;/head&gt; &lt;body leftmargin=&#34;8&#34; marginwidth=&#34;0&#34; topmargin=&#34;8&#34; marginheight=&#34;4&#34; offset=&#34;0&#34;&gt; &lt;table width=&#34;95%&#34; cellpadding=&#34;0&#34; cellspacing=&#34;0&#34; style=&#34;font-size: 11pt; font-family: Tahoma, Arial, Helvetica, sans-serif&#34;&gt; &lt;tr&gt; &lt;td&gt;(本邮件是程序自动下发的，请勿回复！)&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt;&lt;h2&gt;&lt;font color=&#34;#0000FF&#34;&gt;构建结果 - ${BUILD_STATUS}&lt;/font&gt;&lt;/h2&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt;&lt;br /&gt; &lt;b&gt;&lt;font color=&#34;#0B610B&#34;&gt;构建信息&lt;/font&gt;&lt;/b&gt; &lt;hr size=&#34;2&#34; width=&#34;100%&#34; align=&#34;center&#34; /&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt; &lt;ul&gt; &lt;li&gt;项目名称&amp;nbsp;：&amp;nbsp;${PROJECT_NAME}&lt;/li&gt; &lt;li&gt;构建编号&amp;nbsp;：&amp;nbsp;第${BUILD_NUMBER}次构建&lt;/li&gt; &lt;li&gt;触发原因：&amp;nbsp;${CAUSE}&lt;/li&gt; &lt;li&gt;构建日志：&amp;nbsp;&lt;a href=&#34;${BUILD_URL}console&#34;&gt;${BUILD_URL}console&lt;/a&gt;&lt;/li&gt; &lt;li&gt;构建&amp;nbsp;&amp;nbsp;Url&amp;nbsp;：&amp;nbsp;&lt;a href=&#34;${BUILD_URL}&#34;&gt;${BUILD_URL}&lt;/a&gt;&lt;/li&gt; &lt;li&gt;工作目录&amp;nbsp;：&amp;nbsp;&lt;a href=&#34;${PROJECT_URL}ws&#34;&gt;${PROJECT_URL}ws&lt;/a&gt;&lt;/li&gt; &lt;li&gt;项目&amp;nbsp;&amp;nbsp;Url&amp;nbsp;：&amp;nbsp;&lt;a href=&#34;${PROJECT_URL}&#34;&gt;${PROJECT_URL}&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt; &lt;b&gt;&lt;font color=&#34;#0B610B&#34;&gt;Changes Since Last Successful Build:&lt;/font&gt;&lt;/b&gt; &lt;hr size=&#34;2&#34; width=&#34;100%&#34; align=&#34;center&#34; /&gt; &lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt; &lt;ul&gt; &lt;li&gt;历史变更记录 : &lt;a href=&#34;${PROJECT_URL}changes&#34;&gt;${PROJECT_URL}changes&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt; &lt;b&gt;Failed Test Results&lt;/b&gt; &lt;hr size=&#34;2&#34; width=&#34;100%&#34; align=&#34;center&#34; /&gt; &lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt; &lt;pre style=&#34;font-size: 11pt; font-family: Tahoma, Arial, Helvetica, sans-serif&#34;&gt;$FAILED_TESTS&lt;/pre&gt; &lt;br /&gt; &lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt;&lt;b&gt;&lt;font color=&#34;#0B610B&#34;&gt;构建日志 (最后 100行):&lt;/font&gt;&lt;/b&gt; &lt;hr size=&#34;2&#34; width=&#34;100%&#34; align=&#34;center&#34; /&gt;&lt;/td&gt; &lt;/tr&gt; &lt;!"><meta property="og:image" content="https://academia-hugo.netlify.com/img/icon-192.png">
+  <meta property="twitter:image" content="https://academia-hugo.netlify.com/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2020-06-28T00:00:00&#43;01:00">
+  
+  <meta property="article:modified_time" content="2020-06-28T00:00:00&#43;01:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>jenkins触发器 | GUAN-BLOG</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">GUAN-BLOG</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"><span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#gallery"><span>gallery</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/notes/"><span>Notes</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/jenkins-study/">jenkins持续集成</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/jenkins-study/jenkins%E5%AE%89%E8%A3%85/">jenkins安装</a>
+      </li>
+      
+      <li >
+        <a href="/notes/jenkins-study/jenkins%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90/">jenkins用户权限</a>
+      </li>
+      
+      <li >
+        <a href="/notes/jenkins-study/jenkins%E9%85%8D%E7%BD%AEjdkmaven/">jenkins配置jdk,maven</a>
+      </li>
+      
+      <li >
+        <a href="/notes/jenkins-study/%E8%87%AA%E7%94%B1%E9%A3%8E%E6%A0%BC%E9%9B%86%E6%88%90tomcat%E9%A1%B9%E7%9B%AE/">自由风格集成tomcat项目</a>
+      </li>
+      
+      <li >
+        <a href="/notes/jenkins-study/pipeline%E9%A3%8E%E6%A0%BC%E9%9B%86%E6%88%90%E9%A1%B9%E7%9B%AE/">Pipeline风格集成项目</a>
+      </li>
+      
+      <li class="active">
+        <a href="/notes/jenkins-study/jenkins%E9%9B%86%E6%88%90%E9%82%AE%E4%BB%B6/">jenkins触发器</a>
+      </li>
+      
+      <li >
+        <a href="/notes/jenkins-study/jenkins%E8%A7%A6%E5%8F%91%E5%99%A8/">jenkins集成邮件</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/jenkins-study/sonarqube/">sonarQube代码审查</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/notes/jenkins-study/sonarqube%E5%AE%89%E8%A3%85/">sonarQube安装</a>
+      </li>
+      
+      <li >
+        <a href="/notes/jenkins-study/jenkins%E9%9B%86%E6%88%90sonarqube/">jenkins集成sonarQube</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前提条件">前提条件</a></li>
+    <li><a href="#安装插件">安装插件</a></li>
+    <li><a href="#配置">配置</a></li>
+    <li><a href="#测试成功">测试成功</a></li>
+    <li><a href="#添加邮件模板">添加邮件模板</a></li>
+    <li><a href="#修改jenkinsfile">修改jenkinsfile</a></li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article" itemscope itemtype="http://schema.org/Article">
+
+        <div class="docs-article-container">
+          <h1 itemprop="name">jenkins触发器</h1>
+
+          <div class="article-style" itemprop="articleBody">
+            <h2 id="前提条件">前提条件</h2>
+<p>开启邮箱服务器的SMTP功能</p>
+<h2 id="安装插件">安装插件</h2>
+<p>Email Extension Template</p>
+<h2 id="配置">配置</h2>
+<p><img src="/img/jenkins/20.jpg" alt="">
+<img src="/img/jenkins/21.jpg" alt="">
+<img src="/img/jenkins/22.jpg" alt="">
+<img src="/img/jenkins/23.jpg" alt=""></p>
+<h2 id="测试成功">测试成功</h2>
+<p><img src="/img/jenkins/24.jpg" alt=""></p>
+<h2 id="添加邮件模板">添加邮件模板</h2>
+<p>项目根目录下添加邮件模板<code>email.html</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color:#f92672">html</span>&gt;
+&lt;<span style="color:#f92672">head</span>&gt;
+&lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+&lt;<span style="color:#f92672">title</span>&gt;${ENV, var=&#34;JOB_NAME&#34;}-第${BUILD_NUMBER}次构建日志&lt;/<span style="color:#f92672">title</span>&gt;
+&lt;/<span style="color:#f92672">head</span>&gt;
+&lt;<span style="color:#f92672">body</span> <span style="color:#a6e22e">leftmargin</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;8&#34;</span> <span style="color:#a6e22e">marginwidth</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#a6e22e">topmargin</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;8&#34;</span> <span style="color:#a6e22e">marginheight</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;4&#34;</span> <span style="color:#a6e22e">offset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span>&gt;
+&lt;<span style="color:#f92672">table</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;95%&#34;</span> <span style="color:#a6e22e">cellpadding</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#a6e22e">cellspacing</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;font-size: 11pt; font-family: Tahoma, Arial, Helvetica, sans-serif&#34;</span>&gt;
+&lt;<span style="color:#f92672">tr</span>&gt;
+   &lt;<span style="color:#f92672">td</span>&gt;(本邮件是程序自动下发的，请勿回复！)&lt;/<span style="color:#f92672">td</span>&gt;
+&lt;/<span style="color:#f92672">tr</span>&gt;
+&lt;<span style="color:#f92672">tr</span>&gt;
+   &lt;<span style="color:#f92672">td</span>&gt;&lt;<span style="color:#f92672">h2</span>&gt;&lt;<span style="color:#f92672">font</span> <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#0000FF&#34;</span>&gt;构建结果 - ${BUILD_STATUS}&lt;/<span style="color:#f92672">font</span>&gt;&lt;/<span style="color:#f92672">h2</span>&gt;&lt;/<span style="color:#f92672">td</span>&gt;
+&lt;/<span style="color:#f92672">tr</span>&gt;
+&lt;<span style="color:#f92672">tr</span>&gt;
+   &lt;<span style="color:#f92672">td</span>&gt;&lt;<span style="color:#f92672">br</span> /&gt; &lt;<span style="color:#f92672">b</span>&gt;&lt;<span style="color:#f92672">font</span> <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#0B610B&#34;</span>&gt;构建信息&lt;/<span style="color:#f92672">font</span>&gt;&lt;/<span style="color:#f92672">b</span>&gt; &lt;<span style="color:#f92672">hr</span> <span style="color:#a6e22e">size</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;100%&#34;</span> <span style="color:#a6e22e">align</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span> /&gt;&lt;/<span style="color:#f92672">td</span>&gt; 
+&lt;/<span style="color:#f92672">tr</span>&gt; 
+&lt;<span style="color:#f92672">tr</span>&gt;
+&lt;<span style="color:#f92672">td</span>&gt; 
+     &lt;<span style="color:#f92672">ul</span>&gt; 
+          &lt;<span style="color:#f92672">li</span>&gt;项目名称&amp;nbsp;：&amp;nbsp;${PROJECT_NAME}&lt;/<span style="color:#f92672">li</span>&gt;
+          &lt;<span style="color:#f92672">li</span>&gt;构建编号&amp;nbsp;：&amp;nbsp;第${BUILD_NUMBER}次构建&lt;/<span style="color:#f92672">li</span>&gt;
+          &lt;<span style="color:#f92672">li</span>&gt;触发原因：&amp;nbsp;${CAUSE}&lt;/<span style="color:#f92672">li</span>&gt;
+          &lt;<span style="color:#f92672">li</span>&gt;构建日志：&amp;nbsp;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;${BUILD_URL}console&#34;</span>&gt;${BUILD_URL}console&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">li</span>&gt;
+          &lt;<span style="color:#f92672">li</span>&gt;构建&amp;nbsp;&amp;nbsp;Url&amp;nbsp;：&amp;nbsp;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;${BUILD_URL}&#34;</span>&gt;${BUILD_URL}&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">li</span>&gt;
+          &lt;<span style="color:#f92672">li</span>&gt;工作目录&amp;nbsp;：&amp;nbsp;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;${PROJECT_URL}ws&#34;</span>&gt;${PROJECT_URL}ws&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">li</span>&gt;
+          &lt;<span style="color:#f92672">li</span>&gt;项目&amp;nbsp;&amp;nbsp;Url&amp;nbsp;：&amp;nbsp;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;${PROJECT_URL}&#34;</span>&gt;${PROJECT_URL}&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">li</span>&gt;
+     &lt;/<span style="color:#f92672">ul</span>&gt; 
+&lt;/<span style="color:#f92672">td</span>&gt; 
+&lt;/<span style="color:#f92672">tr</span>&gt;
+&lt;<span style="color:#f92672">tr</span>&gt;
+     &lt;<span style="color:#f92672">td</span>&gt;
+          &lt;<span style="color:#f92672">b</span>&gt;&lt;<span style="color:#f92672">font</span> <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#0B610B&#34;</span>&gt;Changes Since Last Successful Build:&lt;/<span style="color:#f92672">font</span>&gt;&lt;/<span style="color:#f92672">b</span>&gt;
+          &lt;<span style="color:#f92672">hr</span> <span style="color:#a6e22e">size</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;100%&#34;</span> <span style="color:#a6e22e">align</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span> /&gt;
+     &lt;/<span style="color:#f92672">td</span>&gt; 
+&lt;/<span style="color:#f92672">tr</span>&gt; 
+&lt;<span style="color:#f92672">tr</span>&gt; 
+     &lt;<span style="color:#f92672">td</span>&gt;
+         &lt;<span style="color:#f92672">ul</span>&gt; 
+              &lt;<span style="color:#f92672">li</span>&gt;历史变更记录 : &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;${PROJECT_URL}changes&#34;</span>&gt;${PROJECT_URL}changes&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">li</span>&gt;
+         &lt;/<span style="color:#f92672">ul</span>&gt;&lt;/<span style="color:#f92672">td</span>&gt; 
+&lt;/<span style="color:#f92672">tr</span>&gt;
+&lt;<span style="color:#f92672">tr</span>&gt;
+     &lt;<span style="color:#f92672">td</span>&gt;
+          &lt;<span style="color:#f92672">b</span>&gt;Failed Test Results&lt;/<span style="color:#f92672">b</span>&gt; &lt;<span style="color:#f92672">hr</span> <span style="color:#a6e22e">size</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;100%&#34;</span> <span style="color:#a6e22e">align</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span> /&gt;
+     &lt;/<span style="color:#f92672">td</span>&gt; 
+&lt;/<span style="color:#f92672">tr</span>&gt;
+&lt;<span style="color:#f92672">tr</span>&gt;
+     &lt;<span style="color:#f92672">td</span>&gt;
+          &lt;<span style="color:#f92672">pre</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;font-size: 11pt; font-family: Tahoma, Arial, Helvetica, sans-serif&#34;</span>&gt;$FAILED_TESTS&lt;/<span style="color:#f92672">pre</span>&gt; &lt;<span style="color:#f92672">br</span> /&gt;
+     &lt;/<span style="color:#f92672">td</span>&gt;
+&lt;/<span style="color:#f92672">tr</span>&gt;
+&lt;<span style="color:#f92672">tr</span>&gt;
+     &lt;<span style="color:#f92672">td</span>&gt;&lt;<span style="color:#f92672">b</span>&gt;&lt;<span style="color:#f92672">font</span> <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#0B610B&#34;</span>&gt;构建日志 (最后 100行):&lt;/<span style="color:#f92672">font</span>&gt;&lt;/<span style="color:#f92672">b</span>&gt; &lt;<span style="color:#f92672">hr</span> <span style="color:#a6e22e">size</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;100%&#34;</span> <span style="color:#a6e22e">align</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span> /&gt;&lt;/<span style="color:#f92672">td</span>&gt;
+&lt;/<span style="color:#f92672">tr</span>&gt; <span style="color:#75715e">&lt;!-- &lt;tr&gt; &lt;td&gt;Test Logs (if test has ran): &lt;a href=&#34;${PROJECT_URL}ws/TestResult/archive_logs/Log-Build-${BUILD_NUMBER}.zip&#34;&gt;${PROJECT_URL}/ws/TestResult/archive_logs/Log-Build-${BUILD_NUMBER}.zip&lt;/a&gt; &lt;br /&gt; &lt;br /&gt; &lt;/td&gt; &lt;/tr&gt; --&gt;</span> 
+&lt;<span style="color:#f92672">tr</span>&gt;
+&lt;<span style="color:#f92672">td</span>&gt;
+     &lt;<span style="color:#f92672">textarea</span> <span style="color:#a6e22e">cols</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;80&#34;</span> <span style="color:#a6e22e">rows</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;30&#34;</span> <span style="color:#a6e22e">readonly</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;readonly&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;font-family: Courier New&#34;</span>&gt;${BUILD_LOG, maxLines=100}&lt;/<span style="color:#f92672">textarea</span>&gt; 
+&lt;/<span style="color:#f92672">td</span>&gt; 
+&lt;/<span style="color:#f92672">tr</span>&gt;
+&lt;/<span style="color:#f92672">table</span>&gt;
+&lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></div><h2 id="修改jenkinsfile">修改jenkinsfile</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">
+        <span style="color:#a6e22e">post</span> {
+             <span style="color:#a6e22e">always</span> {
+               <span style="color:#a6e22e">emailext</span>(
+               		<span style="color:#a6e22e">subject</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;构建通知: ${PROJECT_NAME} - Build  # ${BUILD_NUMBER} - ${BUILD_STATUS)!&#39;</span>,
+                    <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;${FILE,path=&#34;email.html&#34;}&#39;</span>,
+                    <span style="color:#a6e22e">to</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;1785868089@qq.com&#39;</span>
+               )  
+            }
+            
+        }
+    
+</code></pre></div><p>立即构建</p>
+<p><img src="/img/jenkins/25.jpg" alt=""></p>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/notes/jenkins-study/jenkins%E5%AE%89%E8%A3%85/" rel="next">jenkins安装</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/notes/jenkins-study/jenkins%E9%9B%86%E6%88%90sonarqube/" rel="prev">jenkins集成sonarQube</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          Last updated on Jun 28, 2020
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  <script src="/js/clipboard.js"></script>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        
+        <p class="powered-by">
+          <a href="/privacy/"></a>
+        </p>
+        
+        <p>
+          
+          Powered by
+          <a href="https://themefisher.com" target="_blank" rel="noopener">themefisher</a> for
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+        </p>
+      </div>
+      <div class="col-md-6">
+        <ul class="list-inline network-icon text-right">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://twitter.com/Twitter" target="_blank" rel="noopener" title="DM Me"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="skype:echo123?call"  title="Skype Me"><i class="fab fa-skype" aria-hidden="true"></i></a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://keybase.io/" target="_blank" rel="noopener" title="Chat on Keybase"><i class="fab fa-keybase" aria-hidden="true"></i></a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://discourse.gohugo.io" target="_blank" rel="noopener" title="Discuss on Forum"><i class="fas fa-comments" aria-hidden="true"></i></a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script async defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.25/gmaps.min.js" integrity="sha256-7vjlAeb8OaTrCXZkCNun9djzuB2owUsaO72kXaFDBJs=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academia.min.7276a6a3624de715a5c7f54c7c07696d.js"></script>
+
+    
+
+
+
+
+
+
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

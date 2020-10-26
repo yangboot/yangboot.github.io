@@ -1,0 +1,740 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academia 4.3.1">
+  <meta name="generator" content="Hugo 0.70.0" />
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="My favorite">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="启动node-exporter docker run -d -p 9100:9100 \-v &quot;/proc:/host/proc:ro&quot; \-v &quot;/sys:/host/sys:ro&quot; \-v &quot;/:/rootfs:ro&quot; \--net=&quot;host&quot; \prom/node-exporter等待几秒钟，查看端口是否起来了
+root@ubuntu:~# netstat -anptActive Internet connections (servers and established)Proto Recv-Q Send-Q Local Address Foreign Address State PID/Program nametcp 0 0 0.0.0.0:22 0.0.0.0:* LISTEN 1147/sshd tcp 0 36 192.168.91.132:22 192.168.91.1:63648 ESTABLISHED 2969/0 tcp 0 0 192.168.91.132:22 192.168.91.1:63340 ESTABLISHED 1321/1 tcp6 0 0 :::9100 :::* LISTEN 3070/node_exporter访问url：
+http://192.168.91.132:9100/metrics效果如下：">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://academia-hugo.netlify.com/notes/prometheus/%E6%99%AE%E7%BD%97%E7%B1%B3%E4%BF%AE%E6%96%AF%E5%AE%89%E8%A3%85/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#fc6f5c">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academia.min.adccb3b334fd9406ba3e6667ec8e7903.css">
+
+  
+
+  
+  
+  
+
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://academia-hugo.netlify.com/notes/prometheus/%E6%99%AE%E7%BD%97%E7%B1%B3%E4%BF%AE%E6%96%AF%E5%AE%89%E8%A3%85/">
+
+  
+  
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GUAN-BLOG">
+  <meta property="og:url" content="https://academia-hugo.netlify.com/notes/prometheus/%E6%99%AE%E7%BD%97%E7%B1%B3%E4%BF%AE%E6%96%AF%E5%AE%89%E8%A3%85/">
+  <meta property="og:title" content="普罗米修斯安装 | GUAN-BLOG">
+  <meta property="og:description" content="启动node-exporter docker run -d -p 9100:9100 \-v &quot;/proc:/host/proc:ro&quot; \-v &quot;/sys:/host/sys:ro&quot; \-v &quot;/:/rootfs:ro&quot; \--net=&quot;host&quot; \prom/node-exporter等待几秒钟，查看端口是否起来了
+root@ubuntu:~# netstat -anptActive Internet connections (servers and established)Proto Recv-Q Send-Q Local Address Foreign Address State PID/Program nametcp 0 0 0.0.0.0:22 0.0.0.0:* LISTEN 1147/sshd tcp 0 36 192.168.91.132:22 192.168.91.1:63648 ESTABLISHED 2969/0 tcp 0 0 192.168.91.132:22 192.168.91.1:63340 ESTABLISHED 1321/1 tcp6 0 0 :::9100 :::* LISTEN 3070/node_exporter访问url：
+http://192.168.91.132:9100/metrics效果如下："><meta property="og:image" content="https://academia-hugo.netlify.com/img/icon-192.png">
+  <meta property="twitter:image" content="https://academia-hugo.netlify.com/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2020-06-16T00:00:00&#43;01:00">
+  
+  <meta property="article:modified_time" content="2020-06-16T00:00:00&#43;01:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>普罗米修斯安装 | GUAN-BLOG</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">GUAN-BLOG</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"><span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#gallery"><span>gallery</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/notes/"><span>Notes</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/prometheus/">prometheus监控学习</a>
+    <ul class="nav docs-sidenav">
+      
+      <li class="active">
+        <a href="/notes/prometheus/%E6%99%AE%E7%BD%97%E7%B1%B3%E4%BF%AE%E6%96%AF%E5%AE%89%E8%A3%85/">普罗米修斯安装</a>
+      </li>
+      
+      <li >
+        <a href="/notes/prometheus/%E6%99%AE%E7%BD%97%E7%B1%B3%E4%BF%AE%E6%96%AF%E7%9B%91%E6%8E%A7mysql/">普罗米修斯监控MYSQL</a>
+      </li>
+      
+      <li >
+        <a href="/notes/prometheus/%E6%99%AE%E7%BD%97%E7%B1%B3%E4%BF%AE%E6%96%AF%E7%9B%91%E6%8E%A7docker/">普罗米修斯监控docker</a>
+      </li>
+      
+      <li >
+        <a href="/notes/prometheus/%E6%99%AE%E7%BD%97%E7%B1%B3%E4%BF%AE%E6%96%AF%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6/">普罗米修斯监控告警</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#启动node-exporter">启动node-exporter</a></li>
+    <li><a href="#启动prometheus">启动prometheus</a></li>
+    <li><a href="#启动grafana">启动grafana</a>
+      <ul>
+        <li><a href="#docker安装mysql_exporter">docker安装mysql_exporter</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article" itemscope itemtype="http://schema.org/Article">
+
+        <div class="docs-article-container">
+          <h1 itemprop="name">普罗米修斯安装</h1>
+
+          <div class="article-style" itemprop="articleBody">
+            <h2 id="启动node-exporter">启动node-exporter</h2>
+<pre><code>docker run -d -p 9100:9100 \
+  -v &quot;/proc:/host/proc:ro&quot; \
+  -v &quot;/sys:/host/sys:ro&quot; \
+  -v &quot;/:/rootfs:ro&quot; \
+  --net=&quot;host&quot; \
+  prom/node-exporter
+</code></pre><p>等待几秒钟，查看端口是否起来了</p>
+<pre><code>root@ubuntu:~# netstat -anpt
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1147/sshd       
+tcp        0     36 192.168.91.132:22       192.168.91.1:63648      ESTABLISHED 2969/0          
+tcp        0      0 192.168.91.132:22       192.168.91.1:63340      ESTABLISHED 1321/1          
+tcp6       0      0 :::9100                 :::*                    LISTEN      3070/node_exporter
+</code></pre><p>访问url：</p>
+<pre><code>http://192.168.91.132:9100/metrics
+</code></pre><p>效果如下：</p>
+<p><img src="https://img2018.cnblogs.com/blog/1341090/201811/1341090-20181108172459066-1268369984.png" alt="img"></p>
+<p>这些都是收集到数据，有了它就可以做数据展示了</p>
+<h2 id="启动prometheus">启动prometheus</h2>
+<p>新建目录prometheus，编辑配置文件prometheus.yml</p>
+<pre><code>mkdir /opt/prometheus
+cd /opt/prometheus/
+vim prometheus.yml
+</code></pre><p>内容如下：</p>
+<pre><code>global:
+  scrape_interval:     60s
+  evaluation_interval: 60s
+ 
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          instance: prometheus
+ 
+  - job_name: linux
+    static_configs:
+      - targets: ['192.168.91.132:9100']
+        labels:
+          instance: localhost
+</code></pre><p>注意：修改IP地址，这里的192.168.91.132就是本机地址</p>
+<p>启动prometheus</p>
+<pre><code>docker run  -d \
+  -p 9090:9090 \
+  -v /opt/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml  \
+  prom/prometheus
+</code></pre><p>等待几秒钟，查看端口状态</p>
+<pre><code>root@ubuntu:/opt/prometheus# netstat -anpt
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1147/sshd       
+tcp        0     36 192.168.91.132:22       192.168.91.1:63648      ESTABLISHED 2969/0          
+tcp        0      0 192.168.91.132:22       192.168.91.1:63340      ESTABLISHED 1321/1          
+tcp6       0      0 :::9100                 :::*                    LISTEN      3070/node_exporter
+tcp6       0      0 :::22                   :::*                    LISTEN      1147/sshd       
+tcp6       0      0 :::9090                 :::*                    LISTEN      3336/docker-proxy
+</code></pre><p>访问url：</p>
+<pre><code>http://192.168.91.132:9090/graph
+</code></pre><h2 id="启动grafana">启动grafana</h2>
+<p><a href="https://grafana.com/grafana/download?platform=linux">https://grafana.com/grafana/download?platform=linux</a></p>
+<pre><code> systemctl start grafana-server
+</code></pre><p>docker</p>
+<p>新建空文件夹grafana-storage，用来存储数据</p>
+<pre><code>mkdir /opt/grafana-storage
+</code></pre><p>设置权限</p>
+<pre><code>chmod 777 -R /opt/grafana-storage
+</code></pre><p>因为grafana用户会在这个目录写入文件，直接设置777，比较简单粗暴！</p>
+<p>启动grafana</p>
+<pre><code>docker run -d \
+  -p 3000:3000 \
+  --name=grafana \
+  -v /opt/grafana:/var/lib/grafana \
+  grafana/grafana:5.3.4
+</code></pre><h3 id="docker安装mysql_exporter">docker安装mysql_exporter</h3>
+<ul>
+<li>下载mysql_exporter镜像</li>
+</ul>
+<pre><code>docker pull prom/mysqld-exporter
+</code></pre><ul>
+<li>
+<p>mysql_exporter需要链接数据库，mysql创建mysql_monitor用户，添加PROCESS, REPLICATION CLIENT权限</p>
+</li>
+<li>
+<p>mysql_exporter需要链接数据库，mysql创建mysql_monitor用户，添加PROCESS, REPLICATION CLIENT权限</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; INSERT INTO mysql.user<span style="color:#f92672">(</span>Host,User,Password<span style="color:#f92672">)</span> VALUES<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;localhost&#34;</span>, <span style="color:#e6db74">&#34;mysql_monitor&#34;</span>, password<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;mysql_monitor&#34;</span><span style="color:#f92672">))</span>; 
+mysql&gt; GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO <span style="color:#e6db74">&#39;mysql_monitor&#39;</span>@<span style="color:#e6db74">&#39;localhost&#39;</span> IDENTIFIED BY <span style="color:#e6db74">&#39;mysql_monitor&#39;</span>;
+mysql&gt; GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO <span style="color:#e6db74">&#39;mysql_monitor&#39;</span>@<span style="color:#e6db74">&#39;%&#39;</span> IDENTIFIED BY <span style="color:#e6db74">&#39;mysql_monitor&#39;</span>;
+mysql&gt; FLUSH PRIVILEGES;
+</code></pre></div><ul>
+<li>docker启动mysql_exporter镜像</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run -d -p 9104:9104 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --name<span style="color:#f92672">=</span>mysqld-exporter <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --restart<span style="color:#f92672">=</span>always <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -e DATA_SOURCE_NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mysql_monitor:mysql_monitor@(172.17.0.1:3306)/&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  prom/mysqld-exporter
+</code></pre></div><ul>
+<li>修改prometheus.yml文件</li>
+</ul>
+<pre><code>vim prometheus.yml
+</code></pre><p>添加</p>
+<pre><code>- job_name: mysql
+    static_configs:
+      - targets: ['203.176.95.155:9104']
+</code></pre>
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/notes/prometheus/%E6%99%AE%E7%BD%97%E7%B1%B3%E4%BF%AE%E6%96%AF%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6/" rel="prev">普罗米修斯监控告警</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          Last updated on Jun 16, 2020
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  <script src="/js/clipboard.js"></script>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        
+        <p class="powered-by">
+          <a href="/privacy/"></a>
+        </p>
+        
+        <p>
+          
+          Powered by
+          <a href="https://themefisher.com" target="_blank" rel="noopener">themefisher</a> for
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+        </p>
+      </div>
+      <div class="col-md-6">
+        <ul class="list-inline network-icon text-right">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://twitter.com/Twitter" target="_blank" rel="noopener" title="DM Me"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="skype:echo123?call"  title="Skype Me"><i class="fab fa-skype" aria-hidden="true"></i></a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://keybase.io/" target="_blank" rel="noopener" title="Chat on Keybase"><i class="fab fa-keybase" aria-hidden="true"></i></a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://discourse.gohugo.io" target="_blank" rel="noopener" title="Discuss on Forum"><i class="fas fa-comments" aria-hidden="true"></i></a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script async defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.25/gmaps.min.js" integrity="sha256-7vjlAeb8OaTrCXZkCNun9djzuB2owUsaO72kXaFDBJs=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academia.min.7276a6a3624de715a5c7f54c7c07696d.js"></script>
+
+    
+
+
+
+
+
+
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

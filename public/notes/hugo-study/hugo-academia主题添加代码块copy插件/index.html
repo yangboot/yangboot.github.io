@@ -1,0 +1,706 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academia 4.3.1">
+  <meta name="generator" content="Hugo 0.70.0" />
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="My favorite">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="hugo-academia主题添加代码块copy插件 效果 1.编写copy.css编写好后放入static/css目录下
+copy.css .highlight { position: relative; } .highlight pre { padding-right: 75px; background-color:#f8f8f8 !important; } .highlight-copy-btn { position: absolute; bottom: 7px; right: 7px; border: 0; border-radius: 4px; padding: 1px; font-size: 0.8em; line-height: 1.8; color: #fff; background-color: #7777 min-width: 55px; text-align: center; } .highlight-copy-btn:hover { background-color: #666; } 2.编写copy.js编写好后放入static/js目录下
+copy.js (function() { &#39;use strict&#39;; if(!document.queryCommandSupported(&#39;copy&#39;)) { return; } function flashCopyMessage(el, msg) { el.textContent = msg; setTimeout(function() { el.textContent = &#34;Copy&#34;; }, 1000); } function selectText(node) { var selection = window.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://academia-hugo.netlify.com/notes/hugo-study/hugo-academia%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E5%9D%97copy%E6%8F%92%E4%BB%B6/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#fc6f5c">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academia.min.adccb3b334fd9406ba3e6667ec8e7903.css">
+
+  
+
+  
+  
+  
+
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://academia-hugo.netlify.com/notes/hugo-study/hugo-academia%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E5%9D%97copy%E6%8F%92%E4%BB%B6/">
+
+  
+  
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GUAN-BLOG">
+  <meta property="og:url" content="https://academia-hugo.netlify.com/notes/hugo-study/hugo-academia%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E5%9D%97copy%E6%8F%92%E4%BB%B6/">
+  <meta property="og:title" content="hugo-academia主题添加代码块copy插件 | GUAN-BLOG">
+  <meta property="og:description" content="hugo-academia主题添加代码块copy插件 效果 1.编写copy.css编写好后放入static/css目录下
+copy.css .highlight { position: relative; } .highlight pre { padding-right: 75px; background-color:#f8f8f8 !important; } .highlight-copy-btn { position: absolute; bottom: 7px; right: 7px; border: 0; border-radius: 4px; padding: 1px; font-size: 0.8em; line-height: 1.8; color: #fff; background-color: #7777 min-width: 55px; text-align: center; } .highlight-copy-btn:hover { background-color: #666; } 2.编写copy.js编写好后放入static/js目录下
+copy.js (function() { &#39;use strict&#39;; if(!document.queryCommandSupported(&#39;copy&#39;)) { return; } function flashCopyMessage(el, msg) { el.textContent = msg; setTimeout(function() { el.textContent = &#34;Copy&#34;; }, 1000); } function selectText(node) { var selection = window."><meta property="og:image" content="https://academia-hugo.netlify.com/img/icon-192.png">
+  <meta property="twitter:image" content="https://academia-hugo.netlify.com/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+  
+  
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>hugo-academia主题添加代码块copy插件 | GUAN-BLOG</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">GUAN-BLOG</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"><span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#gallery"><span>gallery</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/notes/"><span>Notes</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/notes/hugo-study/">hugo</a>
+    <ul class="nav docs-sidenav">
+      
+      <li class="active">
+        <a href="/notes/hugo-study/hugo-academia%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E5%9D%97copy%E6%8F%92%E4%BB%B6/">hugo-academia主题添加代码块copy插件</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#hugo-academia主题添加代码块copy插件">hugo-academia主题添加代码块copy插件</a>
+      <ul>
+        <li><a href="#效果">效果</a></li>
+        <li><a href="#copycss">copy.css</a></li>
+        <li><a href="#copyjs">copy.js</a></li>
+        <li><a href="#configtoml">config.toml</a></li>
+        <li><a href="#site_footerhtml">site_footer.html</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article" itemscope itemtype="http://schema.org/Article">
+
+        <div class="docs-article-container">
+          <h1 itemprop="name">hugo-academia主题添加代码块copy插件</h1>
+
+          <div class="article-style" itemprop="articleBody">
+            <h2 id="hugo-academia主题添加代码块copy插件">hugo-academia主题添加代码块copy插件</h2>
+<h3 id="效果">效果</h3>
+<p>1.编写<code>copy.css</code>编写好后放入<code>static/css</code>目录下</p>
+<h3 id="copycss">copy.css</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"> .<span style="color:#a6e22e">highlight</span> {
+    <span style="color:#66d9ef">position</span>: <span style="color:#66d9ef">relative</span>;
+}
+
+.<span style="color:#a6e22e">highlight</span> <span style="color:#f92672">pre</span> {
+    <span style="color:#66d9ef">padding-right</span>: <span style="color:#ae81ff">75</span><span style="color:#66d9ef">px</span>;
+    <span style="color:#66d9ef">background-color</span>:<span style="color:#ae81ff">#f8f8f8</span> <span style="color:#75715e">!important</span>;
+}
+
+.<span style="color:#a6e22e">highlight-copy-btn</span> {
+    <span style="color:#66d9ef">position</span>: <span style="color:#66d9ef">absolute</span>;
+    <span style="color:#66d9ef">bottom</span>: <span style="color:#ae81ff">7</span><span style="color:#66d9ef">px</span>;
+    <span style="color:#66d9ef">right</span>: <span style="color:#ae81ff">7</span><span style="color:#66d9ef">px</span>;
+    <span style="color:#66d9ef">border</span>: <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">border-radius</span>: <span style="color:#ae81ff">4</span><span style="color:#66d9ef">px</span>;
+    <span style="color:#66d9ef">padding</span>: <span style="color:#ae81ff">1</span><span style="color:#66d9ef">px</span>;
+    <span style="color:#66d9ef">font-size</span>: <span style="color:#ae81ff">0.8</span><span style="color:#66d9ef">em</span>;
+    <span style="color:#66d9ef">line-height</span>: <span style="color:#ae81ff">1.8</span>;
+    <span style="color:#66d9ef">color</span>: <span style="color:#ae81ff">#fff</span>;
+    <span style="color:#66d9ef">background-color</span>: <span style="color:#ae81ff">#7777</span>
+    <span style="color:#66d9ef">min-width</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">55</span><span style="color:#66d9ef">px</span>;
+    <span style="color:#66d9ef">text-align</span>: <span style="color:#66d9ef">center</span>;
+}
+
+.<span style="color:#a6e22e">highlight-copy-btn</span>:<span style="color:#a6e22e">hover</span> {
+    <span style="color:#66d9ef">background-color</span>: <span style="color:#ae81ff">#666</span>;
+}
+</code></pre></div><p>2.编写<code>copy.js</code>编写好后放入<code>static/js</code>目录下</p>
+<h3 id="copyjs">copy.js</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">(<span style="color:#66d9ef">function</span>() {
+ <span style="color:#e6db74">&#39;use strict&#39;</span>;
+
+ <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>document.<span style="color:#a6e22e">queryCommandSupported</span>(<span style="color:#e6db74">&#39;copy&#39;</span>)) {
+   <span style="color:#66d9ef">return</span>;
+ }
+
+ <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">flashCopyMessage</span>(<span style="color:#a6e22e">el</span>, <span style="color:#a6e22e">msg</span>) {
+   <span style="color:#a6e22e">el</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">msg</span>;
+   <span style="color:#a6e22e">setTimeout</span>(<span style="color:#66d9ef">function</span>() {
+     <span style="color:#a6e22e">el</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Copy&#34;</span>;
+   }, <span style="color:#ae81ff">1000</span>);
+ }
+
+ <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">selectText</span>(<span style="color:#a6e22e">node</span>) {
+   <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">selection</span> <span style="color:#f92672">=</span> window.<span style="color:#a6e22e">getSelection</span>();
+   <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">range</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createRange</span>();
+   <span style="color:#a6e22e">range</span>.<span style="color:#a6e22e">selectNodeContents</span>(<span style="color:#a6e22e">node</span>);
+   <span style="color:#a6e22e">selection</span>.<span style="color:#a6e22e">removeAllRanges</span>();
+   <span style="color:#a6e22e">selection</span>.<span style="color:#a6e22e">addRange</span>(<span style="color:#a6e22e">range</span>);
+   <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">selection</span>;
+ }
+
+ <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">addCopyButton</span>(<span style="color:#a6e22e">containerEl</span>) {
+   <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">copyBtn</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createElement</span>(<span style="color:#e6db74">&#34;button&#34;</span>);
+   <span style="color:#a6e22e">copyBtn</span>.<span style="color:#a6e22e">className</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;highlight-copy-btn&#34;</span>;
+   <span style="color:#a6e22e">copyBtn</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Copy&#34;</span>;
+
+   <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">codeEl</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">containerEl</span>.<span style="color:#a6e22e">firstElementChild</span>;
+   <span style="color:#a6e22e">copyBtn</span>.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;click&#39;</span>, <span style="color:#66d9ef">function</span>() {
+     <span style="color:#66d9ef">try</span> {
+       <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">selection</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">selectText</span>(<span style="color:#a6e22e">codeEl</span>);
+       document.<span style="color:#a6e22e">execCommand</span>(<span style="color:#e6db74">&#39;copy&#39;</span>);
+       <span style="color:#a6e22e">selection</span>.<span style="color:#a6e22e">removeAllRanges</span>();
+
+       <span style="color:#a6e22e">flashCopyMessage</span>(<span style="color:#a6e22e">copyBtn</span>, <span style="color:#e6db74">&#39;Copied!&#39;</span>)
+     } <span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">e</span>) {
+       <span style="color:#a6e22e">console</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">e</span>);
+       <span style="color:#a6e22e">flashCopyMessage</span>(<span style="color:#a6e22e">copyBtn</span>, <span style="color:#e6db74">&#39;Failed :\&#39;(&#39;</span>)
+     }
+   });
+
+   <span style="color:#a6e22e">containerEl</span>.<span style="color:#a6e22e">appendChild</span>(<span style="color:#a6e22e">copyBtn</span>);
+ }
+
+ <span style="color:#75715e">// Add copy button to code blocks
+</span><span style="color:#75715e"></span> <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">highlightBlocks</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementsByClassName</span>(<span style="color:#e6db74">&#39;highlight&#39;</span>);
+ Array.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">forEach</span>.<span style="color:#a6e22e">call</span>(<span style="color:#a6e22e">highlightBlocks</span>, <span style="color:#a6e22e">addCopyButton</span>);
+})();
+
+</code></pre></div><p>3.修改配置文件<code>config.toml</code></p>
+<h3 id="configtoml">config.toml</h3>
+<p>config.toml里添加下面这句引入<code>copy.css</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#a6e22e">custom_css</span> = [<span style="color:#e6db74">&#34;/css/copy.css&#34;</span>]
+</code></pre></div><p>4.引入copy.js
+在主题文件夹下<code>/layouts/partials/site_footer.html</code>添加一行</p>
+<h3 id="site_footerhtml">site_footer.html</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#f92672">&lt;</span>script src<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/js/copy.js&#34;</span><span style="color:#f92672">&gt;&lt;/</span>script<span style="color:#f92672">&gt;</span>
+</code></pre></div>
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          Last updated on Jan 1, 0001
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  <script src="/js/clipboard.js"></script>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        
+        <p class="powered-by">
+          <a href="/privacy/"></a>
+        </p>
+        
+        <p>
+          
+          Powered by
+          <a href="https://themefisher.com" target="_blank" rel="noopener">themefisher</a> for
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+        </p>
+      </div>
+      <div class="col-md-6">
+        <ul class="list-inline network-icon text-right">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://twitter.com/Twitter" target="_blank" rel="noopener" title="DM Me"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="skype:echo123?call"  title="Skype Me"><i class="fab fa-skype" aria-hidden="true"></i></a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://keybase.io/" target="_blank" rel="noopener" title="Chat on Keybase"><i class="fab fa-keybase" aria-hidden="true"></i></a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://discourse.gohugo.io" target="_blank" rel="noopener" title="Discuss on Forum"><i class="fas fa-comments" aria-hidden="true"></i></a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script async defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.25/gmaps.min.js" integrity="sha256-7vjlAeb8OaTrCXZkCNun9djzuB2owUsaO72kXaFDBJs=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academia.min.7276a6a3624de715a5c7f54c7c07696d.js"></script>
+
+    
+
+
+
+
+
+
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

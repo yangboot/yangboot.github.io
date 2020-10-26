@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>背景 on GUAN-BLOG</title>
+    <link>https://academia-hugo.netlify.com/notes/linux-study/</link>
+    <description>Recent content in 背景 on GUAN-BLOG</description>
+    <generator>Source Themes academia (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 May 2020 00:00:00 +0000</lastBuildDate>
+    
+	    <atom:link href="https://academia-hugo.netlify.com/notes/linux-study/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://academia-hugo.netlify.com/notes/linux-study/%E5%AE%89%E8%A3%85jdk/</link>
+      <pubDate>Tue, 05 May 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/linux-study/%E5%AE%89%E8%A3%85jdk/</guid>
+      <description>&lt;h3 id=&#34;yum安装jdk&#34;&gt;yum安装jdk&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;yum install java-1.8.0-openjdk* -y
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;手动安装&#34;&gt;手动安装&lt;/h3&gt;
+&lt;p&gt;下载好&lt;a href=&#34;https://pan.baidu.com/s/1JREejFlPOmr2_uSbDkHf2w?_blank&#34;&gt;jdk-8u112-linux-x64.tar.gz &lt;/a&gt;提取码：liak&lt;/p&gt;
+&lt;p&gt;下载好&lt;a href=&#34;https://pan.baidu.com/s/1EC_TeGLMJmXdJxdEHHXMEw?_blank&#34;&gt;Xshell 6和Xftp 6&lt;/a&gt;提取码：9b13rvice&lt;/p&gt;
+&lt;h3 id=&#34;上传安装包&#34;&gt;上传安装包&lt;/h3&gt;
+&lt;p&gt;使用Xftp连接云服务器，连接可能会出现&amp;quot;无法与XXX连接&amp;rdquo;，别慌&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/linux/4.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;执行以下命令，观察22号端口有没有被监听&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;netstat  -anp  |  more
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;没有启动的话，重启一下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;service  sshd  restart
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;安装&#34;&gt;安装&lt;/h3&gt;
+&lt;p&gt;打开Xshell连接到服务器跳转到/opt目录下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cd  /opt  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;解压opt文件夹下的jdk-8u112-linux-x64.tar.gz文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;tar  -zxvf jdk-8u112-linux-x64.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/linux/5.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/linux/6.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;配置jdk环境变量&#34;&gt;配置jdk环境变量&lt;/h3&gt;
+&lt;p&gt;编辑/etc/目录下的profile文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;vim    /etc/profile
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;按下&lt;code&gt; Esc键&lt;/code&gt; 进入命令行模式 输入&lt;code&gt;G&lt;/code&gt; 进入最后一行
+按下 &lt;code&gt;i&lt;/code&gt; 键进入编辑模式 ，输入以下配置&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;JAVA_HOME&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/opt/jdk1.8.0_112
+PATH&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/opt/jdk1.8.0_112/bin:$PATH
+export  JAVA_HOME PATH
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;按下&lt;code&gt; Esc键&lt;/code&gt; 进入命令行模式，输入&lt;code&gt; wq!&lt;/code&gt; 强制退出保存，再logout注销命令&lt;/p&gt;
+&lt;p&gt;重新登录后
+输入java
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/linux/8.jpg&#34; alt=&#34;&#34;&gt;
+输入javac
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/linux/9.jpg&#34; alt=&#34;&#34;&gt;
+说明安装成功&lt;/p&gt;
+&lt;h3 id=&#34;编写hello&#34;&gt;编写Hello&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;vim  /opt/Hello.java
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;按下 i 键进入编辑模式 ，输入以下配置&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Hello&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;String&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; args&lt;span style=&#34;color:#f92672&#34;&gt;){&lt;/span&gt;
+		System&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hellow&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;按下&lt;code&gt; Esc键&lt;/code&gt; 进入命令行模式，输入&lt;code&gt; wq!&lt;/code&gt; 强制退出保存输入&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;javac Hello.java
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/linux/10.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://academia-hugo.netlify.com/notes/linux-study/vim%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/linux-study/vim%E7%AC%94%E8%AE%B0/</guid>
+      <description>&lt;h1 id=&#34;linux-vivim&#34;&gt;Linux vi/vim&lt;/h1&gt;
+&lt;p&gt;转载：https://www.runoob.com/linux/linux-vim.html&lt;/p&gt;
+&lt;p&gt;所有的 Unix Like 系统都会内建 vi 文书编辑器，其他的文书编辑器则不一定会存在。&lt;/p&gt;
+&lt;p&gt;但是目前我们使用比较多的是 vim 编辑器。&lt;/p&gt;
+&lt;p&gt;vim 具有程序编辑的能力，可以主动的以字体颜色辨别语法的正确性，方便程序设计。&lt;/p&gt;
+&lt;p&gt;相关文章：&lt;a href=&#34;https://www.runoob.com/w3cnote/all-vim-cheatsheat.html&#34;&gt;史上最全Vim快捷键键位图 — 入门到进阶&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;什么是-vim&#34;&gt;什么是 vim？&lt;/h2&gt;
+&lt;p&gt;Vim是从 vi 发展出来的一个文本编辑器。代码补完、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。&lt;/p&gt;
+&lt;p&gt;简单的来说， vi 是老式的字处理器，不过功能已经很齐全了，但是还是有可以进步的地方。 vim 则可以说是程序开发者的一项很好用的工具。&lt;/p&gt;
+&lt;p&gt;连 vim 的官方网站 (&lt;a href=&#34;http://www.vim.org/&#34;&gt;http://www.vim.org&lt;/a&gt;) 自己也说 vim 是一个程序开发工具而不是文字处理软件。&lt;/p&gt;
+&lt;p&gt;vim 键盘图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.runoob.com/wp-content/uploads/2015/10/vi-vim-cheat-sheet-sch.gif&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;vivim-的使用&#34;&gt;vi/vim 的使用&lt;/h2&gt;
+&lt;p&gt;基本上 vi/vim 共分为三种模式，分别是&lt;strong&gt;命令模式（Command mode）&lt;/strong&gt;，&lt;strong&gt;输入模式（Insert mode）&lt;strong&gt;和&lt;/strong&gt;底线命令模式（Last line mode）&lt;/strong&gt;。 这三种模式的作用分别是：&lt;/p&gt;
+&lt;h3 id=&#34;命令模式&#34;&gt;命令模式：&lt;/h3&gt;
+&lt;p&gt;用户刚刚启动 vi/vim，便进入了命令模式。&lt;/p&gt;
+&lt;p&gt;此状态下敲击键盘动作会被Vim识别为命令，而非输入字符。比如我们此时按下i，并不会输入一个字符，i被当作了一个命令。&lt;/p&gt;
+&lt;p&gt;以下是常用的几个命令：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;i&lt;/strong&gt; 切换到输入模式，以输入字符。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;x&lt;/strong&gt; 删除当前光标所在处的字符。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;:&lt;/strong&gt; 切换到底线命令模式，以在最底一行输入命令。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;若想要编辑文本：启动Vim，进入了命令模式，按下i，切换到输入模式。&lt;/p&gt;
+&lt;p&gt;命令模式只有一些最基本的命令，因此仍要依靠底线命令模式输入更多命令。&lt;/p&gt;
+&lt;h3 id=&#34;输入模式&#34;&gt;输入模式&lt;/h3&gt;
+&lt;p&gt;在命令模式下按下i就进入了输入模式。&lt;/p&gt;
+&lt;p&gt;在输入模式中，可以使用以下按键：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;字符按键以及Shift组合&lt;/strong&gt;，输入字符&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ENTER&lt;/strong&gt;，回车键，换行&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;BACK SPACE&lt;/strong&gt;，退格键，删除光标前一个字符&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DEL&lt;/strong&gt;，删除键，删除光标后一个字符&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;方向键&lt;/strong&gt;，在文本中移动光标&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HOME&lt;/strong&gt;/&lt;strong&gt;END&lt;/strong&gt;，移动光标到行首/行尾&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Page Up&lt;/strong&gt;/&lt;strong&gt;Page Down&lt;/strong&gt;，上/下翻页&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Insert&lt;/strong&gt;，切换光标为输入/替换模式，光标将变成竖线/下划线&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ESC&lt;/strong&gt;，退出输入模式，切换到命令模式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;底线命令模式&#34;&gt;底线命令模式&lt;/h3&gt;
+&lt;p&gt;在命令模式下按下:（英文冒号）就进入了底线命令模式。&lt;/p&gt;
+&lt;p&gt;底线命令模式可以输入单个或多个字符的命令，可用的命令非常多。&lt;/p&gt;
+&lt;p&gt;在底线命令模式中，基本的命令有（已经省略了冒号）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;q 退出程序&lt;/li&gt;
+&lt;li&gt;w 保存文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;按ESC键可随时退出底线命令模式。&lt;/p&gt;
+&lt;p&gt;简单的说，我们可以将这三个模式想成底下的图标来表示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.runoob.com/wp-content/uploads/2014/07/vim-vi-workmodel.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;vivim-使用实例&#34;&gt;vi/vim 使用实例&lt;/h2&gt;
+&lt;h3 id=&#34;使用-vivim-进入一般模式&#34;&gt;使用 vi/vim 进入一般模式&lt;/h3&gt;
+&lt;p&gt;如果你想要使用 vi 来建立一个名为 runoob.txt 的文件时，你可以这样做：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ vim runoob.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;直接输入 &lt;strong&gt;vi 文件名&lt;/strong&gt; 就能够进入 vi 的一般模式了。请注意，记得 vi 后面一定要加文件名，不管该文件存在与否！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.runoob.com/wp-content/uploads/2014/07/078207F0-B204-4464-AAEF-982F45EDDAE9.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;按下-i-进入输入模式也称为编辑模式开始编辑文字&#34;&gt;按下 i 进入输入模式(也称为编辑模式)，开始编辑文字&lt;/h3&gt;
+&lt;p&gt;在一般模式之中，只要按下 i, o, a 等字符就可以进入输入模式了！&lt;/p&gt;
+&lt;p&gt;在编辑模式当中，你可以发现在左下角状态栏中会出现 –INSERT- 的字样，那就是可以输入任意字符的提示。&lt;/p&gt;
+&lt;p&gt;这个时候，键盘上除了 &lt;strong&gt;Esc&lt;/strong&gt; 这个按键之外，其他的按键都可以视作为一般的输入按钮了，所以你可以进行任何的编辑。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.runoob.com/wp-content/uploads/2014/07/1C928383-471E-4AF1-A61E-9E2CCBD5A913.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;按下-esc-按钮回到一般模式&#34;&gt;按下 ESC 按钮回到一般模式&lt;/h3&gt;
+&lt;p&gt;好了，假设我已经按照上面的样式给他编辑完毕了，那么应该要如何退出呢？是的！没错！就是给他按下 &lt;strong&gt;Esc&lt;/strong&gt; 这个按钮即可！马上你就会发现画面左下角的 – INSERT – 不见了！&lt;/p&gt;
+&lt;h3 id=&#34;在一般模式中按下-wq-储存后离开-vi&#34;&gt;在一般模式中按下 &lt;strong&gt;:wq&lt;/strong&gt; 储存后离开 vi&lt;/h3&gt;
+&lt;p&gt;OK，我们要存档了，存盘并离开的指令很简单，输入 &lt;strong&gt;:wq&lt;/strong&gt; 即可保存离开！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.runoob.com/wp-content/uploads/2014/07/B2FB5146-327C-4019-AC96-DD7A8EE7460C.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;OK! 这样我们就成功创建了一个 runoob.txt 的文件。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;vivim-按键说明&#34;&gt;vi/vim 按键说明&lt;/h2&gt;
+&lt;p&gt;除了上面简易范例的 i, Esc, :wq 之外，其实 vim 还有非常多的按键可以使用。&lt;/p&gt;
+&lt;h3 id=&#34;第一部分一般模式可用的光标移动复制粘贴搜索替换等&#34;&gt;第一部分：一般模式可用的光标移动、复制粘贴、搜索替换等&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;移动光标的方法&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;h 或 向左箭头键(←)&lt;/td&gt;
+&lt;td&gt;光标向左移动一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;j 或 向下箭头键(↓)&lt;/td&gt;
+&lt;td&gt;光标向下移动一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;k 或 向上箭头键(↑)&lt;/td&gt;
+&lt;td&gt;光标向上移动一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;l 或 向右箭头键(→)&lt;/td&gt;
+&lt;td&gt;光标向右移动一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;如果你将右手放在键盘上的话，你会发现 hjkl 是排列在一起的，因此可以使用这四个按钮来移动光标。 如果想要进行多次移动的话，例如向下移动 30 行，可以使用 &amp;ldquo;30j&amp;rdquo; 或 &amp;ldquo;30↓&amp;rdquo; 的组合按键， 亦即加上想要进行的次数(数字)后，按下动作即可！&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;[Ctrl] + [f]&lt;/td&gt;
+&lt;td&gt;屏幕『向下』移动一页，相当于 [Page Down]按键 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;[Ctrl] + [b]&lt;/td&gt;
+&lt;td&gt;屏幕『向上』移动一页，相当于 [Page Up] 按键 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;[Ctrl] + [d]&lt;/td&gt;
+&lt;td&gt;屏幕『向下』移动半页&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;[Ctrl] + [u]&lt;/td&gt;
+&lt;td&gt;屏幕『向上』移动半页&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;+&lt;/td&gt;
+&lt;td&gt;光标移动到非空格符的下一行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;-&lt;/td&gt;
+&lt;td&gt;光标移动到非空格符的上一行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;n&lt;!-- raw HTML omitted --&gt;&lt;/td&gt;
+&lt;td&gt;那个 n 表示『数字』，例如 20 。按下数字后再按空格键，光标会向右移动这一行的 n 个字符。例如 20&lt;!-- raw HTML omitted --&gt; 则光标会向后面移动 20 个字符距离。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;0 或功能键[Home]&lt;/td&gt;
+&lt;td&gt;这是数字『 0 』：移动到这一行的最前面字符处 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;$ 或功能键[End]&lt;/td&gt;
+&lt;td&gt;移动到这一行的最后面字符处(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;H&lt;/td&gt;
+&lt;td&gt;光标移动到这个屏幕的最上方那一行的第一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;M&lt;/td&gt;
+&lt;td&gt;光标移动到这个屏幕的中央那一行的第一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;L&lt;/td&gt;
+&lt;td&gt;光标移动到这个屏幕的最下方那一行的第一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;G&lt;/td&gt;
+&lt;td&gt;移动到这个档案的最后一行(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;nG&lt;/td&gt;
+&lt;td&gt;n 为数字。移动到这个档案的第 n 行。例如 20G 则会移动到这个档案的第 20 行(可配合 :set nu)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;gg&lt;/td&gt;
+&lt;td&gt;移动到这个档案的第一行，相当于 1G 啊！ (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;n&lt;!-- raw HTML omitted --&gt;&lt;/td&gt;
+&lt;td&gt;n 为数字。光标向下移动 n 行(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;搜索替换&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;/word&lt;/td&gt;
+&lt;td&gt;向光标之下寻找一个名称为 word 的字符串。例如要在档案内搜寻 vbird 这个字符串，就输入 /vbird 即可！ (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;?word&lt;/td&gt;
+&lt;td&gt;向光标之上寻找一个字符串名称为 word 的字符串。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;n&lt;/td&gt;
+&lt;td&gt;这个 n 是英文按键。代表重复前一个搜寻的动作。举例来说， 如果刚刚我们执行 /vbird 去向下搜寻 vbird 这个字符串，则按下 n 后，会向下继续搜寻下一个名称为 vbird 的字符串。如果是执行 ?vbird 的话，那么按下 n 则会向上继续搜寻名称为 vbird 的字符串！&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;N&lt;/td&gt;
+&lt;td&gt;这个 N 是英文按键。与 n 刚好相反，为『反向』进行前一个搜寻动作。 例如 /vbird 后，按下 N 则表示『向上』搜寻 vbird 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;使用 /word 配合 n 及 N 是非常有帮助的！可以让你重复的找到一些你搜寻的关键词！&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;:n1,n2s/word1/word2/g&lt;/td&gt;
+&lt;td&gt;n1 与 n2 为数字。在第 n1 与 n2 行之间寻找 word1 这个字符串，并将该字符串取代为 word2 ！举例来说，在 100 到 200 行之间搜寻 vbird 并取代为 VBIRD 则： 『:100,200s/vbird/VBIRD/g』。(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;strong&gt;:1,$s/word1/word2/g&lt;/strong&gt; 或 &lt;strong&gt;:%s/word1/word2/g&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;从第一行到最后一行寻找 word1 字符串，并将该字符串取代为 word2 ！(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;strong&gt;:1,$s/word1/word2/gc&lt;/strong&gt; 或 &lt;strong&gt;:%s/word1/word2/gc&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;从第一行到最后一行寻找 word1 字符串，并将该字符串取代为 word2 ！且在取代前显示提示字符给用户确认 (confirm) 是否需要取代！(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;删除、复制与贴上&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;x, X&lt;/td&gt;
+&lt;td&gt;在一行字当中，x 为向后删除一个字符 (相当于 [del] 按键)， X 为向前删除一个字符(相当于 [backspace] 亦即是退格键) (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;nx&lt;/td&gt;
+&lt;td&gt;n 为数字，连续向后删除 n 个字符。举例来说，我要连续删除 10 个字符， 『10x』。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;dd&lt;/td&gt;
+&lt;td&gt;删除游标所在的那一整行(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ndd&lt;/td&gt;
+&lt;td&gt;n 为数字。删除光标所在的向下 n 行，例如 20dd 则是删除 20 行 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;d1G&lt;/td&gt;
+&lt;td&gt;删除光标所在到第一行的所有数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;dG&lt;/td&gt;
+&lt;td&gt;删除光标所在到最后一行的所有数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;d$&lt;/td&gt;
+&lt;td&gt;删除游标所在处，到该行的最后一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;d0&lt;/td&gt;
+&lt;td&gt;那个是数字的 0 ，删除游标所在处，到该行的最前面一个字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;yy&lt;/td&gt;
+&lt;td&gt;复制游标所在的那一行(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;nyy&lt;/td&gt;
+&lt;td&gt;n 为数字。复制光标所在的向下 n 行，例如 20yy 则是复制 20 行(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;y1G&lt;/td&gt;
+&lt;td&gt;复制游标所在行到第一行的所有数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;yG&lt;/td&gt;
+&lt;td&gt;复制游标所在行到最后一行的所有数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;y0&lt;/td&gt;
+&lt;td&gt;复制光标所在的那个字符到该行行首的所有数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;y$&lt;/td&gt;
+&lt;td&gt;复制光标所在的那个字符到该行行尾的所有数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;p, P&lt;/td&gt;
+&lt;td&gt;p 为将已复制的数据在光标下一行贴上，P 则为贴在游标上一行！ 举例来说，我目前光标在第 20 行，且已经复制了 10 行数据。则按下 p 后， 那 10 行数据会贴在原本的 20 行之后，亦即由 21 行开始贴。但如果是按下 P 呢？ 那么原本的第 20 行会被推到变成 30 行。 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;J&lt;/td&gt;
+&lt;td&gt;将光标所在行与下一行的数据结合成同一行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;c&lt;/td&gt;
+&lt;td&gt;重复删除多个数据，例如向下删除 10 行，[ 10cj ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;u&lt;/td&gt;
+&lt;td&gt;复原前一个动作。(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;[Ctrl]+r&lt;/td&gt;
+&lt;td&gt;重做上一个动作。(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;这个 u 与 [Ctrl]+r 是很常用的指令！一个是复原，另一个则是重做一次～ 利用这两个功能按键，你的编辑，嘿嘿！很快乐的啦！&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;.&lt;/td&gt;
+&lt;td&gt;不要怀疑！这就是小数点！意思是重复前一个动作的意思。 如果你想要重复删除、重复贴上等等动作，按下小数点『.』就好了！ (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;第二部分一般模式切换到编辑模式的可用的按钮说明&#34;&gt;第二部分：一般模式切换到编辑模式的可用的按钮说明&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;进入输入或取代的编辑模式&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;i, I&lt;/td&gt;
+&lt;td&gt;进入输入模式(Insert mode)： i 为『从目前光标所在处输入』， I 为『在目前所在行的第一个非空格符处开始输入』。 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;a, A&lt;/td&gt;
+&lt;td&gt;进入输入模式(Insert mode)： a 为『从目前光标所在的下一个字符处开始输入』， A 为『从光标所在行的最后一个字符处开始输入』。(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;o, O&lt;/td&gt;
+&lt;td&gt;进入输入模式(Insert mode)： 这是英文字母 o 的大小写。o 为『在目前光标所在的下一行处输入新的一行』； O 为在目前光标所在处的上一行输入新的一行！(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;r, R&lt;/td&gt;
+&lt;td&gt;进入取代模式(Replace mode)： r 只会取代光标所在的那一个字符一次；R会一直取代光标所在的文字，直到按下 ESC 为止；(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;上面这些按键中，在 vi 画面的左下角处会出现『&amp;ndash;INSERT&amp;ndash;』或『&amp;ndash;REPLACE&amp;ndash;』的字样。 由名称就知道该动作了吧！！特别注意的是，我们上面也提过了，你想要在档案里面输入字符时， 一定要在左下角处看到 INSERT 或 REPLACE 才能输入喔！&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;[Esc]&lt;/td&gt;
+&lt;td&gt;退出编辑模式，回到一般模式中(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;第三部分一般模式切换到指令行模式的可用的按钮说明&#34;&gt;第三部分：一般模式切换到指令行模式的可用的按钮说明&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;指令行的储存、离开等指令&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;:w&lt;/td&gt;
+&lt;td&gt;将编辑的数据写入硬盘档案中(常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;:w!&lt;/td&gt;
+&lt;td&gt;若文件属性为『只读』时，强制写入该档案。不过，到底能不能写入， 还是跟你对该档案的档案权限有关啊！&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;:q&lt;/td&gt;
+&lt;td&gt;离开 vi (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;:q!&lt;/td&gt;
+&lt;td&gt;若曾修改过档案，又不想储存，使用 ! 为强制离开不储存档案。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;注意一下啊，那个惊叹号 (!) 在 vi 当中，常常具有『强制』的意思～&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;:wq&lt;/td&gt;
+&lt;td&gt;储存后离开，若为 :wq! 则为强制储存后离开 (常用)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ZZ&lt;/td&gt;
+&lt;td&gt;这是大写的 Z 喔！若档案没有更动，则不储存离开，若档案已经被更动过，则储存后离开！&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;:w [filename]&lt;/td&gt;
+&lt;td&gt;将编辑的数据储存成另一个档案（类似另存新档）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;:r [filename]&lt;/td&gt;
+&lt;td&gt;在编辑的数据中，读入另一个档案的数据。亦即将 『filename』 这个档案内容加到游标所在行后面&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;:n1,n2 w [filename]&lt;/td&gt;
+&lt;td&gt;将 n1 到 n2 的内容储存成 filename 这个档案。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;:! command&lt;/td&gt;
+&lt;td&gt;暂时离开 vi 到指令行模式下执行 command 的显示结果！例如 『:! ls /home』即可在 vi 当中察看 /home 底下以 ls 输出的档案信息！&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;vim 环境的变更&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;:set nu&lt;/td&gt;
+&lt;td&gt;显示行号，设定之后，会在每一行的前缀显示该行的行号&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;:set nonu&lt;/td&gt;
+&lt;td&gt;与 set nu 相反，为取消行号！&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;特别注意，在 vi/vim 中，数字是很有意义的！数字通常代表重复做几次的意思！ 也有可能是代表去到第几个什么什么的意思。&lt;/p&gt;
+&lt;p&gt;举例来说，要删除 50 行，则是用 『50dd』 对吧！ 数字加在动作之前，如我要向下移动 20 行呢？那就是『20j』或者是『20↓』即可。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>防火墙配置</title>
+      <link>https://academia-hugo.netlify.com/notes/linux-study/%E9%98%B2%E7%81%AB%E5%A2%99%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Tue, 16 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/linux-study/%E9%98%B2%E7%81%AB%E5%A2%99%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;h2 id=&#34;开放端口&#34;&gt;开放端口&lt;/h2&gt;
+&lt;p&gt;开放8080端口&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;firewall-cmd --zone&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;public --add-port&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;8080/tcp --permanent
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;firewall-cmd --reload 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;关闭8080端口&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;firewall-cmd --zone&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;public --remove-port&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;8080/tcp --permanent 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;查看防火墙所有开放的端口&#34;&gt;查看防火墙所有开放的端口&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;firewall-cmd --zone&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;public --list-ports
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;查看防火墙状态&#34;&gt;查看防火墙状态&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt; firewall-cmd --state
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;查看监听的端口&#34;&gt;查看监听的端口&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt; netstat -lnpt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;查看进程端口占用&#34;&gt;查看进程端口占用&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;netstat -lnpt |grep 8081
+​```shell
+![](/img/linux/18.jpg)
+## 查看进程详情
+​```shell
+ps 8081
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/linux/19.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;中止进程&#34;&gt;中止进程&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kill -9 &lt;span style=&#34;color:#ae81ff&#34;&gt;8081&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;查看防火墙状态-1&#34;&gt;查看防火墙状态&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;systemctl status firewalld
+
+service  iptables status
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;暂时关闭防火墙&#34;&gt;暂时关闭防火墙&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;systemctl stop firewalld
+
+service  iptables stop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;永久关闭防火墙&#34;&gt;永久关闭防火墙&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;systemctl disable firewalld
+
+chkconfig iptables off
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;重启防火墙&#34;&gt;重启防火墙&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;systemctl enable firewalld
+
+service iptables restart  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;永久关闭后重启&#34;&gt;永久关闭后重启&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;chkconfig iptables on
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://academia-hugo.netlify.com/notes/linux-study/%E5%AE%89%E8%A3%85mysql/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://academia-hugo.netlify.com/notes/linux-study/%E5%AE%89%E8%A3%85mysql/</guid>
+      <description>&lt;h3 id=&#34;安装mysql&#34;&gt;安装MySQL&lt;/h3&gt;
+&lt;h3 id=&#34;卸载老版本mysql&#34;&gt;卸载老版本MySQL&lt;/h3&gt;
+&lt;p&gt;检查是否已经安装过mysql&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;rpm -qa | grep mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/linux/11.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;强制卸载&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;rpm -e --nodeps  mysql-libs-5.1.73-8.el6_8.x86_64
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;安装编译代码需要的包&#34;&gt;安装编译代码需要的包&lt;/h3&gt;
+&lt;p&gt;复制mysql-5.6.14.tar.gz到Linux服务器上
+&lt;img src=&#34;https://academia-hugo.netlify.com/img/linux/13.jpg&#34; alt=&#34;&#34;&gt;
+安装gcc环境&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;yum -y install make gcc-c++ cmake bison-devel ncurses-devel
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;tar -xzvf   mysql-5.6.14.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;源码编译&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cd   mysql-5.6.14
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cmake -DCMAKE_INSTALL_PREFIX&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/usr/local/mysql -DMYSQL_DATADIR&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/usr/local/mysql/data -DSYSCONFDIR&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/etc -DWITH_MYISAM_STORAGE_ENGINE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; -DWITH_INNOBASE_STORAGE_ENGINE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; -DWITH_MEMORY_STORAGE_ENGINE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; -DWITH_READLINE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; -DMYSQL_UNIX_ADDR&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/var/lib/mysql/mysql.sock -DMYSQL_TCP_PORT&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3306&lt;/span&gt; -DENABLED_LOCAL_INFILE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; -DWITH_PARTITION_STORAGE_ENGINE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; -DEXTRA_CHARSETS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;all -DDEFAULT_CHARSET&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;utf8 -DDEFAULT_COLLATION&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;utf8_general_ci
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译并安装&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;make &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; make install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;添加mysql用户和分组&#34;&gt;添加mysql用户和分组&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cat /etc/passwd 查看用户列表
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cat /etc/group  查看用户组列表
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;groupadd mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;useradd -g mysql mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;修改/usr/local/mysql权限&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;chown -R mysql:mysql /usr/local/mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;初始化配置&#34;&gt;初始化配置，&lt;/h3&gt;
+&lt;p&gt;进入安装路径（在执行下面的指令），执行初始化配置脚本，创建系统自带的数据库和表&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cd /usr/local/mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;scripts/mysql_install_db --basedir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/usr/local/mysql --datadir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/usr/local/mysql/data --user&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;mysql  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;注：在启动MySQL服务时，会按照一定次序搜索my.cnf，先在/etc目录下找，找不到则会搜索&amp;quot;$basedir/my.cnf&amp;rdquo;，在本例中就是 /usr/local/mysql/my.cnf，这是新版MySQL的配置文件的默认位置！&lt;/p&gt;
+&lt;p&gt;注意：在CentOS 6.8版操作系统的最小安装完成后，在/etc目录下会存在一个my.cnf，需要将此文件更名为其他的名字，如：/etc/my.cnf.bak，否则，该文件会干扰源码安装的MySQL的正确配置，造成无法启动。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;修改名称，防止干扰：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;mv /etc/my.cnf /etc/my.cnf.bak
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;启动mysql&#34;&gt;启动MySQL&lt;/h3&gt;
+&lt;p&gt;添加服务，拷贝服务脚本到init.d目录，并设置开机启动&lt;/p&gt;
+&lt;p&gt;[注意在 /usr/local/mysql 下执行]&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cp support-files/mysql.server /etc/init.d/mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;设置默认自启&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;chkconfig mysql on
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;service mysql start  --启动MySQL
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://academia-hugo.netlify.com/img/linux/14.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;修改密码&#34;&gt;修改密码&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cd /usr/local/mysql/bin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./mysql -u  账号  -p  密码  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;SET PASSWORD &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; PASSWORD&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;你的新密码&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;quit  退出Mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;给linux下的mysql用户开启远程登录权限&#34;&gt;给linux下的mysql用户开启远程登录权限&lt;/h3&gt;
+&lt;p&gt;配好之后发现本地用Navicat连不上,原因是没有开启远程登录权限&lt;/p&gt;
+&lt;p&gt;mysql&amp;gt;     GRANT ALL PRIVILEGES ON &lt;em&gt;&lt;code&gt;①&lt;/code&gt;&lt;/em&gt; TO &amp;lsquo;&lt;code&gt;②&lt;/code&gt;&amp;rsquo;@&amp;lsquo;&lt;code&gt;③&lt;/code&gt;&amp;rsquo; IDENTIFIED BY &amp;lsquo;&lt;code&gt;④&lt;/code&gt;&amp;rsquo; ;&lt;/p&gt;
+&lt;p&gt;① ：允许访问的数据库,可以是某个数据库，也可以是&lt;code&gt;*.*&lt;/code&gt;所有&lt;/p&gt;
+&lt;p&gt;②：分配的账号&lt;/p&gt;
+&lt;p&gt;③：允许访问的主机IP，也可以是&lt;code&gt;%&lt;/code&gt;所有IP&lt;/p&gt;
+&lt;p&gt;④：分配的密码&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
