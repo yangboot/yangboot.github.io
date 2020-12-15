@@ -1,3 +1,0 @@
-hugo --theme=academia
-
-hugo server -D
