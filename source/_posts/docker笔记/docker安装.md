@@ -7,7 +7,7 @@ tags:
   - 3.10.0-957.el7.x86_64
 excerpt: centos7安装docker
 date: 2020-11-03 20:33:36
-img: '/images/docker.png'
+img: '/images/docker/docker.png'
 ---
 ## docker安装
 ### 查看内核版本
