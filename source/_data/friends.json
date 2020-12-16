@@ -11,6 +11,7 @@
     "url": "https://vercel.com/",
     "title": "前去学习"
 },{
+    "avatar": "/images/friends/matery.png",
     "name": "matery",
     "introduction": "hexo博客主题",
     "url": "https://github.com/blinkfox/hexo-theme-matery/blob/develop/README_CN.md",

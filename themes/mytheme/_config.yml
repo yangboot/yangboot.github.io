@@ -65,8 +65,8 @@ cover:
 # 配置首页显示"梦想"的语句.
 dream:
   enable: true
-  showTitle: false 
-  title: 
+  showTitle: true 
+  title: 福尔摩斯语录
   text: 首先要把一切不可能的结论都排除，那其余的，不管多么离奇，难以置信，也必然是无可辩驳的事实。或许剩下的是几种解释，如果这样，那就要一一地加以证实，直到最后只剩下一种具有充分根据证明的解释。——阿瑟·柯南·道尔《福尔摩斯全集》
 
 # Whether to display the musics.
