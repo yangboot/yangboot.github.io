@@ -3,7 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "hexo generate",
+    "search": "npm install hexo-generator-search --save", 
+	"pinyin": "npm i hexo-permalink-pinyin --save", 
+	"wordcount": "npm i --save hexo-wordcount",    
+    "emojis": "npm install hexo-filter-github-emojis --save",
+	"build": "npm install hexo-generator-feed --save",
+	"build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server"
