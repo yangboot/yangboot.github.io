@@ -3,7 +3,7 @@
     "name": "NameSilo",
     "introduction": "国外域名提供商",
     "url": "https://www.namesilo.com/",
-    "title": "NameSilo"
+    "title": "前去学习"
 },  {
     "avatar": "/images/friends/vercel.jpg",
     "name": "vercel",
@@ -11,9 +11,8 @@
     "url": "https://vercel.com/",
     "title": "前去学习"
 },{
-    "avatar": "http://image.luokangyuan.com/4027734.jpeg",
     "name": "matery",
-    "introduction": "This is a Hexo blog theme with Material Design and responsive design.",
-    "url": "https://github.com/blinkfox/hexo-theme-matery",
-    "title": "hexo博客主题"
+    "introduction": "hexo博客主题",
+    "url": "https://github.com/blinkfox/hexo-theme-matery/blob/develop/README_CN.md",
+    "title": "前去学习"
 }]

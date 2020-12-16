@@ -1,25 +1,25 @@
 # main menu navigation url and icon
 # 配置菜单导航的名称、路径和图标icon.
 menu:
-  Index:
+  首页:
     url: /
     icon: fas fa-home
-  Tags:
+  标签:
     url: /tags
     icon: fas fa-tags
-  Categories:
+  分类:
     url: /categories
     icon: fas fa-bookmark
-  Archives:
+  档案:
     url: /archives
     icon: fas fa-archive
-  About:
+  关于我们:
     url: /about
     icon: fas fa-user-circle
-  Contact:
+  联系我们:
     url: /contact
     icon: fas fa-comments
-  Friends:
+  友情链接:
     url: /friends
     icon: fas fa-address-book
   # 二级菜单写法如下
@@ -65,9 +65,9 @@ cover:
 # 配置首页显示"梦想"的语句.
 dream:
   enable: true
-  showTitle: true
-  title: 我的梦想
-  text: 不是每个人都应该像我这样去建造一座水晶大教堂，但是每个人都应该拥有自己的梦想，设计自己的梦想，追求自己的梦想，实现自己的梦想。梦想是生命的灵魂，是心灵的灯塔，是引导人走向成功的信仰。有了崇高的梦想，只要矢志不渝地追求，梦想就会成为现实，奋斗就会变成壮举，生命就会创造奇迹。——罗伯·舒乐
+  showTitle: false 
+  title: 
+  text: 首先要把一切不可能的结论都排除，那其余的，不管多么离奇，难以置信，也必然是无可辩驳的事实。或许剩下的是几种解释，如果这样，那就要一一地加以证实，直到最后只剩下一种具有充分根据证明的解释。——阿瑟·柯南·道尔《福尔摩斯全集》
 
 # Whether to display the musics.
 # 是否在首页显示音乐.
