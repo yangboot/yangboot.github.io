@@ -37,7 +37,7 @@ yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/d
 ### 查看所有仓库中所有docker版本
 
 ```shell
-docker-ce --showduplicates | sort -rshe
+ yum list docker-ce --showduplicates | sort -rshe
 ```
 
 ### 安装
