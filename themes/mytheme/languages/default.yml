@@ -41,11 +41,11 @@ otherSkills: Other Skills
 gallery: Gallery
 notag: No tag
 from: From
-reprint: Reprint policy
-author: Author
-link: Link
-use: All articles in this blog are used except for special statements
-licensed: reprint polocy. If reproduced, please indicate source
+reprint: 版权声明
+author: 作者
+link: 文章链接
+use: 博客所有文章除特别声明外，均采用
+licensed: 协议. 如有转载，请注明出处
 cc_by_url: https://creativecommons.org/licenses/by/4.0/deed.zh
 cc_by_name: CC BY 4.0
 cc_by_nd_url: https://creativecommons.org/licenses/by-nd/4.0/deed.zh
@@ -67,5 +67,5 @@ cc_0_content: US
 noreprint: This article is not allowed to reprint.
 paycontact: Please contact the author
 payreprint: to pay for reprinting.
-pleaseFollowReprintPolicy: Copied successfully, please follow the reprint policy of this article
+pleaseFollowReprintPolicy: 复制成功！！！
 checkPolicy: more
