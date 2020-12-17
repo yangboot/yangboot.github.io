@@ -4,7 +4,6 @@ categories: docker学习笔记
 tags:
   - dockerCompose 
   - centos7
-  - 3.10.0-957.el7.x86_64
 excerpt: centos7安装dockerCompose 
 date: 2020-12-17 10:33:36
 img: '/images/docker/docker.png'
