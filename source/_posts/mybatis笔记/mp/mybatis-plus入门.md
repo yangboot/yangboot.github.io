@@ -11,7 +11,7 @@ excerpt: 矫正系统操行统计
 date: 2020-12-21 20:33:36
 img:  /images/Mybatis/mybatis.png
 ---
-# [#](https://baomidou.com/guide/quick-start.html#快速开始)快速开始
+# 快速开始
 
 我们将通过一个简单的 Demo 来阐述 MyBatis-Plus 的强大功能，在此之前，我们假设您已经：
 
@@ -65,7 +65,7 @@ Question
 
 如果从零开始用 MyBatis-Plus 来实现该表的增删改查我们需要做什么呢？
 
-## [#](https://baomidou.com/guide/quick-start.html#初始化工程)初始化工程
+## 初始化工程
 
 创建一个空的 Spring Boot 工程（工程将以 H2 作为默认数据库进行演示）
 
@@ -73,7 +73,7 @@ TIP
 
 可以使用 [Spring Initializer (opens new window)](https://start.spring.io/)快速初始化一个 Spring Boot 工程
 
-## [#](https://baomidou.com/guide/quick-start.html#添加依赖)添加依赖
+## 添加依赖
 
 引入 Spring Boot Starter 父工程：
 
@@ -147,7 +147,7 @@ TIP
 </dependencies>
 ```
 
-## [#](https://baomidou.com/guide/quick-start.html#配置)配置
+## 配置
 
 在 `application.yml` 配置文件中添加 H2 数据库的相关配置：
 
@@ -191,7 +191,7 @@ public class Application {
 }
 ```
 
-## [#](https://baomidou.com/guide/quick-start.html#编码)编码
+## 编码
 
 编写实体类 `User.java`（此处使用了 [Lombok (opens new window)](https://www.projectlombok.org/)简化代码）
 
@@ -213,7 +213,7 @@ public interface UserMapper extends BaseMapper<User> {
 }
 ```
 
-## [#](https://baomidou.com/guide/quick-start.html#开始使用)开始使用
+## 开始使用
 
 添加测试类，进行功能测试：
 
@@ -254,10 +254,11 @@ TIP
 
 完整的代码示例请移步：[Spring Boot 快速启动示例 (opens new window)](https://github.com/baomidou/mybatis-plus-samples/tree/master/mybatis-plus-sample-quickstart)| [Spring MVC 快速启动示例(opens new window)](https://github.com/baomidou/mybatis-plus-samples/tree/master/mybatis-plus-sample-quickstart-springmvc)
 
-## [#](https://baomidou.com/guide/quick-start.html#小结)小结
+## 小结
 
 通过以上几个简单的步骤，我们就实现了 User 表的 CRUD 功能，甚至连 XML 文件都不用编写！
 
 从以上步骤中，我们可以看到集成`MyBatis-Plus`非常的简单，只需要引入 starter 工程，并配置 mapper 扫描路径即可。
 
 但 MyBatis-Plus 的强大远不止这些功能，想要详细了解 MyBatis-Plus 的强大功能？那就继续往下看吧！
+原文地址 [https://baomidou.com/guide/quick-start.html#快速开始](https://baomidou.com/guide/quick-start.html#快速开始)
