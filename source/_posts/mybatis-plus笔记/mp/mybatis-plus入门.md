@@ -1,17 +1,13 @@
 ---
-title: 【MyBatis笔记】工作日志-矫正系统操行统计
+title: 【MyBatis-Plus笔记】MyBatis-Plus入门
 categories: MyBatis笔记
 tags:
-  - MyBatis
-  - 左连接
-  - 工作日志
-  - SUN函数
-  - IFNULL函数
-excerpt: 矫正系统操行统计
+  - MyBatis-Plus
+excerpt: MyBatis-Plus
 date: 2020-12-21 20:33:36
-img:  /images/Mybatis/mybatis.png
+img:  /images/MyBatis-Plus/MyBatis-Plus.jpg
 ---
-# 快速开始
+## 快速开始
 
 我们将通过一个简单的 Demo 来阐述 MyBatis-Plus 的强大功能，在此之前，我们假设您已经：
 
@@ -65,119 +61,88 @@ Question
 
 如果从零开始用 MyBatis-Plus 来实现该表的增删改查我们需要做什么呢？
 
-## 初始化工程
+### 初始化工程
 
-创建一个空的 Spring Boot 工程（工程将以 H2 作为默认数据库进行演示）
+创建一个空的 Spring Boot 工程（工程将以 mysql作为默认数据库进行演示）
 
 TIP
 
 可以使用 [Spring Initializer (opens new window)](https://start.spring.io/)快速初始化一个 Spring Boot 工程
 
-## 添加依赖
-
-引入 Spring Boot Starter 父工程：
-
+### 添加依赖
 ```xml
-<parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.4.1</version>
-    <relativePath/>
-</parent>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.1.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <packaging>pom</packaging>
+    <groupId>com.yangboot</groupId>
+    <artifactId>mybatis-plus-samples</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>mybatis-plus-sample-quickstart</module>
+    </modules>
+    <properties>
+        <java.version>11</java.version>
+        <mybatisplus.version>3.4.1</mybatisplus.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--  mybatis-plus starter-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatisplus.version}</version>
+        </dependency>
+        <!-- mybatis-plus end -->
+        <!--  lombok 用来简化实体类starter-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--  lombok end-->
+        <!--  mysqlstarter-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- mysql starter-->
+    </dependencies>
+</project>
 ```
 
-引入 `spring-boot-starter`、`spring-boot-starter-test`、`mybatis-plus-boot-starter`、`lombok`、`h2` 依赖：
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-```xml
-<dependencies>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-test</artifactId>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <optional>true</optional>
-    </dependency>
-    <dependency>
-        <groupId>com.baomidou</groupId>
-        <artifactId>mybatis-plus-boot-starter</artifactId>
-        <version>3.4.1</version>
-    </dependency>
-    <dependency>
-        <groupId>com.h2database</groupId>
-        <artifactId>h2</artifactId>
-        <scope>runtime</scope>
-    </dependency>
-</dependencies>
-```
-
-## 配置
+### 配置
 
 在 `application.yml` 配置文件中添加 H2 数据库的相关配置：
 
 ```yaml
 # DataSource Config
 spring:
+  application:
+    name: mybatis-plus-sample-quickstart
   datasource:
-    driver-class-name: org.h2.Driver
-    schema: classpath:db/schema-h2.sql
-    data: classpath:db/data-h2.sql
-    url: jdbc:h2:mem:test
-    username: root
-    password: test
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    data-username: root
+    password: root
+    url: jdbc:mysql://127.0.1:3306/mpdemo?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
 ```
 
 在 Spring Boot 启动类中添加 `@MapperScan` 注解，扫描 Mapper 文件夹：
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
 
 ```java
 @SpringBootApplication
@@ -191,7 +156,7 @@ public class Application {
 }
 ```
 
-## 编码
+### 编码
 
 编写实体类 `User.java`（此处使用了 [Lombok (opens new window)](https://www.projectlombok.org/)简化代码）
 
@@ -213,7 +178,7 @@ public interface UserMapper extends BaseMapper<User> {
 }
 ```
 
-## 开始使用
+### 开始使用
 
 添加测试类，进行功能测试：
 
@@ -252,13 +217,4 @@ User(id=5, name=Billie, age=24, email=test5@baomidou.com)
 
 TIP
 
-完整的代码示例请移步：[Spring Boot 快速启动示例 (opens new window)](https://github.com/baomidou/mybatis-plus-samples/tree/master/mybatis-plus-sample-quickstart)| [Spring MVC 快速启动示例(opens new window)](https://github.com/baomidou/mybatis-plus-samples/tree/master/mybatis-plus-sample-quickstart-springmvc)
-
-## 小结
-
-通过以上几个简单的步骤，我们就实现了 User 表的 CRUD 功能，甚至连 XML 文件都不用编写！
-
-从以上步骤中，我们可以看到集成`MyBatis-Plus`非常的简单，只需要引入 starter 工程，并配置 mapper 扫描路径即可。
-
-但 MyBatis-Plus 的强大远不止这些功能，想要详细了解 MyBatis-Plus 的强大功能？那就继续往下看吧！
-原文地址 [https://baomidou.com/guide/quick-start.html#快速开始](https://baomidou.com/guide/quick-start.html#快速开始)
+完整的代码示例请移步：[Spring Boot 快速启动示例 (opens new window)](https://github.com/yangboot/mybatis-plus-samples/tree/master/mybatis-plus-sample-quickstart)
