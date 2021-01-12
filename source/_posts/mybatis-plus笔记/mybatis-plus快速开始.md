@@ -1,13 +1,13 @@
 ---
-title: 【MyBatis-Plus笔记】MyBatis-Plus入门
-categories: MyBatis笔记
+title: 【MyBatis-Plus笔记】快速开始
+categories: MyBatis-Plus笔记
 tags:
   - MyBatis-Plus
 excerpt: MyBatis-Plus
 date: 2020-12-21 20:33:36
 img:  /images/MyBatis-Plus/MyBatis-Plus.jpg
 ---
-## 快速开始
+# 快速开始
 
 我们将通过一个简单的 Demo 来阐述 MyBatis-Plus 的强大功能，在此之前，我们假设您已经：
 
@@ -61,7 +61,7 @@ Question
 
 如果从零开始用 MyBatis-Plus 来实现该表的增删改查我们需要做什么呢？
 
-### 初始化工程
+## 初始化工程
 
 创建一个空的 Spring Boot 工程（工程将以 mysql作为默认数据库进行演示）
 
@@ -69,7 +69,7 @@ TIP
 
 可以使用 [Spring Initializer (opens new window)](https://start.spring.io/)快速初始化一个 Spring Boot 工程
 
-### 添加依赖
+## 添加依赖
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -126,7 +126,7 @@ TIP
 </project>
 ```
 
-### 配置
+## 配置
 
 在 `application.yml` 配置文件中添加 H2 数据库的相关配置：
 
@@ -156,7 +156,7 @@ public class Application {
 }
 ```
 
-### 编码
+## 编码
 
 编写实体类 `User.java`（此处使用了 [Lombok (opens new window)](https://www.projectlombok.org/)简化代码）
 
@@ -178,7 +178,7 @@ public interface UserMapper extends BaseMapper<User> {
 }
 ```
 
-### 开始使用
+## 开始使用
 
 添加测试类，进行功能测试：
 
