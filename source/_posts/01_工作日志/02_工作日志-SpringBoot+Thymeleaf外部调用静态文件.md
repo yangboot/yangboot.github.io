@@ -6,7 +6,7 @@ tags:
   - Thymeleaf
 excerpt: SpringBoot+Thymeleaf外部调用静态文件
 date: 2020-01-12 20:33:36
-img:  /images/workLog/workLog.png
+img:  /images/workLog/workLog.jpg
 ---
 
 ## 需求
