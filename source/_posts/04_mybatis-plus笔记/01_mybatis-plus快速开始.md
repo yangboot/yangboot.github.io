@@ -1,5 +1,5 @@
 ---
-title: 【MyBatis-Plus笔记】快速开始
+title: 【MyBatis-Plus笔记_01】快速开始
 categories: MyBatis-Plus笔记
 tags:
   - MyBatis-Plus

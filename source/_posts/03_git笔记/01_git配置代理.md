@@ -1,5 +1,5 @@
 ---
-title: 【git学习笔记】git配置代理
+title: 【git学习笔记_01】git配置代理
 categories: git学习笔记
 tags:
   - git
