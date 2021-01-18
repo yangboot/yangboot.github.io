@@ -10,44 +10,6 @@ date: 2020-11-03 20:33:36
 img: '/images/docker/docker.png'
 ---
 ## docker安装
-### 查看内核版本
-
-```shell
-uname -a
-```
-
-### yum包更新到最新
-
-```shell
-yum update
-```
-
-### 安装需要的软件驱动
-
-```shell
-yum install -y yum-utils device-mapper-persistent-data lvm2
-```
-
-### 设置docker阿里云下载源
-
-```shell
-yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repoyum-config-manager --add-repo
-```
-
-### 查看所有仓库中所有docker版本
-
-```shell
- yum list docker-ce --showduplicates | sort -rshe
-```
-
-### 安装
-
-```shell
-yum install docker-ce-<VERSION_STRING>
-```
-
-
-
 ### 卸载旧版本
 
 较旧的Docker版本称为docker或docker-engine。如果已安装这些程序，请卸载它们以及相关的依赖项。
@@ -63,6 +25,44 @@ yum install docker-ce-<VERSION_STRING>
                   docker-engine
 
 ```
+### 查看内核版本
+
+```shell
+uname -a
+```
+### yum包更新到最新
+
+```shell
+yum update
+```
+
+### 安装需要的软件驱动
+
+```shell
+yum install -y yum-utils device-mapper-persistent-data lvm2
+```
+
+### 设置docker阿里云下载源
+
+```shell
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+```
+
+### 查看所有仓库中所有docker版本
+
+```shell
+ yum list docker-ce --showduplicates | sort -r
+```
+
+### 安装
+
+```shell
+yum install docker-ce-<VERSION_STRING>
+```
+
+
+
+
 
 ### 启动docker服务
 
@@ -89,4 +89,13 @@ systemctl stop docker.service
 
 ```shell
 systemctl restart docker.service 重启
+```
+## 配置阿里镜像加速
+```shell
+vim /etc/docker/daemon.json
+```
+```json
+{
+  "registry-mirrors": ["https://mu2ralus.mirror.aliyuncs.com"]
+}
 ```
