@@ -1,6 +1,6 @@
 ---
-title: 【docker学习笔记_02】dockerCompose 安装
-categories: docker学习笔记
+title: 【docker笔记_02】dockerCompose 安装
+categories: docker笔记
 tags:
   - dockerCompose 
   - centos7

@@ -1,10 +1,9 @@
 ---
-title: 【docker学习笔记_01】docker安装
-categories: docker学习笔记
+title: 【docker笔记_01】docker安装
+categories: docker笔记
 tags:
   - docker
   - centos7
-  - 3.10.0-957.el7.x86_64
 excerpt: centos7安装docker
 date: 2020-11-03 20:33:36
 img: '/images/docker/docker.png'
