@@ -47,6 +47,10 @@ yum install -y yum-utils device-mapper-persistent-data lvm2
 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 ```
 
+删除  docker-ce.repo文件
+```shell
+/etc/yum.repos.d/docker-ce.repo
+```
 ### 查看所有仓库中所有docker版本
 
 ```shell
