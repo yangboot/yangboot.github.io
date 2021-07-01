@@ -8,7 +8,16 @@ excerpt: vue笔记
 date: 2021-07-01 20:33:36
 img: '/images/vue/vue.png'
 ---
-## 一、第一个Vue应用
+
+
+
+
+## 一、第一个
+
+[TOC]
+
+## 应用
+
 ```html
 <!DOCTYPE html>
 <html>
